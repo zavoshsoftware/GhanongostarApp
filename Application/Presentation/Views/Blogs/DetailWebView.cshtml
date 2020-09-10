@@ -1,0 +1,18 @@
+﻿@model Models.Blog
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetailWebView</title>
+</head>
+<body>
+<div style="background-color: #fff; text-align: justify; direction: rtl;">
+    @Html.Raw(Model.Body)
+</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+﻿@model ViewModels.BlogDetailViewModel
+@{
+    ViewBag.Title = Model.SiteBlog.Title +" | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						<a href="/blog/@Model.SiteBlog.SiteBlogCategory.UrlParam">@Model.SiteBlog.SiteBlogCategory.Title |</a>	
+					@Model.SiteBlog.Title
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="main-product pad-45">
+	<div class="container">
+		<div class="row">
+			<!-- single product -->
+			<div class="col-lg-8 col-xl-8">
+				<article class="sin-blog single-page">
+					<figure class="blog-img">
+						<img src="https://ghanongostar.zavoshsoftware.com/@Model.SiteBlog.ImageUrl" alt="@Model.SiteBlog.Title">
+					</figure>
+					<div class="blog-content">
+						<div class="blog-meta">
+							<a href="#">@Model.SiteBlog.CreationDateStr</a>
+						</div>
+						<h1>@Model.SiteBlog.Title</h1>
+						<div class="blog-details">
+					@Html.Raw(Model.SiteBlog.Body)
+						</div>
+					</div>
+				</article>
+
+				@*<div id="comments">
+					<div class="comments-list">
+						<h4 class="heading"><span>4 Comments</span></h4>
+						<div class="commentlists-div">
+							<ol class="commentlists">
+								<li class="sin-comment  depth-1">
+									<div class="the-comment">
+										<div class="avatar">
+											<img alt="" src="media/images/user1.jpg">
+										</div>
+										<div class="comment-box">
+											<div class="comment-author meta">
+												<p class="com-name"><strong>Azad Hossain</strong></p>
+												<p>6 months ago <a href="#" class="comment-reply-link"> Reply </a></p>
+											</div>
+											<div class="comment-text">
+												<p>Donec ac libero nisl. Etiam ornare sollicitudin ultricies. Mauris ac purus eros, ac lobortis tortor. Maecenas sed interdum turpis!</p>
+											</div>
+										</div>
+									</div>
+									<ul class="children-comment">
+										<li class="comment odd alt depth-2">
+											<div class="the-comment">
+												<div class="avatar">
+													<img alt="" src="media/images/user1.jpg">
+												</div>
+												<div class="comment-box">
+													<div class="comment-author meta">
+														<p class="com-name"><strong>Biddut</strong></p>
+														<p> 9 months ago<a href="#" class="comment-reply-link"> Reply </a></p>
+													</div>
+													<div class="comment-text">
+														<p>
+															Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed sollicitudin lectus. Nunc ut vulputate nisi. Donec nec tincidunt ligula, non porta mi.<br>
+														</p>
+													</div>
+												</div>
+											</div>
+										</li>
+										<!-- #comment-## -->
+									</ul>
+									<!-- .children -->
+								</li>
+								<!-- #comment-## -->
+								<li class="sin-comment  depth-1">
+									<div class="the-comment">
+										<div class="avatar">
+											<img alt="" src="media/images/user1.jpg">
+										</div>
+										<div class="comment-box">
+											<div class="comment-author meta">
+												<p class="com-name"><strong>Sajib Hasan</strong></p>
+												<p>6 months ago<a href="#" class="comment-reply-link"> Reply</a></p>
+											</div>
+											<div class="comment-text">
+												<p>Vivamus in semper lorem, id feugiat mi. Ut eu sem lorem. Aliquam vel libero mauris. Integer pellentesque quis mauris eu scelerisque. Vestibulum sodales, velit ut scelerisque mollis.</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- #comment-## -->
+							</ol>
+						</div>
+					</div>
+					<div class="commentform">
+						<div class="comment-respond">
+							<div class="comment-reply-title">
+								<h4 class="heading">
+									<span>Leave a Comment</span>
+								</h4>
+							</div>
+							<form class="comment-form" id="commentform" method="post" action="#">
+								<p class="h-info">Your email address will not be published.</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="author">Name:</label>
+											<input aria-required="true" value="" id="author" class="form-control" name="author" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="email">Email:</label>
+											<input aria-required="true" value="" class="form-control" name="email" id="email" type="text">
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="url">Website:</label>
+									<input value="" class="form-control" name="url" id="url" type="text">
+								</div>
+								<div class="form-group">
+									<label for="comment" class="field-label">Comment:</label>
+									<textarea aria-required="true" name="comment" class="form-control" id="comment" rows="8"></textarea>
+								</div>
+								<p class="form-submit">
+									<input value="Post Comment" class="submit" type="submit">
+								</p>
+							</form>
+						</div>
+						<!-- #respond -->
+					</div>
+					<!-- end commentform -->
+				</div>*@
+			</div>
+			<div class="col-lg-4 col-xl-4">
+				<div class="blog-sidebar">
+					<div class=" blog-widget">
+						<h4 class="widget-title">پرفروش ترین محصولات</h4>
+						
+					 
+						@foreach (var product in Model.SideBarProducts)
+						{
+							<div class="widget-post">
+								<div class="widget-post-img">
+									<a href="@product.Url"><img src="@product.ImageUrl" alt="@product.Title"></a>
+								</div>
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="@product.Url">@product.Title</a>
+									</h6>
+								</div>
+							</div>
+						}
+	
+						 
+					</div>				
+					
+					<div class="blog-widget">
+						<h4 class="widget-title">آخرین مطالب</h4>
+						
+						
+						@foreach (var blog in Model.SideBarBlogs)
+						{
+							<div class="widget-post">
+								<div class="widget-post-img">
+									<a href="/blog/@blog.SiteBlogCategory.UrlParam/@blog.UrlParam"><img src="https://ghanongostar.zavoshsoftware.com/@blog.ImageUrl" alt="@blog.Title"></a>
+								</div>
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="/blog/@blog.SiteBlogCategory.UrlParam/@blog.UrlParam">@blog.Title</a>
+									</h6>
+								</div>
+							</div>
+						}
+	
+	 
+					</div>
+					<!-- /.blog-widget-->
+					<div class="blog-widget">
+						<h4 class="widget-title">گروه های مطالب</h4>
+						<ul class="wid-category">
+							@foreach (var blogCategory in Model.SideBarSiteBlogCategories)
+							{
+									<li><a href="/blog/@blogCategory.UrlParam">@blogCategory.Title</a></li>
+
+							}
+						</ul>
+					</div>
+ 
+		 
+				</div>
+			</div>
+			<!-- /.col-xl-3 -->
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container  -->
+</section>

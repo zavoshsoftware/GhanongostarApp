@@ -1,0 +1,28 @@
+﻿@model Models.PdfGeneratorViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <div class="text-center"> 
+        <h2>
+        رسید شرکت در @Model.Type
+        </h2>
+        <h3>
+            @Model.Title
+        </h3>
+        <h3>
+            نام شرکت کننده: @Model.FullName
+        </h3>
+    </div>
+</body>
+</html>

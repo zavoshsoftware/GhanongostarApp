@@ -1,0 +1,131 @@
+﻿@model ViewModels.FormDetailViewModel
+@{
+		ViewBag.Title = Model.Product.Title + " | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://ghanongostar.com/forms/g-" + @Model.Product.Code;
+	ViewBag.Description = "دانلود " + Model.Product.Title + ". جهت خرید آنلاین و دانلود فرم ها و قراردادها از وب سایت قانون گستر کلیک کنید. قانون گستر مرکز تخصصی روابط کار در ایران";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						<a href="/forms">فرم ها و قراردادها  |</a>
+						@Model.Product.Title
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="order-2 order-lg-2 col-lg-3 col-xl-3">
+				<div class=" shop-sidebar left-side">
+
+					<div class=" blog-widget">
+						<h4 class="widget-title">ویدیو های آموزشی</h4>
+						@foreach (var productGroup in Model.SideBarProductGroups)
+						{
+							<div class="widget-post">
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="/video/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+										<span>(@productGroup.ProductCount)</span>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>				
+					
+					<div class=" blog-widget">
+						<h4 class="widget-title">پرفروش ترین محصولات</h4>
+						@foreach (var product in Model.SideBarProducts)
+						{
+							<div class="widget-post">
+								<div class="widget-post-img">
+									<a href="@product.Url"><img src="@product.ImageUrl" alt="@product.Title"></a>
+								</div>
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="@product.Url">@product.Title</a>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>	
+					<div class=" blog-widget blog-widget-img">
+						<a href="/products/g-106">
+							<img src="~/images/Book.jpg" class="img-fluid" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="order-1 order-lg-1 col-lg-9 col-xl-9">
+
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="product-header">
+
+							<div class="row">
+								<div class="col-md-8 product-detail-title">
+									<h1>
+										@Model.Product.Title
+									</h1>
+									<ul>
+										<li>
+											قیمت:
+											@if (Model.Product.IsInPromotion)
+											{
+											<span class="product-list-price old-price">
+												@Model.Product.AmountStr تومان
+											</span>
+
+											<span class="product-list-price">
+												@Model.Product.DiscountAmountStr تومان
+											</span>
+											}
+											else
+											{
+											<span class="product-list-price">
+												@Model.Product.AmountStr تومان
+											</span>
+											}
+										</li>
+									</ul>
+									<button class="btn-ghanon" onclick="addToBasket(@Model.Product.Code, 1);"><i class="fa fa-shopping-basket"></i> افزودن به سبد خرید</button>
+									</div>
+								<div class="col-md-4 ">
+									<img src="https://ghanongostar.zavoshsoftware.com/@Model.Product.ImageUrl" alt="@Model.Product.Title" />
+								</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12 product-detail caption-detail">
+
+									<p>
+										@Html.Raw(Model.Product.Body)
+									</p>
+									<p>
+										<button class="btn-ghanon" onclick="addToBasket(@Model.Product.Code,1);"><i class="fa fa-shopping-basket"></i> افزودن به سبد خرید</button>
+									</p>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

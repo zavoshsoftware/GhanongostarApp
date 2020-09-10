@@ -1,0 +1,109 @@
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IranSans/IRANSansWebFaNum.eot');
+    src: url('../fonts/IranSans/IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+         url('../fonts/IranSans/IRANSansWebFaNum.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+         url('../fonts/IranSans/IRANSansWebFaNum.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+         url('../fonts/IranSans/IRANSansWebFaNum.ttf') format('truetype');
+}
+body {
+    font-family: 'PT Sans', sans-serif;
+	color: #444444;
+}
+.lora {
+	 
+	color: #191919;
+}
+a, a:hover, a:active {
+	color: #e50005;
+}
+#hook-to-top {
+	background-color: #e50005;
+}
+.main-menu .main-nav > li > a {
+	font-weight: 600;
+    font-size: 14px;
+	color: #fff;
+}
+.main-menu .main-nav > li > a:hover, 
+.main-menu .main-nav > li > a:focus, 
+.main-menu .main-nav > li.active > a, 
+.main-menu .main-nav > li > a.current {
+    color: #e50005;
+}
+.header.header-transparent.scrolling-menu .header-main .main-menu .main-nav > li > a:hover, .header.header-transparent.scrolling-menu .header-main .main-menu .main-nav > li > a:focus, .header.header-transparent.scrolling-menu .header-main .main-menu .main-nav > li.active > a, .header.header-transparent.scrolling-menu .header-main .main-menu .main-nav > li > a.current {
+    color: #e50005;
+}
+.service-item .service-icon > i {
+    color: #e50005;
+}
+.main-menu .main-nav > li > a:after, 
+.main-menu .main-nav > li > a:before {
+    background-color: #fff;
+}
+.main-menu .main-nav > li > a:hover {
+    color: #e50005;
+}
+.button-slide a, .button {
+	background-color: #e50005;
+}
+.accordion-heading .accordion-toggle.active {
+    color: #e50005 !important;
+}
+.accordion-heading .number {
+    color: #e50005;
+}
+.contact-item > i {
+    color: #e50005;
+}
+.recent-post h6 a:hover {
+    color: #e50005;
+}
+.button:before {
+	background-color: #905db7;
+}
+.single-blog-info #anchor {
+    position: absolute; 
+}
+.simple-line {
+	border-color: #e50005;
+}
+.simple-line-3 {
+	border-color: #e50005;
+}
+.testimonials-slider .owl-page.active:before {
+    background-color: #e50005;
+    border-color: #e50005;
+}
+.price-type {
+    color: #e50005;
+}
+.contact-item > i {
+    color: #e50005;
+}
+h1, h2, h3, h4, h5, p, a, input, li, ul, .tm-title, .tm-subtitle {
+    font-family: iransans;
+}
+
+#concept p, .section-bg-44 h3, .section-bg-44 p {
+    direction: rtl;
+    text-align: justify;
+}
+.bg-dark-2 {
+    direction: rtl;
+}
+
+.section-bg-45 .item img {
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+.main-menu .main-nav > li {
+    float: right;
+}
+
+.main-nav li a {
+    direction: rtl;
+    text-align: right;
+}

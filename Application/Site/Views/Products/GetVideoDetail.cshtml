@@ -1,0 +1,107 @@
+﻿@model ViewModels.VideoDetailViewModel
+@{
+		ViewBag.Title =@Model.Product.Title+ " | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://ghanongostar.com/video/"+Model.Product.ProductGroup.UrlParam+"/g-"+ Model.Product.ProductGroup.Code;
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						<a href="/video/@Model.Product.ProductGroup.UrlParam">@Model.Product.ProductGroup.Title  |</a>	
+					@Model.Product.Title</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="order-2 order-lg-2 col-lg-3 col-xl-3">
+				<div class=" shop-sidebar left-side">
+			 
+						
+					<div class=" blog-widget">
+						<h4 class="widget-title">ویدیو های آموزشی</h4>
+						@foreach (var productGroup in Model.SideBarProductGroups)
+						{
+							<div class="widget-post">
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="/video/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+										<span>(@productGroup.ProductCount)</span>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>				
+					
+					<div class=" blog-widget">
+						<h4 class="widget-title">پرفروش ترین محصولات</h4>
+						@foreach (var product in Model.SideBarProducts)
+						{
+							<div class="widget-post">
+								<div class="widget-post-img">
+									<a href="@product.Url"><img src="@product.ImageUrl" alt="@product.Title"></a>
+								</div>
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="@product.Url">@product.Title</a>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>	
+					<div class=" blog-widget blog-widget-img">
+						<a href="/products/g-106">
+							<img src="~/images/Book.jpg" class="img-fluid" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="order-1 order-lg-1 col-lg-9 col-xl-9">
+			 
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						
+							<div class="video-title-top-box">
+								<div class="row">
+									<div class="col-md-8 video-title">
+										<h1>
+											@Model.Product.Title
+										</h1>
+
+									</div>
+									<div class="col-md-4 video-title">
+										<img class="img-fluid" src="https://ghanongostar.zavoshsoftware.com/@Model.Product.ImageUrl" />
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 video-caption">
+									@Html.Raw(Model.Product.Body)
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 video-file">
+									<h2>ویدیو @Model.Product.Title</h2>
+									<video width="640" controls>
+										<source src="https://ghanongostar.zavoshsoftware.com/@Model.Product.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+									</video>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

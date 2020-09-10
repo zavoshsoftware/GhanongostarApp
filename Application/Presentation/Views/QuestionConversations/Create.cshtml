@@ -1,0 +1,58 @@
+﻿@model Models.QuestionConversation
+
+@{
+    ViewBag.Title = "افزودن " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>افزودن @Html.DisplayNameFor(model => model)</h2>
+
+@using (Html.BeginForm("Create", "QuestionConversations",FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">        
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="form-group">
+                <label class="col-md-2">
+                عنوان سوال
+                </label>   <div class="col-md-10">
+                    @ViewBag.subject
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">
+                
+                متن سوال
+                </label>        <div class="col-md-10">
+                    @ViewBag.body
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">
+                
+                پاسخ
+                </label> <div class="col-md-10">
+                    @Html.EditorFor(model => model.Body)
+
+                    @Html.ValidationMessageFor(model => model.Body)
+                </div>
+            </div>
+
+        
+ 
+
+        
+        <div class="form-group" id="buttons">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ایجاد" class="btn btn-primary" />
+				@Html.ActionLink("بازگشت به فهرست", "Index",new { id=ViewBag.id})
+            </div>
+        </div>
+        </div>
+</div>
+}
+

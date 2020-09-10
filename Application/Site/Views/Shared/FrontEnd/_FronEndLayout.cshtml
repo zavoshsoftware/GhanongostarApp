@@ -1,0 +1,63 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>@ViewBag.Title</title>
+	<link rel="canonical" href="@ViewBag.Canonical" />
+	<meta name="description" content="@ViewBag.Description">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon60.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon60.png">
+	<link rel="stylesheet" href="/Scripts/bootstrap/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/fontawesome/css/fontawesome-all.min.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/owl.carousel/css/owl.carousel.min.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/owl.carousel/css/owl.theme.default.min.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/flaticon/css/flaticon.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/wow/css/animate.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/jquery-ui/css/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/venobox/css/venobox.css" type="text/css">
+	<link rel="stylesheet" href="/Scripts/slick-carousel/css/slick.css" type="text/css">
+	<link rel="stylesheet" href="/assets/css/app.css" type="text/css">
+	<link href="~/assets/css/style-rtl.css" rel="stylesheet" />
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161971714-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-161971714-1');
+	</script>
+	
+	@RenderSection("headSection", required: false)
+
+</head>
+<body id="home-version-1" class="home-version-1" data-style="default">
+	<div class="site-content">
+		@Html.Partial("FrontEnd/_MenuPartial")
+		@RenderBody()
+		@Html.Partial("FrontEnd/_FooterPartial")
+		<div class="backtotop">
+			<i class="fa fa-angle-up backtotop_btn"></i>
+		</div>
+	</div>
+	<script src="/Scripts/jquery/jquery.min.js"></script>
+	<script src="/Scripts/popper.js/popper.min.js"></script>
+	<script src="/Scripts/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/Scripts/owl.carousel/js/owl.carousel.min.js"></script>
+	<script src="/Scripts/wow/js/wow.min.js"></script>
+	<script src="/Scripts/isotope-layout/js/isotope.pkgd.min.js"></script>
+	<script src="/Scripts/imagesloaded/js/imagesloaded.pkgd.min.js"></script>
+	<script src="/Scripts/jquery.countdown/js/jquery.countdown.min.js"></script>
+	<script src="/Scripts/gmap3/js/gmap3.min.js"></script>
+	<script src="/Scripts/venobox/js/venobox.min.js"></script>
+	<script src="/Scripts/slick-carousel/js/slick.js"></script>
+	<script src="/Scripts/headroom/js/headroom.js"></script>
+	<script src="/Scripts/jquery-ui/js/jquery-ui.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="~/Scripts/custom.js"></script>
+@RenderSection("scripts", required: false)
+</body>
+</html>

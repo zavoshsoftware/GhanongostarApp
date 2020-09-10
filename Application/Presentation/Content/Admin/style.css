@@ -1,0 +1,35 @@
+﻿body {
+}
+.panel-body .row {
+    padding: 4px 0;
+}
+.login-form {
+    top: 100px;
+    background: #fff;
+    text-align: right;
+    direction: rtl;
+    border: 1px solid silver;
+}
+.login-header {
+    background-color: #41586E;
+    color: #fff;
+    text-align: center;
+    min-height: 41px;
+}
+.login-btn {
+    background-color: #41586E;
+    color: #fff;
+}
+.field-input
+{
+    margin-bottom:5px;
+}
+.admin-info {
+    padding: 10px;
+    text-align:center;
+    direction:rtl;
+}
+.lfloat
+{
+    float:left;
+}

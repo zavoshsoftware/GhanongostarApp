@@ -1,0 +1,29 @@
+﻿@model Payment.OrderDetailViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>رسید شرکت در @Model.Type</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="text-center"> 
+        <div class="logo">
+            <img src="~/Images/logo.png" />
+        </div>
+        <h2>رسید شرکت در @Model.Type
+        </h2>
+        <h3>
+            @Model.Title
+        </h3>
+        <h3>
+            نام شرکت کننده: @Model.Fullname
+        </h3>
+    </div>
+</body>
+</html>

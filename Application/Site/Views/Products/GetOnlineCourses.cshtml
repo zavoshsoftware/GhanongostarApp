@@ -1,0 +1,122 @@
+﻿@model ViewModels.ProductListViewModel
+@{
+    ViewBag.Title = "دوره های آموزشی | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+	ViewBag.Canonical = "https://ghanongostar.com/online-course" ;
+	ViewBag.Description = "ثبت نام در دوره های آنلاین و دریافت ویدیو های آموزشی از وب سایت قانون گستر کلیک کنید. قانون گستر مرکز تخصصی روابط کار در ایران";
+
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+					
+						دوره های آموزشی آنلاین</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="order-2 order-lg-2 col-lg-3 col-xl-3">
+				<div class=" shop-sidebar left-side">
+			 
+					<div class=" blog-widget">
+						<h4 class="widget-title">ویدیو های آموزشی</h4>
+						@foreach (var productGroup in Model.SideBarProductGroups)
+						{
+								<div class="widget-post">
+									<div class="widget-post-content">
+										<h6 class="wid-post-title">
+											<a href="/video/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+											<span>(@productGroup.ProductCount)</span>
+										</h6>
+									</div>
+								</div>
+						}
+					</div>
+
+					<div class=" blog-widget">
+						<h4 class="widget-title">پرفروش ترین محصولات</h4>
+						@foreach (var product in Model.SideBarProducts)
+						{
+								<div class="widget-post">
+									<div class="widget-post-img">
+										<a href="@product.Url"><img src="@product.ImageUrl" alt="@product.Title"></a>
+									</div>
+									<div class="widget-post-content">
+										<h6 class="wid-post-title">
+											<a href="@product.Url">@product.Title</a>
+										</h6>
+									</div>
+								</div>
+						}
+					</div>	
+					<div class=" blog-widget blog-widget-img">
+						<a href="/products/g-106">
+							<img src="~/images/Book.jpg" class="img-fluid" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="order-1 order-lg-1 col-lg-9 col-xl-9">
+			 
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="row">
+						@foreach (var product in Model.Products)
+						{
+							<div class="col-sm-6 col-xl-4">
+								<div class="sin-product style-two">
+					 
+										<a href="/online-course/g-@product.Code">
+											<img src="https://ghanongostar.zavoshsoftware.com/@product.ImageUrl" alt="@product.Title"></a>
+ 
+									<div class="mid-wrapper">
+										<h2 class="pro-title"><a href="/online-course/g-@product.Code">@product.Title</a></h2>
+							 
+										@if (product.IsInPromotion)
+										{
+											<p class="product-list-price old-price">
+												@product.Amount.ToString("N0") تومان
+											</p>
+											<p class="product-list-price">
+												@product.DiscountAmount.Value.ToString("N0") تومان
+											</p>
+										}
+										else
+										{
+											<p class="product-list-price">
+												@product.Amount.ToString("N0") تومان
+											</p>
+										}
+										
+										@if (product.IsPrevious == false)
+										{
+											<button class="btn-ghanon" onclick="addToBasket(@product.Code, 1);"><i class="fa fa-shopping-basket"></i> افزودن به سبد خرید</button>
+										}
+										else
+										{
+											<button class="btn-ghanon"><i class="fa fa-remove"></i>تکمیل ظرفیت</button>
+										}
+									</div>
+								 
+								</div>
+							</div>
+						}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

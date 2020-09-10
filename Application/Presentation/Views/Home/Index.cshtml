@@ -1,0 +1,94 @@
+﻿@model ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>پنل مدیریتی اپلیکیشن قانون گستر</h2>
+<div class="row">
+   
+    <div class="col-md-6 col-xs-12 col-sm-12 col-md-pull-3">
+        <div class="row">
+            <div class="col-md-6 dashboard-admin col-xs-12 col-sm-12">
+                <div class="alert alert-info">
+                    <a href="/products/index/BAFB5CA2-1212-4E9D-9F43-79954C8F303F">
+                        <div class="lfloat">
+                            <i class="fa fa-2x fa-shopping-cart"></i>
+                        </div>
+                        <div class="rfloat">
+                            <span>@Model.ProductCount</span>
+                            <br />
+                            تعداد کل محصولات آموزشی
+                        </div>
+                    </a>
+                    <p class="clear"></p>
+                </div>
+            </div>
+            <div class="col-md-6 dashboard-admin col-xs-12 col-sm-12">
+                <div class="alert alert-warning">
+                    <a href="/products/index/E71DF968-54A3-497A-A8C2-1058A4293F8D">
+                        <div class="lfloat">
+                            <i class="fa fa-2x fa-envelope"></i>
+                        </div>
+                        <div class="rfloat">
+                            <span>@Model.FomrsCount</span>
+                            <br />
+                            تعداد فرم ها و قراردادها
+                        </div>
+                    </a>
+                    <p class="clear"></p>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-md-6 dashboard-admin col-xs-12 col-sm-12">
+                <div class="alert alert-success">
+                    <a href="/users">
+                        <div class="lfloat">
+                            <i class="fa fa-2x fa-users"></i>
+                        </div>
+                        <div class="rfloat">
+                            <span>@Model.UserCount</span>
+                            <br />
+                            تعداد کل کاربران فعال
+                        </div>
+                    </a>
+                    <p class="clear"></p>
+                </div>
+            </div>
+            <div class="col-md-6 dashboard-admin col-xs-12 col-sm-12">
+                <div class="alert alert-danger">
+                    <a href="/orders">
+                        <div class="lfloat">
+                            <i class="fa fa-2x fa-book"></i>
+                        </div>
+                        <div class="rfloat">
+                            <span>@Model.OrderCount</span>
+                            <br />
+                            تعداد کل سفارشات
+                        </div>
+                    </a>
+                    <p class="clear"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div>
+    <div class="row">
+        <div class="col-md-2 col-md-pull-4">
+            <div class="bg-info admin-info">
+                تعداد کل کاربران <br />
+                <i class="fa fa-users"></i> @Model.UserCount
+            </div>
+            
+        </div>
+        <div class="col-md-2">
+            <div class="bg-warning admin-info">
+                تعداد کل کاربران
+            </div>
+        </div>
+    </div>
+</div>*@

@@ -1,0 +1,130 @@
+﻿@model ViewModels.ProductListViewModel
+@{
+    ViewBag.Title = "جشنواره عید تا عید قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+	ViewBag.Canonical = "https://ghanongostar.com/promotion";
+	ViewBag.Description = "جشنواره تخفیفات عید تا عید قانون گستر. خرید پکیج های آموزشی در حوزه قوانین کار و تامین اجتماعی و منابع انسانی و دریافت ویدیو های آموزشی از وب سایت قانون گستر کلیک کنید. قانون گستر مرکز تخصصی روابط کار در ایران";
+
+}
+@section headSection{
+	<link href="/assets/css/flipdown.css" rel="stylesheet" />
+	<script src="/assets/js/flipdown.js"></script>
+	<script src="/assets/js/main.js"></script>
+}
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						جشنواره عید تا عید قانون گستر</p>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	</section>
+
+<section>
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div>
+				<img src="~/images/eid-ta-eid.jpg" class="img-fluid"/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="promotion-info">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h1>جشنواره عید تا عید قانون گستر</h1>
+			<p>
+				جشنواره عید تا عید قانون گستر ویژه مدیران و کارفرمایان از عید قربان تا عید غدیر با تخفیف های باورنکردنی برای خرید محصولات آموزشی، پکیج ها و فرم ها و قراردادهای کار فعال می باشد.
+				مجموعه قانون گستر با مدیریت استاد وحید حاجی زاده ارائه دهنده خدمات مشاوره ای در زمینه قوانین کار و تامین اجتماعی و مشاوره در زمینه مدیریت می باشد.
+			</p>
+				<p>
+					برای شرکت در این جشنواره و استفاده از تخفیفات آن فقط تا تاریخ 18 مرداد 99 فرصت دارید. پس همین الان اقدام کنید.
+				</p>
+				<div id="flipdown" class="flipdown"></div>
+				
+				<h2><i class="fa fa-arrow-down"></i> پیشنهاد ویژه به کارفرمایان <i class="fa fa-arrow-down"></i></h2>
+				<ul>
+					<li>
+						اولین پکیج جامع و آموزشی روابط کار با تخفیف ویژه ۱/۲۰۰/۰۰۰ تومانی 
+							</li>
+					<li>
+						بیش از ۶۰ ساعت آموزش تصویری
+						</li>
+					<li>
+						کلیه قراردادهای پرسنل بیمه ای و غیر بیمه ای 
+
+					</li>
+					<li>
+						کتاب قانون کار
+					</li>
+			 
+				</ul>
+				<video width="640" height="360" controls>
+					<source src="/assets/video/pacage-final.mp4" type="video/mp4">
+					<source src="/assets/video/pacage-final.mp4" type="video/ogg">
+					Your browser does not support the video tag.
+				</video>
+			</div>
+	</div>
+	</div>
+</section>
+<section class="shop-area">
+	<div class="container ">
+		<div class="row">
+			<h2>محصولات جشنواره عید تا عید قانون گستر</h2>
+			<div class="order-1 order-lg-1 col-lg-12 col-xl-12">
+			 
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="row">
+							
+								@foreach (var product in Model.Products)
+								{
+									<div class="col-sm-6 col-xl-4">
+										<div class="sin-product style-two">
+
+											<a href="/promotion/g-@product.Code">
+												<img src="https://ghanongostar.zavoshsoftware.com/@product.ImageUrl" alt="@product.Title"></a>
+
+											<div class="mid-wrapper">
+												<h2 class="pro-title"><a href="/promotion/g-@product.Code">@product.Title</a>
+												</h2>
+
+												@if (product.IsInPromotion)
+												{
+													<p class="product-list-price old-price">
+														@product.Amount.ToString("N0") تومان
+													</p>
+													<p class="product-list-price">
+														@product.DiscountAmount.Value.ToString("N0") تومان
+													</p>
+												}
+												else
+												{
+													<p class="product-list-price">
+														@product.Amount.ToString("N0") تومان
+													</p>
+												}
+												<button class="btn-ghanon" onclick="addToBasket(@product.Code, 1);"><i class="fa fa-shopping-basket"></i> افزودن به سبد خرید</button>
+
+											</div>
+
+										</div>
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

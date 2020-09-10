@@ -1,0 +1,75 @@
+﻿@model Models.QuestionConversation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuestionConversation</h4>
+	<hr />
+    <dl class="dl-horizontal">
+      
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.CellNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.CellNum)
+        </dd>
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusCode)
+        </dt>
+
+        <dd>
+            @if (Model.StatusCode == 0)
+            {
+                <text>در انتظار پاسخ</text>
+            }
+            else if (Model.StatusCode == 1)
+            {
+                <text>پاسخ داده شده</text>
+            }
+        </dd>
+
+    
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</p>

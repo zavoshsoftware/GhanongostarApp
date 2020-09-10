@@ -1,0 +1,141 @@
+﻿@model ViewModels.CallBackViewModel
+@{
+    ViewBag.Title = "نتیجه پرداخت | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						خرید</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section class="cart-area">
+	<div class="container-fluid custom-container">
+		<div class="container">
+			<div class="row justify-content-center pt--75 pb--80 pt-md--55 pb-md--60 pt-sm--35 pb-sm--40">
+				<div class="col-lg-6">
+					@if (Model.IsSuccess)
+					{
+							<p class="heading-color mb--30 text-center alert alert-success">
+								پرداخت سفارش شما با موفقیت انجام شد
+							</p>
+										<div class="panel panel-primary">
+											<div class="panel-heading text-right">اطلاعات پرداحت</div>
+											<div class="panel-body text-right">
+												<table class="table table-hover" style="direction: rtl;">
+													<tbody>
+														@if (Model.ProductType == "forms")
+														{
+																<tr>
+																	<td>دانلود: </td>
+																	<td><a class="btn btn-success" href="@Model.DownloadLink">دانلود فایل</a> </td>
+																</tr>
+}
+														
+													@if (ViewBag.hasCourseDetail == "true")
+													{
+												
+														<tr>
+															<td>دانلود: </td>
+															<td><a class="btn btn-success" href="@Model.DownloadLink">مشاهده فایل</a> </td>
+														</tr>
+													}
+													<tr>
+															<td>شماره فاکتور: </td>
+															<td>@Model.OrderCode </td>
+														</tr>
+													<tr>
+														<td>شماره پیگیری: </td>
+														<td>@Model.RefrenceId </td>
+													</tr>
+														
+														
+													@if (ViewBag.hasCourseDetail == "true")
+													{
+													<tr>
+														<p style="direction: rtl; text-align: right;" class="alert alert-info">
+															راهنمای دانلود:
+															<br/>
+															با کلیک بر روی دکمه مشاهده فایل می توانید فایل را به صورت آنلاین مشاهده نمایید
+															<br/>
+															جهت دانلود فایل بر روی لینک مشاهده راست کلیک کرده و گزینه save link as ... را انتخاب نمایید
+															<br/>
+															لازم به ذکر است لینک بالا برای آدرس ایمیل شما ارسال شده است.
+															<br/>
+														</p>
+														<p style="direction: rtl; text-align: right;"  class="alert alert-warning">
+															در صورتی که ایمیلی از وب سایت قانون گستر دریافت نکردید، پوشه spam یا junk ایمیل خود را بررسی نمایید.
+														</p>
+													</tr>
+													}
+
+													</tbody>
+												</table>
+
+												<div class="alert alert-info">
+													<p>
+														با تشکر از خرید شما
+													</p>
+													@if (Model.ProductType == "forms")
+													{
+														<p style="direction: rtl; text-align: right;">
+															فایل مربوطه را می توانید از طریق دکمه دانلود، دانلود فرمایید. همچنین این فایل برای ایمیل @ViewBag.Email، ارسال گردید.
+														</p>
+
+														<p style="direction: rtl; text-align: right;">
+														در صورتی که در inbox ایمیل خود، ایمیلی دریافت نکرده اید به پوشه spam یا Junk مراجعه فرمایید.
+														</p>
+}
+													@if (Model.ProductType == "physicalproduct")
+													{
+															<p>
+																همکاران ما جهت هماهنگی زمان ارسال با شما تماس خواهند گرفت
+															</p>
+}
+
+												</div>
+											</div>
+										</div>
+
+					}
+					@if (!Model.IsSuccess)
+					{
+							<p class="heading-color mb--30 text-center alert alert-danger">
+								خطا در انجام عملیات پرداخت
+							</p>
+										<div class="panel panel-primary">
+											<div class="panel-heading text-right">اطلاعات پرداحت</div>
+											<div class="panel-body text-right">
+												<table class="table table-hover">
+													<tbody>
+														<tr>
+															<td>کد خطا: </td>
+															<td>@Model.RefrenceId </td>
+														</tr>
+
+
+													</tbody>
+												</table>
+												<p>
+													کاربر گرامی در صورتی که مبلغ سفارش از حساب شما کسر شده است، حداکثر ظرف مدت 72 ساعت به حساب شما باز خواهد گشت. در صورت مشکل با شماره تلفن پشتیبانی تماس بگیرید.
+												</p>
+											</div>
+										</div>
+
+					}
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>

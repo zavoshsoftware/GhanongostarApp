@@ -1,0 +1,287 @@
+﻿@model ViewModels.BasketViewModel
+@{
+		ViewBag.Title = "سبد خرید | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						سبد خرید
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="cart-area">
+<div class="container-fluid custom-container">
+<div class="row">
+<div class="col-xl-3">
+	<div class="cart-subtotal">
+		<p>فاکتور</p>
+		<ul>
+			<li><span>جمع خرید:</span>@Model.SubTotal</li>
+			<li><span>تخفیف:</span>@Model.DiscountAmount</li>
+			<li><span>مبلغ قابل پرداخت:</span>@Model.Total</li>
+		</ul>
+		@*<div class="note">
+							<span>ایمیل:</span>
+							<input type="text" id="email"/>
+						</div>
+						<div class="note">
+							<span>توضیحات:</span>
+							<textarea id="orderNotes"></textarea>
+						</div>*@
+
+
+	</div>
+
+</div>
+<div class="col-xl-9">
+	<div class="cart-table">
+		<table class="tables">
+			<thead>
+			<tr>
+				<th></th>
+				<th>تصویر</th>
+				<th>محصول</th>
+				<th>قیمت</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var product in Model.Products)
+			{
+				<tr>
+					<td>
+						<a href="#">X</a>
+					</td>
+					<td>
+						<a href="#">
+							<div class="product-image">
+								<img height="100px" alt="@product.Product.Title" src="https://ghanongostar.zavoshsoftware.com/@product.Product.ImageUrl">
+							</div>
+						</a>
+					</td>
+					<td>
+						<div class="product-title">
+							<a href="#">@product.Product.Title</a>
+						</div>
+					</td>
+
+					<td>
+						<div class="total-price-box">
+							@if (product.Product.IsInPromotion)
+							{
+								<span class="price old-price">@product.Product.Amount.ToString("N0") تومان</span>
+								<span class="price">@product.Product.DiscountAmount.Value.ToString("N0") تومان</span>
+							}
+							else
+							{
+								<span class="price">@product.Product.Amount.ToString("N0") تومان</span>
+
+							}
+						</div>
+					</td>
+				</tr>
+			}
+
+			</tbody>
+		</table>
+	</div>
+
+	<div class="row cart-btn-section">
+
+		<div class="col-12 col-sm-4 col-lg-6">
+			<div class="cart-btn-right">
+				@*<a href="#">تکمیل خرید</a>*@
+			</div>
+		</div>
+
+		<div class="col-12 col-sm-8 col-lg-6">
+			<div class="cart-btn-left">
+				<div class="alert alert-danger" id="errorDiv"></div>
+				<div class="alert alert-success" id="SuccessDiv">تخفیف اعمال شد</div>
+				<input id="coupon" type="text" class="coupon-code" placeholder="کد تخفیف" />
+				<button class="btn-ghanon" onclick="addDiscountCode();">اعمال کد تخفیف</button>
+			</div>
+		</div>
+
+
+		<!-- /.col-xl-6 -->
+	</div>
+
+
+	<div class="finalize-form">
+		<div class="register">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="txtFullName">نام و نام خانوادگی*</label>
+						<input type="text" class="form-control" id="txtFullName" placeholder="نام و نام خانوادگی">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="txtCellNum">شماره موبایل*</label>
+						<input type="text" class="form-control" id="txtCellNum" placeholder="شماره موبایل">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="email">ایمیل*</label>
+						<input type="text" class="form-control" id="email" placeholder="ایمیل">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="ddlEmployee">کارمند یا کارفرما</label>
+						<select id="ddlEmployee" class="form-control">
+							<option value="1">کارمند هستم</option>
+							<option value="2">کارفرما هستم</option>
+						</select>
+					</div>
+				</div>
+			</div>
+						
+						
+						
+			<div class="row physical-product">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="province">استان</label>
+						<select class="form-control" id="province">
+							@foreach (var province in Model.Provinces)
+							{
+								<option value="@province.Id">@province.Title</option>
+
+							}
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="city">شهر</label>
+						<select class="form-control" id="city">
+</select>
+					</div>
+				</div>
+			</div>
+			<div class="row physical-product">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="address">آدرس</label>
+						<input type="text" class="form-control" id="address" placeholder="آدرس">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="postal">کد پستی</label>
+						<input type="text" class="form-control" id="postal" placeholder="کد پستی">
+
+					</div>
+				</div>
+			</div>
+						
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="orderNotes">توضیحات</label>
+						<textarea class="form-control" id="orderNotes" rows="3"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="alert alert-danger" id="error-box"></p>
+				<button id="btn-register" class="btn-ghanon" onclick="registerUser();">پرداخت</button>
+				<p class="alert alert-info" id="transfer-message">در حال پردازش اطلاعات ...</p>
+			</div>
+					
+		</div>
+					
+		<div class="activate">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="alert alert-info">کد فعال سازی از طریق پیامک برای شما ارسال گردید</div>
+					<div class="form-group">
+						<label for="txtActivationCode">کد فعال سازی</label>
+						<input type="text" class="form-control" id="txtActivationCode" placeholder="کد فعال سازی">
+					</div>
+				</div>
+							 
+			</div>
+						
+			<div class="row">
+				<p class="alert alert-danger" id="error-box2"></p>
+				<button id="btn-finalize" class="btn-ghanon" onclick="FinalizeOrder();">پرداخت</button>
+				<p class="alert alert-info" id="transfer-message2"> در حال انتقال به درگاه پرداخت بانکی</p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</section>
+
+
+@section scripts{
+	<script>
+		$(document).ready(function() {
+			$.ajax(
+				{
+					url: "/shop/CheckFields",
+					data: {
+					},
+					type: "GET"
+				}).done(function (result) {
+
+					if (result === "physical") {
+						$('.physical-product').css('display', '-webkit-box');
+					}
+			 
+			 else {
+						$('.physical-product').css('display', 'none');
+					}
+			});
+		});
+
+
+		$('#province').on('change',
+			function () {
+				var SelectedValue = $(this).val(); // < added test values
+				if (SelectedValue !== "") {
+					var procemessage = "<option value='0'> صبرکنید...</option>";
+					$("#city").html(procemessage).show();
+					$.ajax(
+						{
+							url: "/Shop/FillCities",
+							data: { id: SelectedValue },
+							cache: false,
+							type: "POST",
+							success: function (data) {
+								var markup = "<option value='0'>انتخاب شهر</option>";
+								for (var x = 0; x < data.length; x++) {
+									markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+								}
+								$("#city").html(markup).show();
+							},
+							error: function (reponse) {
+								alert("error : " + reponse);
+							}
+						});
+				}
+			});
+
+	</script>
+}

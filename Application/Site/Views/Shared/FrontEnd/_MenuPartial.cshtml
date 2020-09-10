@@ -1,0 +1,133 @@
+﻿@model ViewModels._BaseViewModel
+
+<header id="header" class="header-area">
+	<div class="container-fluid custom-container menu-rel-container">
+		<div class="row">
+
+			<div class="col-lg-6 col-xl-2">
+				<div class="logo">
+					<a href="/">
+						<img src="/images/logo.png" alt="قانون گستر">
+					</a>
+				</div>
+			</div>
+
+			<div class="col-lg-12 col-xl-10 order-lg-3 order-xl-2 menu-container">
+				<div class="mainmenu">
+					<ul id="navigation">
+						<li><a href="/">قانون گستر</a></li>
+
+						<li class="has-child ">
+							<a href="/video">ویدیو های آموزشی</a>
+							<ul class="sub-menu">
+								@foreach (var productGroup in Model.MenuProductGroups)
+								{
+										<li><a href="/video/@productGroup.UrlParam">@productGroup.Title</a></li>
+								}
+							</ul>
+						</li>
+						<li class="has-child ">
+							<a href="#">محصولات</a>
+							<ul class="sub-menu">
+								<li><a href="/forms">فرم ها و قراردادها</a></li>
+								<li><a href="/products">محصولات آموزشی</a></li>
+								<li><a href="/online-course">دوره های آموزشی غیر حضوری</a></li>
+							</ul>
+						</li>
+						@*<li><a href="#">پرسش و پاسخ</a></li>*@
+						<li><a href="/blog">مقالات</a></li>
+
+
+						@*<li><a href="#">کارگاه ها</a></li>
+						<li><a href="#">رویدادها</a></li>*@
+
+
+						@*<li class="has-child">
+							<a href="#">درباره ما</a>
+							<ul class="sub-menu">
+								<li><a href="#">درباره قانون گستر</a></li>
+								<li><a href="#">سخن مدیرعامل</a></li>
+								<li><a href="#">مشتریان</a></li>
+							</ul>
+						</li>
+						<li><a href="#">تماس با ما</a></li>*@
+						@*<li><a class="active" href="/promotiontype/eydtaeyd">جشنواره عید تا عید</a></li>*@
+						@*<li><a href="/login">ورود</a></li>
+						<li><a href="/register">ثبت نام</a></li>*@
+						<li><a href="/basket">سبد خرید</a></li>
+						<li><a href="/orders/list">سفارشات گذشته</a></li>
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</header>
+
+
+<header class="mobile-header">
+	<div class="container-fluid custom-container">
+		<div class="row">
+
+			<div class="col-4">
+
+			</div>
+			<div class="col-4">
+				<div class="logo">
+					<a href="/">
+						<img src="/images/logo.png" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="accordion-wrapper">
+					<a href="#" class="mobile-open"><i class="flaticon-menu-1"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="accordion-wrapper">
+
+	<div id="mobilemenu" class="accordion">
+		<ul>
+			<li class="mob-logo">
+				<a href="/">
+					<img src="/images/logo.png" alt="">
+				</a>
+			</li>
+			<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
+
+			<li class="out-link"><a href="/">قانون گستر</a></li>
+			<li>
+				<a href="#" class="link">ویدیو های آموزشی<i class="fa fa-chevron-down"></i></a>
+				<ul class="submenu">
+					@foreach (var productGroup in Model.MenuProductGroups)
+					{
+						<li><a href="/video/@productGroup.UrlParam">@productGroup.Title</a></li>
+					}
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="link">محصولات<i class="fa fa-chevron-down"></i></a>
+				<ul class="submenu">
+					<li><a href="/forms">فرم ها و قراردادها</a></li>
+					<li><a href="/products">محصولات آموزشی</a></li>
+					<li><a href="/online-course">دوره های آموزشی غیر حضوری</a></li>
+				</ul>
+			</li>
+
+			<li class="out-link"><a href="/blog">مقالات</a></li>
+			@*<li class="out-link"><a href="#">تماس با ما</a></li>*@
+			<li class="out-link"><a class="active" href="/promotion">جشنواره تخفیفات</a></li>
+			<li class="out-link"><a href="/orders/list">سفارشات گذشته</a></li>
+
+		</ul>
+		<div class="mobile-login">
+			<a href="login.html">ورود</a> |
+			<a href="create-account.html">ثبت نام</a>
+		</div>
+
+	</div>
+</div>

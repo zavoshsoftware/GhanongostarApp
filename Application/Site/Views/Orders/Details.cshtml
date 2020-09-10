@@ -1,0 +1,148 @@
+﻿@model ViewModels.OrderDetailViewModel
+@{
+		ViewBag.Title = "سفارش شماره " + Model.Order.Code + " | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+
+						سفارش شماره  @Model.Order.Code
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="account-area">
+	<div class="container-fluid custom-container">
+		<div class="row dirright">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body order-detail">
+						<h5 class="card-title">مشخصات سفارش</h5>
+						<div class="card-text ">
+							<div class="row dirright">
+								<div class="col-md-4 order-0">
+									تاریخ ثبت
+								</div>
+								<div class="col-md-8 order-1">@Model.Order.CreationDateStr</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 order-0">
+									شماره سفارش
+								</div>
+								<div class="col-md-8 order-1">@Model.Order.Code</div>
+								</div>
+							<div class="row">
+								<div class="col-md-4 order-0">
+									وضعیت پرداخت
+								</div>
+								<div class="col-md-8 order-1">
+									
+									@{
+										if (Model.Order.IsPaid)
+										{
+											<text>
+												پرداخت شده
+											</text>
+										}
+										if (!Model.Order.IsPaid)
+										{
+											<text>
+												در انتظار پرداخت
+											</text>
+										}
+									}
+
+								</div>
+							</div>
+							
+							
+							<div class="row">
+								<div class="col-md-4 order-0">
+									مبلغ سفارش
+								</div>
+								<div class="col-md-8 order-1">@Model.Order.AmountStr</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 order-0">
+									تخفیف
+								</div>
+								<div class="col-md-8 order-1">@Model.Order.DiscountAmountStr</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 order-0">
+									مبلغ قابل پرداخت
+								</div>
+								<div class="col-md-8 order-1">@Model.Order.TotalAmountStr</div>
+							</div>
+						</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body order-detail">
+							<h5 class="card-title">سفارشات</h5>
+							<div class="card-text account-table">
+								
+								
+								<table class="tables">
+									<thead>
+									<tr>
+										<th>عنوان محصول</th>
+										<th>قیمت</th>
+										<th>توضیحات</th>
+									</tr>
+									</thead>
+									@foreach (var orderDetal in Model.OrderDetails)
+									{
+										<tbody>
+										<tr>
+											<td>
+												@orderDetal.Product.Title
+											</td>
+										 
+											<td>
+												@orderDetal.AmountStr
+											</td>
+										 			<td>
+													 @if (Model.Order.IsPaid)
+													 {
+														 if (!string.IsNullOrEmpty(@orderDetal.Product.FileUrl))
+														 {
+															 <a href="https://ghanongostar.zavoshsoftware.com/@orderDetal.Product.FileUrl" class="btn btn-info"><i class="fa fa-download"></i> دانلود</a>
+														 }
+														 else
+														 {
+																	<a href="@ViewBag.fileLink" class="btn btn-info"><i class="fa fa-download"></i> دانلود</a>
+														 }
+													 }
+											</td>
+										</tr>
+										</tbody>
+									}
+								</table>
+								
+								
+
+
+							</div>
+						 
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</section>

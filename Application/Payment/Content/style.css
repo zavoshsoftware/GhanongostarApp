@@ -1,0 +1,20 @@
+﻿body {
+}
+
+.text-center {
+    text-align: center;
+    direction: rtl;
+}
+
+    .text-center h2, .text-center h3 {
+        direction: rtl;
+    }
+
+.logo {
+    text-align: center;
+    background-color: #000;
+}
+
+    .logo img {
+        text-align: center;
+    }

@@ -1,0 +1,77 @@
+﻿@model ViewModels.BlogListViewModel
+@{
+    ViewBag.Title = "وبلاگ | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						مقالات </p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="order-2 order-lg-2 col-lg-3 col-xl-3">
+				<div class=" shop-sidebar left-side">
+			 
+					<div class="sidebar-widget category-widget">
+						<label>ویدیو های آموزشی</label>
+						<ul>
+							@foreach (var productGroup in Model.SideBarProductGroups)
+							{
+									<li><a href="/video/@productGroup.UrlParam">@productGroup.Title</a> <span>(19)</span></li>
+							}
+
+						</ul>
+					</div>
+ 
+				</div>
+			</div>
+			<div class="order-1 order-lg-1 col-lg-9 col-xl-9">
+			 
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" aria-labelledby="home-tab">
+							<div class="row">
+						@foreach (var blog in Model.SiteBlogs)
+						{
+							<div class="col-sm-6 col-xl-4">
+								<div class="sin-product style-two">
+									<div class="pro-img">
+										<a href="/blog/@blog.SiteBlogCategory.UrlParam/@blog.UrlParam">
+										<img src="https://ghanongostar.zavoshsoftware.com/@blog.ImageUrl" alt="">
+										</a>
+											</div>
+									<div class="mid-wrapper">
+										<h2 class="pro-title"><a href="/blog/@blog.SiteBlogCategory.UrlParam/@blog.UrlParam">@blog.Title</a></h2>
+										<div class="color-variation">
+											<ul>
+												<li><i class="fas fa-circle"></i></li>
+												<li><i class="fas fa-circle"></i></li>
+												<li><i class="fas fa-circle"></i></li>
+												<li><i class="fas fa-circle"></i></li>
+											</ul>
+										</div>
+									</div>
+								 
+								</div>
+							</div>
+						}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

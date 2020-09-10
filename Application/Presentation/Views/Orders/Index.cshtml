@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ViewModels.OrderListViewModel>
+
+@{
+ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+    
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+	جمع کل پرداختی: @ViewBag.Sum
+</p>
+@(Html.Kendo().Grid(Model)
+									.Name("Grid")
+									.Columns(columns =>
+									{
+									columns.Bound(model => model.Code);
+									columns.Bound(model => model.FullName);
+									columns.Bound(model => model.OrderTypeTitle);
+									columns.Bound(model => model.ProductTitle);
+									columns.Bound(model => model.Amount);
+									columns.Bound(model => model.TotalAmount);
+									columns.Bound(model => model.IsPaid);
+									columns.Bound(model => model.PaymentDate);
+									columns.Bound(model => model.ResCode);
+									columns.Bound(model => model.CreationDate);
+									columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+									.Template(@<text>
+								 
+@Html.ActionLink("جزییات", "details", "OrderDetails", new { id = @item.Id }, new { @class = "k-button" })
+									</text>).Width(100);  
+		})
+		.ToolBar(toolbar =>
+					{				
+						toolbar.Custom().Action("Create","Orders").Text("افزودن");                          
+					}
+		)         
+		.DataSource(dataSource => dataSource
+									.Server()
+							
+									.Model(model => model.Id(item => item.Id))
+					)              
+	)

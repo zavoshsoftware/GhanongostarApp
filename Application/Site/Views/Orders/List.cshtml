@@ -1,0 +1,129 @@
+﻿@model ViewModels.OrderListViewModel
+@{
+    ViewBag.Title = "لیست سفارشات | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+					
+					لیست سفارشات</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="account-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-9">
+		 
+				<div class="account-table">
+					
+					<div class="card">
+						<div class="card-body">
+							<h6 class="card-title">تاریخچه سفارشات</h6>
+							<p class="card-text">
+								<table class="tables">
+									<thead>
+									<tr>
+										<th>کد</th>
+										<th>تاریخ</th>
+										<th>وضعیت پرداخت</th>
+										<th>مبلغ سفارش</th>
+										<th>تخفیف</th>
+										<th>مبلغ کل</th>
+										<th>توضیحات</th>
+									</tr>
+									</thead>
+
+									@foreach (var order in Model.Orders)
+									{
+										<tbody>
+										<tr>
+											<td>
+												<a href="/orders/details/@order.Code">#@order.Code</a>
+											</td>
+											<td>
+												@order.CreationDateStr
+											</td>
+											<td>
+												@{
+													if (order.IsPaid)
+													{
+														<text>
+															پرداخت شده
+														</text>
+													}
+													if (!order.IsPaid)
+													{
+														<text>
+															در انتظار پرداخت
+														</text>
+													}
+												}
+											</td>
+											<td>
+												@order.AmountStr
+											</td>
+											<td>
+												@order.DiscountAmountStr
+
+											</td>
+											<td>
+												@order.TotalAmountStr
+
+											</td>
+											<td>
+												<a href="/orders/details/@order.Code" class="btn btn-primary">مشاهده جزییات</a>
+												@*@if (!order.IsPaid)
+												{
+													<a href="#" class="btn btn-primary">پرداخت</a>
+												}*@
+											</td>
+										</tr>
+										<!-- /.single product -->
+										</tbody>
+									}
+
+
+								</table>
+							</p>
+	 
+						</div>
+					</div>
+					
+
+				
+				
+
+				</div>
+
+			  
+			</div>
+			<div class="col-xl-3">
+				<div class="account-details">
+					<div class="card">
+						<div class="card-body">
+							<h6 class="card-title">اطلاعات کاربری</h6>
+							<p class="card-text">
+								<ul>
+									<li>@Model.User.FullName</li>
+									<li>@Model.User.CellNum</li>
+									<li>@Model.User.Role.Title </li>
+								</ul>
+							</p>
+						</div>
+								
+					</div>
+				</div>
+				</div>
+		</div>
+	</div>
+</section>
