@@ -9,7 +9,10 @@ namespace ViewModels
     public class HomeViewModel:_BaseViewModel
     {
         public List<SiteBlog> SiteBlogs { get; set; }
+
         public List<HomeProducts> HomeProducts { get; set; }
+
+        public List<Product> LatestVideos { get; set; }
     }
 
     public class HomeProducts

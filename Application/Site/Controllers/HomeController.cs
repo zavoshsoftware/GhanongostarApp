@@ -16,11 +16,14 @@ namespace Site.Controllers
         [Route("")]
         public ActionResult Index()
         {
+            Guid typeId = new Guid("800AD0E8-A281-4C15-AAB1-1BC9D883B8DD");
+
             HomeViewModel home = new HomeViewModel()
             {
-                SiteBlogs = UnitOfWork.SiteBlogRepository.Get().OrderByDescending(current=>current.CreationDate).Take(6).ToList(),
+                SiteBlogs = UnitOfWork.SiteBlogRepository.Get().OrderByDescending(current=>current.CreationDate).Take(3).ToList(),
                 MenuProductGroups = _baseHelper.GetMenuProductGroups(),
                 HomeProducts = GetHomeProducts(),
+                LatestVideos = UnitOfWork.ProductRepository.Get(current => current.ProductTypeId == typeId&&current.IsActive).OrderByDescending(current => current.CreationDate).Take(3).ToList(),
             };
             return View(home);
         }
