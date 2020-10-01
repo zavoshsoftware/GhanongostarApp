@@ -35,115 +35,42 @@
 						</div>
 						<h1>@Model.SiteBlog.Title</h1>
 						<div class="blog-details">
-					@Html.Raw(Model.SiteBlog.Body)
+							@Html.Raw(Model.SiteBlog.Body)
+						</div>
+						
+						
+						
+						<div class="row">
+							<div class="col-lg-12 col-xl-12">
+								<!-- Product View Slider -->
+								<div class="quickview-slider">
+									<div class="slider-for">
+										@foreach (var image in Model.SiteBlogImages)
+										{
+											<div class="">
+												<img src="https://ghanongostar.zavoshsoftware.com/@image.ImageUrl" alt="Thumb">
+											</div>
+										}
+						
+					 
+									</div>
+									<div class="slider-nav">
+										@foreach (var image in Model.SiteBlogImages)
+										{
+											<div class="">
+												<img src="https://ghanongostar.zavoshsoftware.com/@image.ImageUrl" alt="Thumb">
+											</div>
+										}
+					 
+									</div>
+								</div>
+								<!-- /.quickview-slider -->
+							</div>
 						</div>
 					</div>
 				</article>
 
-				@*<div id="comments">
-					<div class="comments-list">
-						<h4 class="heading"><span>4 Comments</span></h4>
-						<div class="commentlists-div">
-							<ol class="commentlists">
-								<li class="sin-comment  depth-1">
-									<div class="the-comment">
-										<div class="avatar">
-											<img alt="" src="media/images/user1.jpg">
-										</div>
-										<div class="comment-box">
-											<div class="comment-author meta">
-												<p class="com-name"><strong>Azad Hossain</strong></p>
-												<p>6 months ago <a href="#" class="comment-reply-link"> Reply </a></p>
-											</div>
-											<div class="comment-text">
-												<p>Donec ac libero nisl. Etiam ornare sollicitudin ultricies. Mauris ac purus eros, ac lobortis tortor. Maecenas sed interdum turpis!</p>
-											</div>
-										</div>
-									</div>
-									<ul class="children-comment">
-										<li class="comment odd alt depth-2">
-											<div class="the-comment">
-												<div class="avatar">
-													<img alt="" src="media/images/user1.jpg">
-												</div>
-												<div class="comment-box">
-													<div class="comment-author meta">
-														<p class="com-name"><strong>Biddut</strong></p>
-														<p> 9 months ago<a href="#" class="comment-reply-link"> Reply </a></p>
-													</div>
-													<div class="comment-text">
-														<p>
-															Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed sollicitudin lectus. Nunc ut vulputate nisi. Donec nec tincidunt ligula, non porta mi.<br>
-														</p>
-													</div>
-												</div>
-											</div>
-										</li>
-										<!-- #comment-## -->
-									</ul>
-									<!-- .children -->
-								</li>
-								<!-- #comment-## -->
-								<li class="sin-comment  depth-1">
-									<div class="the-comment">
-										<div class="avatar">
-											<img alt="" src="media/images/user1.jpg">
-										</div>
-										<div class="comment-box">
-											<div class="comment-author meta">
-												<p class="com-name"><strong>Sajib Hasan</strong></p>
-												<p>6 months ago<a href="#" class="comment-reply-link"> Reply</a></p>
-											</div>
-											<div class="comment-text">
-												<p>Vivamus in semper lorem, id feugiat mi. Ut eu sem lorem. Aliquam vel libero mauris. Integer pellentesque quis mauris eu scelerisque. Vestibulum sodales, velit ut scelerisque mollis.</p>
-											</div>
-										</div>
-									</div>
-								</li>
-								<!-- #comment-## -->
-							</ol>
-						</div>
-					</div>
-					<div class="commentform">
-						<div class="comment-respond">
-							<div class="comment-reply-title">
-								<h4 class="heading">
-									<span>Leave a Comment</span>
-								</h4>
-							</div>
-							<form class="comment-form" id="commentform" method="post" action="#">
-								<p class="h-info">Your email address will not be published.</p>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="author">Name:</label>
-											<input aria-required="true" value="" id="author" class="form-control" name="author" type="text">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="email">Email:</label>
-											<input aria-required="true" value="" class="form-control" name="email" id="email" type="text">
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="url">Website:</label>
-									<input value="" class="form-control" name="url" id="url" type="text">
-								</div>
-								<div class="form-group">
-									<label for="comment" class="field-label">Comment:</label>
-									<textarea aria-required="true" name="comment" class="form-control" id="comment" rows="8"></textarea>
-								</div>
-								<p class="form-submit">
-									<input value="Post Comment" class="submit" type="submit">
-								</p>
-							</form>
-						</div>
-						<!-- #respond -->
-					</div>
-					<!-- end commentform -->
-				</div>*@
+	 
 			</div>
 			<div class="col-lg-4 col-xl-4">
 				<div class="blog-sidebar">

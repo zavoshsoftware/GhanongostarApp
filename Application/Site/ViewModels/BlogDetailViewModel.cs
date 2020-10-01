@@ -9,5 +9,7 @@ namespace ViewModels
         public List<SiteBlog> SideBarBlogs { get; set; }
         public List<SiteBlogCategory> SideBarSiteBlogCategories { get; set; }
         public List<HomeProducts> SideBarProducts { get; set; }
+        public List<SiteBlogImage> SiteBlogImages { get; set; }
+
     }
 }

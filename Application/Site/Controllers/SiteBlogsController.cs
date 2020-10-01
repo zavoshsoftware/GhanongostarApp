@@ -67,7 +67,9 @@ namespace Site.Controllers
                 SiteBlog = siteBlog,
                 SideBarBlogs = UnitOfWork.SiteBlogRepository.Get().OrderByDescending(current=>current.CreationDate).Take(3).ToList(),
                 SideBarSiteBlogCategories = UnitOfWork.SiteBlogCategoryRepository.Get().ToList(),
-                SideBarProducts = GetHomeProducts()
+                SideBarProducts = GetHomeProducts(),
+                SiteBlogImages = UnitOfWork.SiteBlogImageRepository.Get(c => c.SiteBlogId == siteBlog.Id && c.IsActive).ToList()
+
             };
 
             return View(blog);
