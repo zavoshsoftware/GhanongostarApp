@@ -355,6 +355,7 @@
     <Content Include="images\banner\7.png" />
     <Content Include="images\banner\9.png" />
     <Content Include="images\banner\add.jpg" />
+    <Content Include="images\banner\arbain.jpg" />
     <Content Include="images\banner\banner1.jpg" />
     <Content Include="images\banner\banner2.jpg" />
     <Content Include="images\banner\cf1.jpg" />
@@ -728,6 +729,8 @@
     <Content Include="Views\Orders\List.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Products\GetEydTaEydPromotion.cshtml" />
+    <Content Include="Views\Products\GetWorkshps.cshtml" />
+    <Content Include="Views\Products\GetWorkshpDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

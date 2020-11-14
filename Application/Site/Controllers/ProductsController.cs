@@ -62,6 +62,42 @@ namespace Site.Controllers
         }
 
 
+        [Route("workshops")]
+        public ActionResult GetWorkshps()
+        {
+            Guid typeId = new Guid("1AC97D01-66B8-4A77-99D4-E67CC84F4F85");
+
+            ProductListViewModel products = new ProductListViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                Products = UnitOfWork.ProductRepository.Get(current => current.ProductTypeId == typeId).ToList(),
+                SideBarProducts = GetHomeProducts(),
+                SideBarProductGroups = _baseHelper.GetSidebarProductGroups(),
+            };
+            return View(products);
+        }
+
+        [Route("workshops/{productCode}")]
+        public ActionResult GetWorkshpDetail(string productCode)
+        {
+            int code = Convert.ToInt32(productCode.Split('-')[1]);
+
+            Product product = UnitOfWork.ProductRepository.Get(current => current.Code == code).FirstOrDefault();
+
+            if (product == null)
+                return RedirectPermanent("/workshops");
+
+            FormDetailViewModel form = new FormDetailViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                Product = UnitOfWork.ProductRepository.Get(current => current.Code == code).FirstOrDefault(),
+                SideBarProducts = GetHomeProducts(),
+                SideBarProductGroups = _baseHelper.GetSidebarProductGroups(),
+            };
+            return View(form);
+        }
+
+
         [Route("forms")]
         public ActionResult GetForms()
         {
