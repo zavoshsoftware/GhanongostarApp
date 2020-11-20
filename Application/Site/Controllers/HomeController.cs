@@ -35,7 +35,7 @@ namespace Site.Controllers
             List<Product> products = UnitOfWork.ProductRepository.Get(current =>
                 current.IsInHome && current.IsFree == false &&
                 (current.ProductType.Name == "forms" || current.ProductType.Name == "course" ||
-                 current.ProductType.Name == "physicalproduct")).Take(8).ToList();
+                current.ProductType.Name == "workshop" || current.ProductType.Name == "physicalproduct")).Take(8).ToList();
 
             List<HomeProducts> homeProducts=new List<HomeProducts>();
 

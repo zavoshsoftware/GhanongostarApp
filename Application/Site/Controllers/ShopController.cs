@@ -54,7 +54,7 @@ namespace Site.Controllers
         [AllowAnonymous]
         public ActionResult DiscountRequestPost(string coupon)
         {
-            DiscountCode discount = UnitOfWork.DiscountCodeRepository.Get(current => current.Code == coupon).FirstOrDefault();
+            DiscountCode discount = UnitOfWork.DiscountCodeRepository.Get(current => current.Code == coupon&&current.IsActive).FirstOrDefault();
 
             string result = CheckCouponValidation(discount);
 
@@ -155,12 +155,18 @@ namespace Site.Controllers
                         string res = "";
 
                         if (order.TotalAmount == 0)
-                            res = "freecallback?orderid=" + order.Id;
+                            return Json("invalid", JsonRequestBehavior.AllowGet);
 
-                        else
-                            res = zp.ZarinPalRedirect(order, order.TotalAmount);
-
+                        res = zp.ZarinPalRedirect(order, order.TotalAmount);
                         return Json(res, JsonRequestBehavior.AllowGet);
+
+                        //if (order.TotalAmount == 0)
+                        //    res = "freecallback?orderid=" + order.Id;
+
+                        //else
+                        //    res = zp.ZarinPalRedirect(order, order.TotalAmount);
+
+                       //return Json(res, JsonRequestBehavior.AllowGet);
                     }
 
                     if (user.IsActive && user.Password == activationCode)
@@ -173,13 +179,19 @@ namespace Site.Controllers
 
                         string res = "";
 
-                        if (order.TotalAmount == 0)
-                            res = "freecallback?orderid=" + order.Id;
+                        if(order.TotalAmount==0)
+                            return Json("invalid", JsonRequestBehavior.AllowGet);
 
-                        else
-                            res = zp.ZarinPalRedirect(order, order.TotalAmount);
-
+                        res = zp.ZarinPalRedirect(order, order.TotalAmount);
                         return Json(res, JsonRequestBehavior.AllowGet);
+
+                        //if (order.TotalAmount == 0)
+                        //    res = "freecallback?orderid=" + order.Id;
+
+                        //else
+                        //    res = zp.ZarinPalRedirect(order, order.TotalAmount);
+
+                        //return Json(res, JsonRequestBehavior.AllowGet);
                     }
                 }
                 return Json("invalid", JsonRequestBehavior.AllowGet);
