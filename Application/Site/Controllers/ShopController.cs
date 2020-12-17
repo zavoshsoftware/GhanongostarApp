@@ -95,6 +95,7 @@ namespace Site.Controllers
                 if (!isEmail)
                     return Json("invalidEmail", JsonRequestBehavior.AllowGet);
 
+            
                 User user = UnitOfWork.UserRepository.Get(current => current.CellNum == cellNumber).FirstOrDefault();
 
                 string code;
@@ -130,6 +131,13 @@ namespace Site.Controllers
         {
             try
             {
+
+                List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
+
+                if (productInCarts.FirstOrDefault().Product.ProductType.Name == "physicalproduct"&&(string.IsNullOrEmpty(address)||string.IsNullOrEmpty(city)))
+                    return Json("physical", JsonRequestBehavior.AllowGet);
+
+
                 cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
                 activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
@@ -146,9 +154,12 @@ namespace Site.Controllers
                         UpdateActivationCode(activation, null, null, null, null);
                         UnitOfWork.Save();
 
-                        List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
+
 
                         Order order = ConvertCoockieToOrder(productInCarts, user.Id, notes, email, city, address, postal);
+
+
+
 
                         RemoveCookie();
 
@@ -171,7 +182,7 @@ namespace Site.Controllers
 
                     if (user.IsActive && user.Password == activationCode)
                     {
-                        List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
+                 
 
                         Order order = ConvertCoockieToOrder(productInCarts, user.Id, notes, email, city, address, postal);
 
@@ -987,114 +998,114 @@ namespace Site.Controllers
             return body;
         }
 
-        [Route("freecallback")]
-        public ActionResult CallBackFree(Guid orderId)
-        {
-            CallBackViewModel callBack = new CallBackViewModel()
-            {
-                MenuProductGroups = _baseHelper.GetMenuProductGroups()
-            };
+        //[Route("freecallback")]
+        //public ActionResult CallBackFree(Guid orderId)
+        //{
+        //    CallBackViewModel callBack = new CallBackViewModel()
+        //    {
+        //        MenuProductGroups = _baseHelper.GetMenuProductGroups()
+        //    };
 
-            try
-            {
+        //    try
+        //    {
 
-                Order order = UnitOfWork.OrderRepository.GetById(orderId);
-                if (order != null)
-                {
-                    order.IsPaid = true;
-                    order.PaymentDate = DateTime.Now;
+        //        Order order = UnitOfWork.OrderRepository.GetById(orderId);
+        //        if (order != null)
+        //        {
+        //            order.IsPaid = true;
+        //            order.PaymentDate = DateTime.Now;
 
-                    UnitOfWork.OrderRepository.Update(order);
-                    UnitOfWork.Save();
+        //            UnitOfWork.OrderRepository.Update(order);
+        //            UnitOfWork.Save();
 
-                    callBack.IsSuccess = true;
-                    callBack.OrderCode = order.Code.ToString();
-                    // callBack.RefrenceId = verificationResponse.RefID;
+        //            callBack.IsSuccess = true;
+        //            callBack.OrderCode = order.Code.ToString();
+        //            // callBack.RefrenceId = verificationResponse.RefID;
 
-                    // UpdateUserPoint(order);
+        //            // UpdateUserPoint(order);
 
-                    string orderType = UnitOfWork.ProductTypeRepository.GetById(order.OrderTypeId).Name;
-                    callBack.ProductType = orderType;
-                    if (!string.IsNullOrEmpty(orderType))
-                    {
-                        if (orderType.ToLower() == "vippackage")
-                            CheckVipPackage(order);
-                        if (orderType.ToLower() == "workshop" || orderType.ToLower() == "event")
-                        {
-                            //   GeneratePfd(order.Id);
-                        }
-
-
-
-                        OrderDetail orderDetail = UnitOfWork.OrderDetailRepository
-                            .Get(current => current.OrderId == order.Id).FirstOrDefault();
-
-                        if (orderDetail != null)
-                        {
-                            Product product = UnitOfWork.ProductRepository.GetById(orderDetail.ProductId);
-
-                            if (product != null)
-                            {
-                                string fileLink = "https://ghanongostar.zavoshsoftware.com/" + product.FileUrl;
-
-                                if (orderType.ToLower() == "course")
-                                {
-                                    Models.CourseDetail courseDetail = UnitOfWork.CourseDetailRepository
-                                        .Get(c => c.ProductId == product.Id).OrderBy(c => c.SessionNumber)
-                                        .FirstOrDefault();
-
-                                    if (courseDetail != null)
-                                    {
-                                        ViewBag.hasCourseDetail = "true";
-                                        fileLink = "https://ghanongostar.zavoshsoftware.com/" +
-                                                   courseDetail.VideoUrl;
-                                    }
-
-                                }
-                                callBack.DownloadLink = fileLink;
-                                ViewBag.Email = order.Email;
-
-                                CreateEmail(order.Email, fileLink, orderType);
+        //            string orderType = UnitOfWork.ProductTypeRepository.GetById(order.OrderTypeId).Name;
+        //            callBack.ProductType = orderType;
+        //            if (!string.IsNullOrEmpty(orderType))
+        //            {
+        //                if (orderType.ToLower() == "vippackage")
+        //                    CheckVipPackage(order);
+        //                if (orderType.ToLower() == "workshop" || orderType.ToLower() == "event")
+        //                {
+        //                    //   GeneratePfd(order.Id);
+        //                }
 
 
-                                string city = "";
-                                if (order.City != null)
-                                    city = order.City.Title;
 
-                                CreateEmailForAdmin(product.Title, 0, order.User.CellNum,
-                                    order.Address, city, order.PostalCode, order.User.FullName);
+        //                OrderDetail orderDetail = UnitOfWork.OrderDetailRepository
+        //                    .Get(current => current.OrderId == order.Id).FirstOrDefault();
 
-                                //CreateEmailForAdminTest(product.Title, Amount, order.User.CellNum,
-                                //    order.Address, city, order.PostalCode, order.User.FullName);
+        //                if (orderDetail != null)
+        //                {
+        //                    Product product = UnitOfWork.ProductRepository.GetById(orderDetail.ProductId);
 
-                                if (orderType.ToLower() == "physicalproduct")
-                                {
+        //                    if (product != null)
+        //                    {
+        //                        string fileLink = "https://ghanongostar.zavoshsoftware.com/" + product.FileUrl;
+
+        //                        if (orderType.ToLower() == "course")
+        //                        {
+        //                            Models.CourseDetail courseDetail = UnitOfWork.CourseDetailRepository
+        //                                .Get(c => c.ProductId == product.Id).OrderBy(c => c.SessionNumber)
+        //                                .FirstOrDefault();
+
+        //                            if (courseDetail != null)
+        //                            {
+        //                                ViewBag.hasCourseDetail = "true";
+        //                                fileLink = "https://ghanongostar.zavoshsoftware.com/" +
+        //                                           courseDetail.VideoUrl;
+        //                            }
+
+        //                        }
+        //                        callBack.DownloadLink = fileLink;
+        //                        ViewBag.Email = order.Email;
+
+        //                        CreateEmail(order.Email, fileLink, orderType);
 
 
-                                    CreateEmailForAdminForPhysicalProduct(product.Title, order.User.CellNum,
-                                        order.Address, city, order.PostalCode, order.User.FullName);
-                                }
-                            }
-                        }
+        //                        string city = "";
+        //                        if (order.City != null)
+        //                            city = order.City.Title;
 
-                    }
-                }
-                else
-                {
-                    callBack.IsSuccess = false;
-                    callBack.RefrenceId = "سفارش پیدا نشد";
-                }
+        //                        CreateEmailForAdmin(product.Title, 0, order.User.CellNum,
+        //                            order.Address, city, order.PostalCode, order.User.FullName);
 
-            }
-            catch (Exception e)
-            {
-                callBack.IsSuccess = false;
-                callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
-            }
+        //                        //CreateEmailForAdminTest(product.Title, Amount, order.User.CellNum,
+        //                        //    order.Address, city, order.PostalCode, order.User.FullName);
 
-            return View(callBack);
+        //                        if (orderType.ToLower() == "physicalproduct")
+        //                        {
 
-        }
+
+        //                            CreateEmailForAdminForPhysicalProduct(product.Title, order.User.CellNum,
+        //                                order.Address, city, order.PostalCode, order.User.FullName);
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else
+        //        {
+        //            callBack.IsSuccess = false;
+        //            callBack.RefrenceId = "سفارش پیدا نشد";
+        //        }
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        callBack.IsSuccess = false;
+        //        callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
+        //    }
+
+        //    return View(callBack);
+
+        //}
 
 
         [AllowAnonymous]

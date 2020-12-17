@@ -90,6 +90,15 @@ function FinalizeOrder() {
                     $('#error-box2').html('کد وارد شده صحیح نمی باشد.');
                     AppearButton('btn-finalize', 'transfer-message2');
                 }
+                else if (result === "physical") {
+                    $('.activate').css('display', 'none');
+                    $('.register').css('display', 'block');
+                    $('#error-box').css('display', 'block');
+                    $('#error-box').html('شهر و آدرس خود را وارد نمایید');
+                    AppearButton('btn-register', 'transfer-message');
+                    AppearButton('btn-finalize', 'transfer-message2');
+                }
+
                 else if (result !== "false"&&result!=="invalid") {
                     window.location = result;
                 } else {
