@@ -1,0 +1,154 @@
+﻿@model ViewModels.ConsultantViewModel
+@{
+		ViewBag.Title = "درخواست مشاوره | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+@section headSection
+{
+	<style>
+		.img-header {
+			width: 100%;
+		}
+
+		.consultant-container {
+			padding-bottom: 20px;
+			background-color: #ececec;
+			padding-top: 20px;
+		}
+
+			.consultant-container ul {
+				direction: rtl;
+				text-align: right;
+			}
+
+
+			.consultant-container .form-info {
+				border: 1px solid #ddd;
+				padding: 20px;
+				background-color: #fff;
+				direction: rtl;
+			}
+
+
+
+		.btn-bottom-20 {
+			margin-bottom: 20px;
+		}
+
+		.mrl0 {
+			margin-right: 0;
+			margin-left: 0;
+		}
+
+		.prl0 {
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+		.bg-gray {
+			background-color: #ececec;
+		}
+	</style>
+}
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						درخواست مشاوره
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+@*<section>
+		<div class="employer-container">
+
+			<div class="row justify-content-center mrl0">
+				<div class="col-lg-8 prl0">
+
+					<p class="heading-color text-center">
+						<img src="~/images/Employers-Club2.jpg" class="img-header" />
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>*@
+
+<section class="consultant-container">
+	<div class="row justify-content-center mrl0">
+
+		<div class="col-lg-8">
+			<div class="form-info">
+			
+				<h2 class="text-center heading-title">
+					درخواست مشاوره
+				</h2>
+				<p class="heading-color mb--30 text-center">
+					تسویه حساب پایان سال پرسنل، تمدید قرارداد کار برای سال آینده و تعدیل نیرو، همیشه یکی از چالش های مدیران و کارفرمایان در اسفند ماه هر سال می باشد.
+				</p>
+				<p class="heading-color mb--30 text-center">
+					با توجه به تغییرات قانون در خصوص نحوه تسویه حساب و محاسبات مزایای کارگران و کارمندان، همچنین فرم های جدید انجام این فرآیند، بهتر است که شرکت ها و مجموعه ها تحت نظارت کارشناسان این امر اقدام نمایند تا از جرایم و مجازات های آتی پیشگیری کنند.
+
+				</p>
+				<p class="heading-color mb--30 text-center">
+					جهت بهره مندی از مشاوره و اجرای صحیح تسویه حساب پرسنل لطفا فرم زیر را تکمیل نمایید،  تا در اسرع وقت از واحد پشتیبانی با شما تماس گرفته شود 
+				</p>
+			</div>
+		</div>
+	</div>
+</section> 
+
+
+<section class="contact-area">
+	<div class="container-fluid custom-container">
+		<div class="section-heading pb-30">
+			<h3>فرم درخواست مشاوره</h3>
+		</div>
+		<div class="row justify-content-center dirright">
+			<div class="col-md-8 col-lg-8 col-xl-6">
+				<div class="contact-form">
+					@if (TempData["error"] != null)
+					{
+						<p class="alert alert-danger">
+							@TempData["error"]
+						</p>
+					}else if (TempData["success"] != null)
+					{
+						<p class="alert alert-success">
+							@TempData["success"]
+						</p>
+					}
+					@using (Html.BeginForm("Consultant", "Home", new {}, FormMethod.Post, new {@class = "panel-body wrapper-lg", role = "form"}))
+					{
+						<div class="row">
+							<div class="col-xl-6">
+								<input type="text" placeholder="نام*" name="FirstName">
+							</div>
+							<div class="col-xl-6">
+								<input type="text" placeholder="نام خانوادگی*" name="LastName">
+							</div>
+							<div class="col-xl-6">
+								<input type="text" placeholder="شرکت" name="Company">
+							</div>
+							<div class="col-xl-6">
+								<input type="text" placeholder="شماره تماس*" name="ContactNumber">
+							</div>
+							<div class="col-xl-12">
+								<textarea placeholder="توضیحات" name="Message"></textarea>
+							</div>
+							<div class="col-xl-12">
+								<input type="submit" value="ثبت درخواست">
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

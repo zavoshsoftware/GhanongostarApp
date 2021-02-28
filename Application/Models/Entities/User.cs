@@ -69,6 +69,7 @@ namespace Models
         public virtual ICollection<QuestionConversation> QuestionConversations { get; set; }
         public virtual ICollection<SupportRequest> SupportRequests { get; set; }
         public virtual ICollection<UserVipPackage> UserVipPackages { get; set; }
+        public virtual ICollection<EmpClubQuestion> EmpClubQuestions { get; set; }
         internal class configuration : EntityTypeConfiguration<User>
         {
             public configuration()

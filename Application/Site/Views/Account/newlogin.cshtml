@@ -1,0 +1,92 @@
+﻿@model ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+@section headSection
+{
+	<style>
+	.login {
+		margin-bottom: 15px;
+	}
+	
+	</style>
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						ورود
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-sm-10 offset-sm-1 col-xs-12  offset-md-3 login">
+			<div class="login-header">
+				ورود به پنل کاربری قانون گستر
+			</div>
+			<div class="login-form">
+				@using (Html.BeginForm("NewLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "panel-body wrapper-lg", role = "form" }))
+				{
+					if (TempData["WrongPass"] != null)
+					{
+						<p class="alert alert-danger">
+							@TempData["WrongPass"]
+						</p>
+					}
+					if (TempData["required"] != null)
+					{
+						<p class="alert alert-danger">
+							@TempData["required"]
+						</p>
+					}
+					@Html.ValidationSummary(true)
+
+					@Html.AntiForgeryToken()
+					<div class="form-group">
+						<label for="Username">شماره موبایل</label>
+
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<i class="fa fa-mobile"></i>
+								</div>
+							</div>
+
+							<input type="text" readonly
+							       onfocus="this.removeAttribute('readonly');" class="form-control" id="Username" name="Username" placeholder="شماره موبایل">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Password">کلمه عبور</label>
+						<a href="/login" class="forget-pass">رمز عبور خود را فراموش کرده ام</a>
+						<p class="clearfix"></p>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+							<input type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control" id="Password" name="Password" placeholder="کلمه عبور">
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-savadimo-login">ورود</button>
+				}
+			</div>
+
+		</div>
+	</div> 
+</div>

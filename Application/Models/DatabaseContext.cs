@@ -44,6 +44,9 @@ namespace Models
         public DbSet<SiteBlog> SiteBlogs { get; set; }
         public DbSet<SiteBlogImage> SiteBlogImages { get; set; }
         public DbSet<Redirect> Redirects { get; set; }
+        public DbSet<EmpClubProductGroup> EmpClubProductGroups { get; set; }
+        public DbSet<EmpClubProduct> EmpClubProducts { get; set; }
+        public DbSet<EmpClubQuestion> EmpClubQuestions { get; set; }
+        public DbSet<ConsultantRequest> ConsultantRequests { get; set; }
     }
-
 }

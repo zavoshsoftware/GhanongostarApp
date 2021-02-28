@@ -831,8 +831,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\ConsultantRequestsController.cs" />
     <Compile Include="Controllers\CourseDetailsController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
+    <Compile Include="Controllers\EmpClubProductGroupsController.cs" />
+    <Compile Include="Controllers\EmpClubProductsController.cs" />
+    <Compile Include="Controllers\EmpClubQuestionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
@@ -1124,6 +1128,26 @@
     <Content Include="Views\Redirects\Details.cshtml" />
     <Content Include="Views\Redirects\Edit.cshtml" />
     <Content Include="Views\Redirects\Index.cshtml" />
+    <Content Include="Views\EmpClubProductGroups\Create.cshtml" />
+    <Content Include="Views\EmpClubProductGroups\Delete.cshtml" />
+    <Content Include="Views\EmpClubProductGroups\Details.cshtml" />
+    <Content Include="Views\EmpClubProductGroups\Edit.cshtml" />
+    <Content Include="Views\EmpClubProductGroups\Index.cshtml" />
+    <Content Include="Views\EmpClubProducts\Create.cshtml" />
+    <Content Include="Views\EmpClubProducts\Delete.cshtml" />
+    <Content Include="Views\EmpClubProducts\Details.cshtml" />
+    <Content Include="Views\EmpClubProducts\Edit.cshtml" />
+    <Content Include="Views\EmpClubProducts\Index.cshtml" />
+    <Content Include="Views\EmpClubQuestions\Create.cshtml" />
+    <Content Include="Views\EmpClubQuestions\Delete.cshtml" />
+    <Content Include="Views\EmpClubQuestions\Details.cshtml" />
+    <Content Include="Views\EmpClubQuestions\Edit.cshtml" />
+    <Content Include="Views\EmpClubQuestions\Index.cshtml" />
+    <Content Include="Views\ConsultantRequests\Create.cshtml" />
+    <Content Include="Views\ConsultantRequests\Delete.cshtml" />
+    <Content Include="Views\ConsultantRequests\Details.cshtml" />
+    <Content Include="Views\ConsultantRequests\Edit.cshtml" />
+    <Content Include="Views\ConsultantRequests\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1137,6 +1161,7 @@
     <Folder Include="Uploads\Courses\Images\" />
     <Folder Include="Uploads\Courses\Video\" />
     <Folder Include="Uploads\Editor\" />
+    <Folder Include="Uploads\emp\" />
     <Folder Include="Uploads\Product\Files\" />
     <Folder Include="Uploads\shared\" />
   </ItemGroup>

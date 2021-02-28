@@ -28,6 +28,53 @@ namespace Site.Controllers
             return View(home);
         }
 
+        [Route("Consultant")]
+        public ActionResult Consultant()
+        {
+            ConsultantViewModel result = new ConsultantViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result);
+        }
+
+
+        [Route("Consultant")]
+        [HttpPost]
+        public ActionResult Consultant(ConsultantViewModel consultantViewModel)
+        {
+            if (ModelState.IsValid)
+            { 
+                ConsultantRequest consultantRequest=new ConsultantRequest()
+                {
+                    Id = Guid.NewGuid(),
+                    Company = consultantViewModel.Company  ,
+                    CreationDate = DateTime.Now,
+                    IsDeleted = false,
+                    IsActive = true,
+                    FirstName = consultantViewModel.FirstName,
+                    LastName = consultantViewModel.LastName,
+                    Message = consultantViewModel.Message,
+                    ContactNumber = consultantViewModel.ContactNumber
+                };
+
+                UnitOfWork.ConsultantRequestRepository.Insert(consultantRequest);
+                UnitOfWork.Save();
+
+                TempData["success"] = "درخواست شما با موفقیت ثبت گردید. همکاران ما در اسرع وقت به درخواست شما رسیدگی خواهند کرد..";
+                consultantViewModel.MenuProductGroups = _baseHelper.GetMenuProductGroups();
+                return View(consultantViewModel);
+            }
+
+            TempData["error"] = "لطفا فیلدهای ستاره دار را تکمیل کنید..";
+
+            ConsultantViewModel result = new ConsultantViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result);
+        }
+
 
         public List<HomeProducts> GetHomeProducts()
         {

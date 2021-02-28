@@ -18,4 +18,7 @@ namespace API.Models
         public string Rate { get; set; }
         public string InviteText { get; set; }
     }
+
+  
+
 }

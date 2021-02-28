@@ -81,6 +81,10 @@
     <Compile Include="DatabaseContextInitializerBeforeTheFirstRelease.cs" />
     <Compile Include="Entities\ActivationCode.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\ConsultantRequest.cs" />
+    <Compile Include="Entities\EmpClubQuestion.cs" />
+    <Compile Include="Entities\EmpClubProduct.cs" />
+    <Compile Include="Entities\EmpClubProductGroup.cs" />
     <Compile Include="Entities\Redirect.cs" />
     <Compile Include="Entities\SiteBlogCategory.cs" />
     <Compile Include="Entities\SiteBlog.cs" />
@@ -292,6 +296,18 @@
     <Compile Include="Migrations\202003251205493_V451.Designer.cs">
       <DependentUpon>202003251205493_V451.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102181111092_V46.cs" />
+    <Compile Include="Migrations\202102181111092_V46.Designer.cs">
+      <DependentUpon>202102181111092_V46.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102181158173_V47.cs" />
+    <Compile Include="Migrations\202102181158173_V47.Designer.cs">
+      <DependentUpon>202102181158173_V47.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102281844252_V48.cs" />
+    <Compile Include="Migrations\202102281844252_V48.Designer.cs">
+      <DependentUpon>202102281844252_V48.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -440,6 +456,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003251205493_V451.resx">
       <DependentUpon>202003251205493_V451.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102181111092_V46.resx">
+      <DependentUpon>202102181111092_V46.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102181158173_V47.resx">
+      <DependentUpon>202102181158173_V47.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102281844252_V48.resx">
+      <DependentUpon>202102281844252_V48.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

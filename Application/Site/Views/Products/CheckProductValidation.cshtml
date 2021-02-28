@@ -1,0 +1,62 @@
+﻿@model ViewModels.ProductValidationViewModel
+@{
+    ViewBag.Title = "اعتبارسنجی محصول | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						اعتبارسنجی محصول</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section class="cart-area">
+	<div class="container-fluid custom-container">
+		<div class="container">
+			<div class="row justify-content-center pt--75 pb--80 pt-md--55 pb-md--60 pt-sm--35 pb-sm--40">
+				<div class="col-lg-6">
+				 
+							<p class="heading-color mb--30 text-center">
+								<img class="img-responsive" src="https://ghanongostar.zavoshsoftware.com/@Model.ProductImage" />
+								<h2 class="text-center">
+									@Model.ProductTitle
+								</h2>
+							</p>
+							<p class="heading-color mb--30 text-center alert alert-success">
+								این محصول معتبر است و اطلاعات آن به شرح زیر می باشد
+							</p>
+										<div class="panel panel-primary">
+											<div class="panel-heading text-center"><strong>اطلاعات خریدار</strong></div>
+											<div class="panel-body text-right">
+												<table class="table table-hover table-bordered" style="direction: rtl;">
+													<tbody>
+											 
+													<tr>
+															<td>نام خریدار: </td>
+															<td>@Model.UserFullName </td>
+														</tr>
+													<tr>
+														<td>تاریخ ثبت سفارش: </td>
+														<td>@Model.OrderDate </td>
+													</tr>
+														
+													</tbody>
+												</table>
+												 
+											</div>
+										</div>
+					 
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

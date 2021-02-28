@@ -546,3 +546,16 @@ a.forget-pass {
 .caption-detail h2 {
     border-bottom: 0;
 }
+
+.account-list-item {
+    direction: rtl;
+    text-align: right;
+}
+.account-list-item li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.account-table {
+    padding-top: 0;
+}

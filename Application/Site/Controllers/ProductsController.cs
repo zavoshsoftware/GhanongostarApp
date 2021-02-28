@@ -299,5 +299,147 @@ namespace Site.Controllers
             return urlPrefix;
         }
 
+
+        [Route("product-validation/{id:Guid}")]
+        public ActionResult CheckProductValidation(Guid id)
+        {
+            Order order = UnitOfWork.OrderRepository.GetById(id);
+
+            OrderDetail orderDetail = UnitOfWork.OrderDetailRepository.Get(c => c.OrderId == order.Id).FirstOrDefault();
+
+            Product product = UnitOfWork.ProductRepository.GetById(orderDetail.ProductId);
+            ProductValidationViewModel validation = new ProductValidationViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                OrderId = id,
+                OrderDate = order.CreationDateStr,
+                ProductTitle = product.Title,
+                ProductImage = product.ImageUrl,
+                UserFullName = order.User.FullName
+            };
+            return View(validation);
+        }
+
+        [Route("employer-package")]
+        public ActionResult EmployerPackage()
+        {
+
+            if (User.Identity.IsAuthenticated)
+            {
+                User user = GetOnlineUser();
+
+                if (UnitOfWork.OrderDetailRepository.Get(c =>
+                    c.Order.UserId == user.Id && c.Product.ProductTypeId == empPackageTypeId && c.Order.IsPaid).Any())
+                {
+                    return RedirectToAction("EmployerPackageResult");
+                }
+
+                EmployerPackageViewModel result = new EmployerPackageViewModel()
+                {
+                    MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                    Products = UnitOfWork.ProductRepository.Get(c=>c.ProductType.Name== "employerpackage").OrderBy(c=>c.Code).ToList()
+                };
+                return View(result);
+
+            }
+            else
+            {
+                EmployerPackageViewModel result = new EmployerPackageViewModel()
+                {
+                    MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                    Products = UnitOfWork.ProductRepository.Get(c => c.ProductType.Name == "employerpackage").OrderBy(c => c.Code).ToList()
+
+                };
+                return View(result);
+            }
+        }
+
+
+        [Route("ghanongostar-package")]
+        public ActionResult PackageList()
+        {
+            EmployerPackageViewModel result = new EmployerPackageViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+
+            };
+            return View(result);
+
+        }
+        public User GetOnlineUser()
+        {
+            var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+            string name = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+            Guid userId = new Guid(name);
+
+
+            return UnitOfWork.UserRepository.GetById(userId);
+        }
+
+        private Guid empPackageTypeId = new Guid("38DF416F-0A23-491C-8729-1316C20DC442");
+
+
+        [Route("employer-package-result")]
+        [Authorize]
+        public ActionResult EmployerPackageResult()
+        {
+            User user = GetOnlineUser();
+
+            if (!UnitOfWork.OrderDetailRepository.Get(c => c.Order.UserId == user.Id && c.Product.ProductTypeId == empPackageTypeId && c.Order.IsPaid).Any())
+            {
+                return RedirectToAction("EmployerPackage");
+            }
+            Guid typeId = new Guid("E71DF968-54A3-497A-A8C2-1058A4293F8D");
+
+            EmployerPackageResultViewModel result = new EmployerPackageResultViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                SideBarProducts = GetHomeProducts(),
+                SideBarProductGroups = _baseHelper.GetSidebarProductGroups(),
+                Forms = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "form" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
+                Videos = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "video" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
+                Instructions = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "instructions" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
+                Questions = UnitOfWork.EmpClubQuestionRepository.Get(c=>c.UserId==user.Id&& c.IsDeleted==false).OrderByDescending(c=>c.CreationDate).ToList()
+            };
+            return View(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("employer-package-result/SubmitQuestion")]
+        public ActionResult SubmitQuestion(string subject, string question)
+        {
+            try
+            {
+
+                User user = GetOnlineUser();
+
+                if (user != null)
+                {
+                    EmpClubQuestion empClubQuestion = new EmpClubQuestion()
+                    {
+                        Id = Guid.NewGuid(),
+                        Subject = subject,
+                        Question = question,
+                        UserId = user.Id,
+                        CreationDate = DateTime.Now,
+                        IsActive = true,
+                        IsDeleted = false,
+                        ResponseDate = DateTime.Now
+                    };
+
+                    UnitOfWork.EmpClubQuestionRepository.Insert(empClubQuestion);
+                    UnitOfWork.Save();
+                    return Json("true", JsonRequestBehavior.AllowGet);
+                }
+                return Json("false", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+                return Json("false", JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

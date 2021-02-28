@@ -60,6 +60,10 @@
     <Compile Include="RepositoryAndUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="RepositoryAndUnitOfWork\Repository.cs" />
     <Compile Include="RepositoryAndUnitOfWork\UnitOfWork.cs" />
+    <Compile Include="RepositoryClasses\ConsultantRequestRepository.cs" />
+    <Compile Include="RepositoryClasses\EmpClubQuestionRepository.cs" />
+    <Compile Include="RepositoryClasses\EmpClubProductRepository.cs" />
+    <Compile Include="RepositoryClasses\EmpClubProductGroupRepository.cs" />
     <Compile Include="RepositoryClasses\SiteBlogCategoryRepository.cs" />
     <Compile Include="RepositoryClasses\SiteBlogImageRepository.cs" />
     <Compile Include="RepositoryClasses\SiteBlogRepository.cs" />
@@ -91,6 +95,10 @@
     <Compile Include="RepositoryClasses\VipPackageFeatureRepository.cs" />
     <Compile Include="RepositoryClasses\VipPackageRepository.cs" />
     <Compile Include="RepositoryClasses\ZarinpallAuthorityRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IConsultantRequestRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IEmpClubQuestionRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IEmpClubProductRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IEmpClubProductGroupRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISiteBlogCategoryRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISiteBlogImageRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISiteBlogRepository.cs" />

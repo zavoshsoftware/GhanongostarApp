@@ -48,7 +48,7 @@ namespace Site.Controllers
                     a.CellNum == model.Username
                     && a.Password == model.Password
                     && a.IsActive
-                    && a.IsDeleted == false);
+                    && a.IsDeleted == false&&(a.Role.Name== "Employee"||a.Role.Name== "Employer"));
 
                 if (oUser != null)
                 {
@@ -296,7 +296,7 @@ namespace Site.Controllers
             var ultraFastSend = new UltraFastSend()
             {
                 Mobile = Convert.ToInt64(cellNumber),
-                TemplateId = 10382,
+                TemplateId = 43399,
                 ParameterArray = new List<UltraFastParameters>()
                 {
                     new UltraFastParameters()
@@ -329,10 +329,8 @@ namespace Site.Controllers
             }
             else
             {
-                if (roleName == "Administrator")
-                    return RedirectToAction("index", "Products");
-
-                return RedirectToAction("Index", "home");
+             
+                return RedirectToAction("list", "orders");
             }
         }
         public ActionResult LogOff()
@@ -398,7 +396,16 @@ namespace Site.Controllers
         {
             try
             {
-                cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+              //  cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+                string englishcellNumber = "";
+                foreach (char ch in cellNumber)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                cellNumber = englishcellNumber;
+
+
                 bool isValidMobile = Regex.IsMatch(cellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
 
                 if (isValidMobile)
@@ -443,7 +450,15 @@ namespace Site.Controllers
         {
             try
             {
-                cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                //cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+                string englishcellNumber = "";
+                foreach (char ch in cellNumber)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                cellNumber = englishcellNumber;
+
 
                 User user = UnitOfWork.UserRepository.Get(current => current.CellNum == cellNumber).FirstOrDefault();
 
@@ -478,8 +493,26 @@ namespace Site.Controllers
         {
             try
             {
-                cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
-                activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                //cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                //activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+                string englishcellNumber = "";
+                foreach (char ch in cellNumber)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                cellNumber = englishcellNumber;
+
+
+                //   activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+
+                string englishactivationCode = "";
+                foreach (char ch in activationCode)
+                {
+                    englishactivationCode += char.GetNumericValue(ch);
+                }
+                activationCode = englishactivationCode;
 
                 User user = UnitOfWork.UserRepository.Get(current => current.CellNum == cellNumber).FirstOrDefault();
 
@@ -603,5 +636,84 @@ namespace Site.Controllers
                 ident);
             
         }
+
+
+
+
+        [Route("newlogin")]
+        public ActionResult NewLogin(string ReturnUrl = "")
+        {
+            ViewBag.Message = "";
+            ViewBag.ReturnUrl = ReturnUrl;
+
+            LoginViewModel login = new LoginViewModel()
+            {
+                MenuProductGroups = baseViewModel.GetMenuProductGroups()
+            };
+
+            return View(login);
+        }
+
+        [Route("newlogin")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewLogin(LoginViewModel model, string returnUrl)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User oUser = db.Users.Include(u => u.Role)
+                    .FirstOrDefault(a =>
+                    a.CellNum == model.Username
+                    && a.Password == model.Password
+                    && a.IsActive
+                    && a.IsDeleted == false);
+
+                if (oUser != null)
+                {
+                    var ident = new ClaimsIdentity(
+                      new[] { 
+              // adding following 2 claim just for supporting default antiforgery provider
+              new Claim(ClaimTypes.NameIdentifier, oUser.CellNum),
+              new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+
+              new Claim(ClaimTypes.Name,oUser.Id.ToString()),
+
+              // optionally you could add roles if any
+               new Claim(ClaimTypes.Role, oUser.Role.Name),
+               new Claim(ClaimTypes.Surname, oUser.FullName),
+
+                      },
+                      DefaultAuthenticationTypes.ApplicationCookie);
+
+                    HttpContext.GetOwinContext().Authentication.SignIn(
+                       new AuthenticationProperties
+                       {
+                           IsPersistent = true,
+                           ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(600),
+
+                       },
+                       ident);
+                    return RedirectToLocal(returnUrl, oUser.Role.Name); // auth succeed 
+                }
+                else
+                {
+                    // invalid username or password
+                    TempData["WrongPass"] = "شماره موبایل و یا کلمه عبور وارد شده صحیح نمی باشد.";
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            LoginViewModel login = new LoginViewModel()
+            {
+                MenuProductGroups = baseViewModel.GetMenuProductGroups(),
+                Username = model.Username,
+                Password = model.Password
+            };
+            TempData["required"] = "شماره موبایل و کلمه عبور صحیح را وارد نمایید.";
+            return View(login);
+        }
+
+
     }
 }

@@ -565,7 +565,62 @@ namespace DAL
                 return (_siteBlogCategoryRepository);
             }
         }
-        #endregion Inserting custom Respositories
+        private IEmpClubProductGroupRepository _empClubProductGroupRepository;
+        public IEmpClubProductGroupRepository  EmpClubProductGroupRepository
+        {
+            get
+            {
+                if (_empClubProductGroupRepository == null)
+                {
+                    _empClubProductGroupRepository =
+                        new EmpClubProductGroupRepository(DatabaseContext);
+                }
+                return (_empClubProductGroupRepository);
+            }
+        }
 
+        private IEmpClubProductRepository _empClubProductRepository;
+        public IEmpClubProductRepository EmpClubProductRepository
+        {
+            get
+            {
+                if (_empClubProductRepository == null)
+                {
+                    _empClubProductRepository =
+                        new EmpClubProductRepository(DatabaseContext);
+                }
+                return (_empClubProductRepository);
+            }
+        }
+
+        private IEmpClubQuestionRepository _empClubQuestionRepository;
+        public IEmpClubQuestionRepository EmpClubQuestionRepository
+        {
+            get
+            {
+                if (_empClubQuestionRepository == null)
+                {
+                    _empClubQuestionRepository =
+                        new EmpClubQuestionRepository(DatabaseContext);
+                }
+                return (_empClubQuestionRepository);
+            }
+        }
+
+        private IConsultantRequestRepository _consultantRequestRepository;
+        public IConsultantRequestRepository ConsultantRequestRepository
+        {
+            get
+            {
+                if (_consultantRequestRepository == null)
+                {
+                    _consultantRequestRepository =
+                        new ConsultantRequestRepository(DatabaseContext);
+                }
+                return (_consultantRequestRepository);
+            }
+        }
+
+        #endregion Inserting custom Respositories
     }
 }

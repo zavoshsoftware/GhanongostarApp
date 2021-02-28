@@ -3,8 +3,15 @@
     ViewBag.Title = Model.SiteBlog.Title +" | قانون گستر";
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
-
-<section class="breadcrumb-area">
+@section headSection
+{
+	<style>
+		.blog-content {
+			margin-top: 0;
+		}
+	</style>
+}
+	<section class="breadcrumb-area">
 	<div class="container-fluid custom-container">
 		<div class="row">
 			<div class="col-xl-12">

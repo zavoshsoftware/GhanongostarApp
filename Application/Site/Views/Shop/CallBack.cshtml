@@ -41,6 +41,13 @@
 																	<td><a class="btn btn-success" href="@Model.DownloadLink">دانلود فایل</a> </td>
 																</tr>
 }
+															@if (Model.ProductType == "employerpackage")
+														{
+																<tr>
+																	<td>جهت دسترسی به باشگاه روابط کار وارد پنل کاربری خود شوید </td>
+																	<td><a class="btn btn-success" href="/Login?ReturnUrl=employer-package-result">ورود به باشگاه روابط کار</a> </td>
+																</tr>
+}
 														
 													@if (ViewBag.hasCourseDetail == "true")
 													{

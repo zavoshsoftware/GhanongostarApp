@@ -39,6 +39,10 @@ namespace DAL
         ISiteBlogRepository SiteBlogRepository { get; }
         ISiteBlogImageRepository SiteBlogImageRepository { get; }
         ISiteBlogCategoryRepository SiteBlogCategoryRepository { get; }
+        IEmpClubProductGroupRepository EmpClubProductGroupRepository { get; }
+        IEmpClubProductRepository EmpClubProductRepository { get; }
+        IEmpClubQuestionRepository EmpClubQuestionRepository { get; }
+        IConsultantRequestRepository ConsultantRequestRepository { get; }
 
         void Save();
     }

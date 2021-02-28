@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 
 namespace API.Models
-{
+{ 
+
     public class Status
     {
         public string Message { get; set; }

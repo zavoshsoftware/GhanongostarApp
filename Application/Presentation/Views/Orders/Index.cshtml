@@ -27,7 +27,8 @@ ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(mod
 									columns.Bound(model => model.CreationDate);
 									columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
 									.Template(@<text>
-								 
+										          <input type="hidden" value="https://ghanongostar.com/product-validation/@item.Id" id="validation_@item.Id">
+										          <button onclick="copyTo('@item.Id')" class = "k-button">کپی لینک اعتبار سنجی</button>
 @Html.ActionLink("جزییات", "details", "OrderDetails", new { id = @item.Id }, new { @class = "k-button" })
 									</text>).Width(100);  
 		})
@@ -42,3 +43,17 @@ ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(mod
 									.Model(model => model.Id(item => item.Id))
 					)              
 	)
+
+@section scripts
+{
+	<script>
+		function copyTo(id) {
+			var copyText = document.getElementById("validation_"+id);
+			copyText.select();
+		//	copyText.setSelectionRange(0, 99999)
+			document.execCommand("copy");
+			alert("Copied the text: " + copyText.value);
+		}
+
+	</script>
+}

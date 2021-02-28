@@ -40,7 +40,10 @@ namespace Site.Controllers
 
             cart.SubTotal = subTotal.ToString("n0") + " تومان";
 
-            decimal discountAmount = GetDiscount();
+            decimal discountAmount = 0;
+
+            if (productInCarts.FirstOrDefault()!=null)
+             discountAmount = GetDiscount(productInCarts.FirstOrDefault().Product.Id);
 
             cart.DiscountAmount = discountAmount.ToString("n0") + " تومان";
 
@@ -62,6 +65,14 @@ namespace Site.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
+
+            if (discount != null && productInCarts.Any())
+            {
+                string result2 = CheckCopunUser(discount.Id, productInCarts.FirstOrDefault().Product.Id);
+                if (result2 != "true")
+                    return Json(result2, JsonRequestBehavior.AllowGet);
+            }
+
             decimal subTotal = GetSubtotal(productInCarts);
 
             decimal total = subTotal;
@@ -75,6 +86,18 @@ namespace Site.Controllers
             return Json("true", JsonRequestBehavior.AllowGet);
         }
 
+        public string CheckCopunUser(Guid discountCodeId, Guid productId)
+        {
+            ProductDiscount productDiscount = UnitOfWork.ProductDiscountRepository
+                .Get(c => c.ProductId == productId && c.DiscountCodeId == discountCodeId && c.IsActive)
+                .FirstOrDefault();
+
+            if (productDiscount != null)
+                return "true";
+            else
+                return "invalidProduct";
+        }
+
         ZarinPalHelper zp = new ZarinPalHelper();
 
         [AllowAnonymous]
@@ -82,12 +105,33 @@ namespace Site.Controllers
         {
             try
             {
-                cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+              //  cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+                string englishcellNumber = "";
+                foreach (char ch in cellNumber)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                cellNumber = englishcellNumber;
+               
+
 
                 bool isValidMobile = Regex.IsMatch(cellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
 
                 if (!isValidMobile)
                     return Json("invalidMobile", JsonRequestBehavior.AllowGet);
+
+
+                string englishemail = "";
+                foreach (char ch in email)
+                {
+                    if (char.IsDigit(ch))
+                        englishemail += char.GetNumericValue(ch);
+                    else
+                        englishemail += ch;
+                }
+
+                email = englishemail;
 
 
                 bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
@@ -138,9 +182,27 @@ namespace Site.Controllers
                     return Json("physical", JsonRequestBehavior.AllowGet);
 
 
-                cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+               // cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
-                activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+                string englishcellNumber = "";
+                foreach (char ch in cellNumber)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                cellNumber = englishcellNumber;
+
+
+             //   activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+
+
+                string englishactivationCode = "";
+                foreach (char ch in activationCode)
+                {
+                    englishactivationCode += char.GetNumericValue(ch);
+                }
+                activationCode = englishactivationCode;
+
 
                 User user = UnitOfWork.UserRepository.Get(current => current.CellNum == cellNumber).FirstOrDefault();
 
@@ -420,7 +482,14 @@ namespace Site.Controllers
 
                     order.Amount = subtotal;
 
-                    order.DiscountAmount = GetDiscount();
+                   
+
+                    decimal discountAmount = 0;
+
+                    if (products.FirstOrDefault() != null)
+                        discountAmount = GetDiscount(products.FirstOrDefault().Product.Id);
+
+                    order.DiscountAmount = discountAmount;
 
                     order.TotalAmount = Convert.ToDecimal(subtotal - order.DiscountAmount);
                     order.OrderTypeId = product.Product.ProductTypeId;
@@ -503,7 +572,7 @@ namespace Site.Controllers
 
 
 
-        public decimal GetDiscount()
+        public decimal GetDiscount(Guid productId)
         {
             if (Request.Cookies["discount"] != null)
             {
@@ -512,9 +581,31 @@ namespace Site.Controllers
                     string cookievalue = Request.Cookies["discount"].Value;
 
                     string[] basketItems = cookievalue.Split('/');
+
+                    string code = basketItems[2];
+                    DiscountCode discountCode = UnitOfWork.DiscountCodeRepository
+                        .Get(c => c.Code == code  && c.IsActive && c.IsDeleted == false).FirstOrDefault();
+
+                    if (discountCode == null)
+                        return 0;
+                    else
+                    {
+                        ProductDiscount productDiscount = UnitOfWork.ProductDiscountRepository
+                            .Get(c => c.ProductId == productId && c.DiscountCodeId == discountCode.Id && c.IsActive)
+                            .FirstOrDefault();
+
+                        if (productDiscount != null)
+                            return Convert.ToDecimal(basketItems[0]);
+
+                        else
+                            return 0;
+                    }
+
+
+
                     return Convert.ToDecimal(basketItems[0]);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return 0;
                 }

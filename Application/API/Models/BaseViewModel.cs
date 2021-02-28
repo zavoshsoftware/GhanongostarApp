@@ -9,4 +9,6 @@ namespace API.Models
     {
         public Status Status { get; set; }
     }
+
+  
 }

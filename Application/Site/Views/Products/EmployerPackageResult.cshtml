@@ -1,0 +1,435 @@
+﻿@model ViewModels.EmployerPackageResultViewModel
+@{
+		ViewBag.Title = "باشگاه روابط کار | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+
+@section headSection
+{
+	<style>
+		.img-header {
+			width: 100%;
+		}
+
+		.product-des-tab ul, #myTabContent {
+			direction: rtl;
+			text-align: right;
+		}
+
+		.raing-form .form-control {
+			width: 100%;
+		}
+
+		.card-question {
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			padding: 5px;
+		}
+
+		.card-question-title {
+			border-bottom: 1px solid #ddd;
+		}
+
+		.card-question-response {
+			padding-right: 20px;
+			background-color: rgba(249, 210, 201, 0.3);
+		}
+
+		.description strong {
+			color: red;
+		}
+
+		#SuccessDiv,#errorDiv {
+			display: none;
+		}
+		.qsbutton {
+			font-weight: 600;
+			color: #fff;
+			background: #ec0000 !important;
+			padding: 10px 15px;
+			width: 204px;
+			cursor: pointer;
+		}
+	</style>
+}
+
+
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						باشگاه روابط کار
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+	<div class="row">
+		<div class="col-lg-1"></div>
+	
+	<div class="col-lg-10">
+
+	<div class="shop-content">
+	<div>
+	<div>
+	<div class="product-header">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="~/images/Employers-Club32.jpg" class="img-header"/>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-xl-12">
+	<div class="product-des-tab">
+	<ul class="nav nav-tabs " role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">توضیحات</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ویدیوهای آموزشی</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">سوالات شما</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact2" aria-selected="false">فرم ها و قراردادها</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3" role="tab" aria-controls="contact3" aria-selected="false">آیین نامه ها و بخش نامه ها</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		<div class="prod-bottom-tab-sin description">
+			<h5>توضیحات</h5>
+			<p>
+				به باشگاه روابط کار قانون گستر اولین و جامع ترین شبکه مجازی آموزش کشور در حوزه‌های روابط کار ، تامین اجتماعی ، مالیات و دارایی خوش آمدید .
+			</p>
+			<p>
+				در این بخش شما میتوانید :
+			</p>
+			<p>
+				<strong>ویدیو های آموزشی:</strong> دسترسی رایگان و کامل به ویدیو های اختصاصی باشگاه که در موضوعات قانون کار و تامین اجتماعی و مالیات و دارایی از سوی اساتید برجسته ارائه شده است داشته باشید .
+			</p>
+			<p>
+				<strong>فرم ها و قراردادها:</strong> دسترسی رایگان و کامل به کلیه قراردادهای کار پرسنل مشمول قانون کار و غیر مشمول و همچنین کلیه فرمهای اداری پرسنل و مالی
+			</p>
+			<p><strong>
+					آیین نامه ها و بخشنامه ها:
+				</strong> مشاهده تشریح ویدیوی و یا متنی بخشنامه ها و آیین نامه های صادره از دیوان عدالت اداری ، تامین اجتماعی ، وزارت کار ، سازمان مالیاتی کشور .
+			</p>
+			<p><strong>
+					پشتیبانی و پاسخ به سوالات شما:
+				</strong> هر گونه سوال و یا مشکلی که در حوزه های تعیین شده داشته باشید از این طریق می توانید ارسال نموده و ظرف مدت ۲۴ ساعت پاسخ خود را دریافت نمایید .
+			</p>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+		<div class="prod-bottom-tab-sin">
+			<h5>ویدیوهای آموزشی اختصاصی باشگاه روابط کار</h5>
+
+
+			<div id="accordion">
+				@if (!Model.Videos.Any())
+				{
+					<p class="alert alert-info">
+						در حال حاظر ویدیویی در این بخش بارگزاری نشده است
+					</p>
+				}
+				@{
+					int i = 1;
+					foreach (var video in Model.Videos)
+					{
+						var id = "heading" + i;
+						var idCollapse = "collapse" + i;
+						<div class="card">
+							<div class="card-header" id="@id">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+										@video.Title
+									</button>
+								</h5>
+							</div>
+
+							<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+								<div class="card-body">
+									<p>
+										@Html.Raw(video.Body)
+									</p>
+									<video width="540" controls>
+										<source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+									</video>
+								</div>
+							</div>
+						</div>
+						i++;
+					}
+				}
+				@*<div class="card">
+															<div class="card-header" id="headingOne">
+																<h5 class="mb-0">
+																	<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+																		مرخصی ساعتی کارگران (تاریخ انتشار: 1399/10/09)
+																	</button>
+																</h5>
+															</div>
+
+															<div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+																<div class="card-body">
+																	<p>
+																		توضیحات ویدیو اینجا قرار می گیرد
+																	</p>
+																	<video width="540" controls>
+																		<source src="https://ghanongostar.zavoshsoftware.com//Uploads/Product/Files/81042c805d574ce29b06724e187112d7.mp4" type="video/mp4">Your browser does not support HTML5 video.
+																	</video>
+																</div>
+															</div>
+														</div>
+														<div class="card">
+															<div class="card-header" id="headingTwo">
+																<h5 class="mb-0">
+																	<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+																		مرخصی کارگران در روز پنجشنبه
+																		(تاریخ انتشار: 1399/09/11)
+																	</button>
+																</h5>
+															</div>
+															<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+																<div class="card-body">
+																	<p>
+																		توضیحات ویدیو اینجا قرار می گیرد
+																	</p>
+																	<video width="540" controls>
+																		<source src="https://ghanongostar.zavoshsoftware.com//Uploads/Product/Files/5a25880fff8042809aab7cca577067f4.mp4" type="video/mp4">Your browser does not support HTML5 video.
+																	</video>
+																</div>
+															</div>
+														</div>
+														<div class="card">
+															<div class="card-header" id="headingThree">
+																<h5 class="mb-0">
+																	<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+																		اشتباه رایج در تنظیم قراردادهای کار
+																		(تاریخ انتشار: 1399/09/05)
+																	</button>
+																</h5>
+															</div>
+															<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+																<div class="card-body">
+																	<p>
+																		توضیحات ویدیو اینجا قرار می گیرد
+																	</p>
+																	<video width="540" controls>
+																		<source src="https://ghanongostar.zavoshsoftware.com//Uploads/Product/Files/46ceabc84863468591254bd4cb6c98cc.mp4" type="video/mp4">Your browser does not support HTML5 video.
+																	</video>
+																</div>
+															</div>
+														</div>*@
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+		<div class="prod-bottom-tab-sin">
+			<h5>سوالات شما</h5>
+			<div class="product-review">
+				<div class="reviwer">
+					<div class="review-details">
+						@*<span>تعداد سوال باقی مانده از پکیج شما: 5 سوال</span>*@
+
+
+						<div class="card-question">
+							@foreach (var question in Model.Questions)
+							{
+								<div class="card-question-title">
+									<p>@question.Question</p>
+								</div>
+
+								if (!string.IsNullOrEmpty(question.Response))
+								 {
+									 <div class="card-question-response">
+
+										 <p>
+											 <span style="color: red">پاسخ:</span>
+											 @question.Response
+										 </p>
+
+									 </div>
+								 }
+							}
+					 
+						</div>
+					</div>
+				</div>
+				<div class="add-your-review">
+					<h6>ثبت سوال جدید</h6>
+
+					<div class="raing-form">
+						<div action="#">
+							<input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
+
+							<textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
+							<button class="qsbutton" type="button" onclick="submitQuestion();" >ارسال سوال</button>
+						
+						</div>
+					</div>
+					<div>
+						<div class="alert alert-success" id="SuccessDiv">سوال شما با موفقیت ثبت گردید</div>
+						<div class="alert alert-danger" id="errorDiv"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
+		<div class="prod-bottom-tab-sin">
+			<h5>فرم ها و قراردادهای کار</h5>
+
+			<div class="row">
+
+				@foreach (var form in Model.Forms)
+				{
+					<div class="col-sm-6 col-xl-4">
+						<div class="sin-product style-two">
+							<a href="#">
+								<img src="https://ghanongostar.zavoshsoftware.com/@form.ImageUrl" alt="@form.Title">
+							</a>
+							<div class="mid-wrapper">
+								<h2 class="pro-title"><a href="#">@form.Title</a>
+								</h2>
+
+								<a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@form.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
+							</div>
+						</div>
+					</div>
+				}
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
+		<div class="prod-bottom-tab-sin">
+			<h5>آیین نامه ها و بخش نامه ها</h5>
+
+			<div class="row">
+
+				@if (!Model.Instructions.Any())
+				{
+					<p class="alert alert-info">
+						در حال حاظر آیین نامه ای بارگزاری نشده است.
+					</p>
+				}
+				
+				
+				@{
+						int j = 9000;
+						foreach (var instruction in Model.Instructions)
+						{
+							var id = "heading" + j;
+							var idCollapse = "collapse" + j;
+								<div class="col-md-12">
+									<div class="card">
+										<div class="card-header" id="@id">
+											<h5 class="mb-0">
+												<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+													@instruction.Title
+												</button>
+											</h5>
+										</div>
+
+										<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+											<div class="card-body">
+												<p>@Html.Raw(instruction.Body)</p>
+											</div>
+										</div>
+									</div>
+									</div>
+									j++;
+									}
+									}
+
+									@*@foreach (var ins in Model.Instructions)
+										{
+											<div class="col-sm-6 col-xl-4">
+												<div class="sin-product style-two">
+													<a href="#">
+														<img src="https://ghanongostar.zavoshsoftware.com/@ins.ImageUrl" alt="">
+													</a>
+													<div class="mid-wrapper">
+														<h2 class="pro-title"><a href="#">@ins.Title</a>
+														</h2>
+
+														<a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@ins.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
+													</div>
+												</div>
+											</div>
+										}*@
+
+								</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+</section>
+
+
+@section scripts{
+<script src="~/Scripts/jquery/jquery.min.js"></script>
+	<script>
+		function submitQuestion() {
+			
+			var subject = $("#txtSubject").val();
+			var question = $("#txtQuestion").val();
+
+			if (subject !== "" && question !== "") {
+				$.ajax(
+					{
+						url: "/employer-package-result/SubmitQuestion",
+						data: { subject: subject, question: question },
+						type: "Post"
+					}).done(function (result) {
+					if (result === "true") {
+						$("#errorDiv").css('display', 'none');
+						$("#SuccessDiv").css('display', 'block');
+						localStorage.setItem("id", "");
+					}
+					else if (result === "InvalidEmail") {
+						$("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
+						$("#errorDiv").css('display', 'block');
+						$("#SuccessDiv").css('display', 'none');
+
+					}
+				});
+			}
+			else {
+				$("#errorDiv").html('موضوع و متن سوال خود را وارد نمایید.');
+				$("#errorDiv").css('display', 'block');
+				$("#SuccessDiv").css('display', 'none');
+
+			}
+		}
+	</script>
+}

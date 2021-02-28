@@ -42,6 +42,9 @@ function addDiscountCode() {
                     else if (result.toLowerCase() === "invald") {
                         $('#errorDiv').html("کد تخفیف وارد شده معتبر نمی باشد.");
                     }
+                    else if (result.toLowerCase() === "invalidproduct") {
+                        $('#errorDiv').html("کد تخفیف وارد شده برای این محصول معتبر نمی باشد.");
+                    }
                     else if (result.toLowerCase() === "true") {
                         $('#SuccessDiv').css('display', 'block');
                         $('#errorDiv').css('display', 'none');
@@ -289,10 +292,15 @@ function checkUserOtp() {
                     AppearButton('btn-checkOtp', 'activation-loading-box');
 
                 }
-          else if (result === "true") {
-                window.location = "/orders/list";
-            }
-                else {
+                else if (result === "true") {
+                var returnUrl = getUrlVars()["ReturnUrl"];
+                if (returnUrl !== '' && returnUrl !=='undefined' && returnUrl !==undefined) {
+                    window.location = returnUrl;
+
+                } else {
+                    window.location = "/orders/list";
+                }
+            } else {
                 $('#error-box-otp').css('display', 'block');
                 $('#error-box-otp').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
                 AppearButton('btn-checkOtp', 'activation-loading-box');
@@ -304,4 +312,16 @@ function checkUserOtp() {
         $('#error-box-otp').html('کد فعال سازی را وارد کنید');
         AppearButton('btn-checkOtp', 'activation-loading-box');
     }
+}
+
+
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }

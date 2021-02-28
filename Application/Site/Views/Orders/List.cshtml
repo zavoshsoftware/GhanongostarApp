@@ -1,7 +1,7 @@
 ﻿@model ViewModels.OrderListViewModel
 @{
-    ViewBag.Title = "لیست سفارشات | قانون گستر";
-    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Title = "لیست سفارشات | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
 <section class="breadcrumb-area">
@@ -9,9 +9,11 @@
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="bc-inner">
-					<p><a href="/">قانون گستر  |</a>
-					
-					لیست سفارشات</p>
+					<p>
+						<a href="/">قانون گستر  |</a>
+
+						لیست سفارشات
+					</p>
 				</div>
 			</div>
 		</div>
@@ -21,11 +23,51 @@
 
 <section class="account-area">
 	<div class="container-fluid custom-container">
-		<div class="row">
+		<div class="row dirright">
+		
+			<div class="col-xl-3">
+				<div class="account-list-item">
+					<div class="card">
+						<div class="card-body">
+							<h6 class="card-title">اطلاعات کاربری</h6>
+
+							<ul>
+								<li>
+									<a href="#">
+										پروفایل
+									</a>
+								</li>
+								<li>
+									<a href="/orders/list">
+										محصولات خریداری شده
+									</a>
+								</li>
+								<li>
+									<a href="/employer-package-result">
+										باشگاه روابط کار
+									</a>
+								</li>
+								<li>
+									<a href="/account/LogOff">خروج</a>
+								</li>
+							</ul>
+							@*<p class="card-text">
+								<ul>
+									<li>@Model.User.FullName</li>
+									<li>@Model.User.CellNum</li>
+									<li>@Model.User.Role.Title </li>
+								</ul>
+							</p>*@
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
 			<div class="col-xl-9">
-		 
+
 				<div class="account-table">
-					
+
 					<div class="card">
 						<div class="card-body">
 							<h6 class="card-title">تاریخچه سفارشات</h6>
@@ -42,7 +84,6 @@
 										<th>توضیحات</th>
 									</tr>
 									</thead>
-
 									@foreach (var order in Model.Orders)
 									{
 										<tbody>
@@ -74,56 +115,33 @@
 											</td>
 											<td>
 												@order.DiscountAmountStr
-
 											</td>
 											<td>
 												@order.TotalAmountStr
-
 											</td>
 											<td>
 												<a href="/orders/details/@order.Code" class="btn btn-primary">مشاهده جزییات</a>
 												@*@if (!order.IsPaid)
-												{
-													<a href="#" class="btn btn-primary">پرداخت</a>
-												}*@
+													{
+														<a href="#" class="btn btn-primary">پرداخت</a>
+													}*@
 											</td>
 										</tr>
 										<!-- /.single product -->
 										</tbody>
 									}
 
-
 								</table>
 							</p>
-	 
+
 						</div>
 					</div>
-					
 
-				
-				
+
 
 				</div>
 
-			  
 			</div>
-			<div class="col-xl-3">
-				<div class="account-details">
-					<div class="card">
-						<div class="card-body">
-							<h6 class="card-title">اطلاعات کاربری</h6>
-							<p class="card-text">
-								<ul>
-									<li>@Model.User.FullName</li>
-									<li>@Model.User.CellNum</li>
-									<li>@Model.User.Role.Title </li>
-								</ul>
-							</p>
-						</div>
-								
-					</div>
-				</div>
-				</div>
 		</div>
 	</div>
 </section>
