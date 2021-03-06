@@ -620,6 +620,19 @@ namespace DAL
                 return (_consultantRequestRepository);
             }
         }
+        private IConsultantRequestFormRepository _consultantRequestFormRepository;
+        public IConsultantRequestFormRepository ConsultantRequestFormRepository
+        {
+            get
+            {
+                if (_consultantRequestFormRepository == null)
+                {
+                    _consultantRequestFormRepository =
+                        new ConsultantRequestFormRepository(DatabaseContext);
+                }
+                return (_consultantRequestFormRepository);
+            }
+        }
 
         #endregion Inserting custom Respositories
     }

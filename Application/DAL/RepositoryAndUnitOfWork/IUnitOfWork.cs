@@ -43,6 +43,7 @@ namespace DAL
         IEmpClubProductRepository EmpClubProductRepository { get; }
         IEmpClubQuestionRepository EmpClubQuestionRepository { get; }
         IConsultantRequestRepository ConsultantRequestRepository { get; }
+        IConsultantRequestFormRepository ConsultantRequestFormRepository { get; }
 
         void Save();
     }

@@ -81,6 +81,7 @@
     <Compile Include="DatabaseContextInitializerBeforeTheFirstRelease.cs" />
     <Compile Include="Entities\ActivationCode.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\ConsultantRequestForm.cs" />
     <Compile Include="Entities\ConsultantRequest.cs" />
     <Compile Include="Entities\EmpClubQuestion.cs" />
     <Compile Include="Entities\EmpClubProduct.cs" />
@@ -308,6 +309,10 @@
     <Compile Include="Migrations\202102281844252_V48.Designer.cs">
       <DependentUpon>202102281844252_V48.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103061351432_V49.cs" />
+    <Compile Include="Migrations\202103061351432_V49.Designer.cs">
+      <DependentUpon>202103061351432_V49.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -465,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102281844252_V48.resx">
       <DependentUpon>202102281844252_V48.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061351432_V49.resx">
+      <DependentUpon>202103061351432_V49.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class ConsultantRequestForm : BaseEntity
+    public class ConsultantRequest : BaseEntity
     {
         [Display(Name = "نام")]
         public string FirstName { get; set; }
@@ -15,10 +15,6 @@ namespace Models
         public string LastName { get; set; }
         [Display(Name = "شرکت")]
         public string Company { get; set; }
-        [Display(Name = "نوع فعالیت")]
-        public string ActionType { get; set; }
-        [Display(Name = "تعداد پرسنل")]
-        public string EmployeeQuantity { get; set; }
         [Display(Name = "تلفن تماس")]
         public string ContactNumber { get; set; }
         [Display(Name = "پیغام")]

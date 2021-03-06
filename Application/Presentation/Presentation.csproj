@@ -831,6 +831,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\ConsultantRequestFormsController.cs" />
     <Compile Include="Controllers\ConsultantRequestsController.cs" />
     <Compile Include="Controllers\CourseDetailsController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
@@ -1148,6 +1149,11 @@
     <Content Include="Views\ConsultantRequests\Details.cshtml" />
     <Content Include="Views\ConsultantRequests\Edit.cshtml" />
     <Content Include="Views\ConsultantRequests\Index.cshtml" />
+    <Content Include="Views\ConsultantRequestForms\Create.cshtml" />
+    <Content Include="Views\ConsultantRequestForms\Delete.cshtml" />
+    <Content Include="Views\ConsultantRequestForms\Details.cshtml" />
+    <Content Include="Views\ConsultantRequestForms\Edit.cshtml" />
+    <Content Include="Views\ConsultantRequestForms\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

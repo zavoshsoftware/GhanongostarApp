@@ -75,6 +75,56 @@ namespace Site.Controllers
             return View(result);
         }
 
+        [Route("ConsultantForm")]
+        public ActionResult ConsultantForm()
+        {
+            ConsultantFormViewModel result = new ConsultantFormViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result);
+        }
+
+
+        [Route("ConsultantForm")]
+        [HttpPost]
+        public ActionResult ConsultantForm(ConsultantFormViewModel consultantViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                ConsultantRequestForm consultantRequest = new ConsultantRequestForm()
+                {
+                    Id = Guid.NewGuid(),
+                    Company = consultantViewModel.Company,
+                    CreationDate = DateTime.Now,
+                    IsDeleted = false,
+                    IsActive = true,
+                    FirstName = consultantViewModel.FirstName,
+                    LastName = consultantViewModel.LastName,
+                    Message = consultantViewModel.Message,
+                    ContactNumber = consultantViewModel.ContactNumber,
+                    ActionType = consultantViewModel.ActionType,
+                    EmployeeQuantity = consultantViewModel.EmployeeQuantity
+                };
+
+                UnitOfWork.ConsultantRequestFormRepository.Insert(consultantRequest);
+                UnitOfWork.Save();
+
+                TempData["success"] = "درخواست شما با موفقیت ثبت گردید. همکاران ما در اسرع وقت به درخواست شما رسیدگی خواهند کرد.";
+                consultantViewModel.MenuProductGroups = _baseHelper.GetMenuProductGroups();
+                return View(consultantViewModel);
+            }
+
+            TempData["error"] = "لطفا فیلدهای ستاره دار را تکمیل کنید..";
+
+            ConsultantFormViewModel result = new ConsultantFormViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result);
+        }
+
+
 
         public List<HomeProducts> GetHomeProducts()
         {

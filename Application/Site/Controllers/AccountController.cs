@@ -414,9 +414,14 @@ namespace Site.Controllers
 
                     if (user != null)
                     {
-                        int code = Convert.ToInt32(user.Password);
+                        int pass = RandomCode();
+                        user.Password = pass.ToString();
+                        user.LastModifiedDate=DateTime.Now;
+                        UnitOfWork.Save();
 
-                        SendSms(cellNumber, code);
+                      //  int code = Convert.ToInt32(pass);
+
+                        SendSms(cellNumber, pass);
 
                         return Json("true", JsonRequestBehavior.AllowGet);
                     }
@@ -444,6 +449,7 @@ namespace Site.Controllers
             }
         }
 
+    
 
         [AllowAnonymous]
         public ActionResult CompleteRegister(string cellNumber, string employeeType, string fullName)
