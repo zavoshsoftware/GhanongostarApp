@@ -40,6 +40,7 @@ namespace Presentation.Controllers
         public ActionResult Create()
         {
             ViewBag.EmpClubProductGroupId = new SelectList(db.EmpClubProductGroups, "Id", "Title");
+            ViewBag.EmpClubVideoGroupId = new SelectList(db.EmpClubVideoGroups, "Id", "Title");
             return View();
         }
 
@@ -82,6 +83,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EmpClubProductGroupId = new SelectList(db.EmpClubProductGroups, "Id", "Title");
+            ViewBag.EmpClubVideoGroupId = new SelectList(db.EmpClubVideoGroups, "Id", "Title");
 
             return View(empClubProduct);
         }
@@ -99,6 +101,7 @@ namespace Presentation.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmpClubProductGroupId = new SelectList(db.EmpClubProductGroups, "Id", "Title",empClubProduct.EmpClubProductGroupId);
+            ViewBag.EmpClubVideoGroupId = new SelectList(db.EmpClubVideoGroups, "Id", "Title",empClubProduct.EmpClubVideoGroupId);
 
             return View(empClubProduct);
         }
@@ -142,6 +145,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EmpClubProductGroupId = new SelectList(db.EmpClubProductGroups, "Id", "Title",empClubProduct.EmpClubProductGroupId);
+            ViewBag.EmpClubVideoGroupId = new SelectList(db.EmpClubVideoGroups, "Id", "Title",empClubProduct.EmpClubVideoGroupId);
             return View(empClubProduct);
         }
 

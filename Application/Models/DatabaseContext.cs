@@ -49,5 +49,6 @@ namespace Models
         public DbSet<EmpClubQuestion> EmpClubQuestions { get; set; }
         public DbSet<ConsultantRequest> ConsultantRequests { get; set; }
         public DbSet<ConsultantRequestForm> ConxConsultantRequestForms { get; set; }
+        public DbSet<EmpClubVideoGroup> EmpClubVideoGroups { get; set; }
     }
 }

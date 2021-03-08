@@ -838,6 +838,7 @@
     <Compile Include="Controllers\EmpClubProductGroupsController.cs" />
     <Compile Include="Controllers\EmpClubProductsController.cs" />
     <Compile Include="Controllers\EmpClubQuestionsController.cs" />
+    <Compile Include="Controllers\EmpClubVideoGroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
@@ -1154,6 +1155,11 @@
     <Content Include="Views\ConsultantRequestForms\Details.cshtml" />
     <Content Include="Views\ConsultantRequestForms\Edit.cshtml" />
     <Content Include="Views\ConsultantRequestForms\Index.cshtml" />
+    <Content Include="Views\EmpClubVideoGroups\Create.cshtml" />
+    <Content Include="Views\EmpClubVideoGroups\Delete.cshtml" />
+    <Content Include="Views\EmpClubVideoGroups\Details.cshtml" />
+    <Content Include="Views\EmpClubVideoGroups\Edit.cshtml" />
+    <Content Include="Views\EmpClubVideoGroups\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

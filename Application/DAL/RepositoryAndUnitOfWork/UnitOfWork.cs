@@ -634,6 +634,20 @@ namespace DAL
             }
         }
 
+        private IEmpClubVideoGroupRepository _empClubVideoGroupRepository;
+        public IEmpClubVideoGroupRepository EmpClubVideoGroupRepository
+        {
+            get
+            {
+                if (_empClubVideoGroupRepository == null)
+                {
+                    _empClubVideoGroupRepository =
+                        new EmpClubVideoGroupRepository(DatabaseContext);
+                }
+                return (_empClubVideoGroupRepository);
+            }
+        }
+
         #endregion Inserting custom Respositories
     }
 }

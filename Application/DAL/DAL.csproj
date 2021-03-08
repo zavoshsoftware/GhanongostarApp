@@ -60,6 +60,7 @@
     <Compile Include="RepositoryAndUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="RepositoryAndUnitOfWork\Repository.cs" />
     <Compile Include="RepositoryAndUnitOfWork\UnitOfWork.cs" />
+    <Compile Include="RepositoryClasses\EmpClubVideoGroupRepository.cs" />
     <Compile Include="RepositoryClasses\ConsultantRequestFormRepository.cs" />
     <Compile Include="RepositoryClasses\ConsultantRequestRepository.cs" />
     <Compile Include="RepositoryClasses\EmpClubQuestionRepository.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="RepositoryClasses\VipPackageFeatureRepository.cs" />
     <Compile Include="RepositoryClasses\VipPackageRepository.cs" />
     <Compile Include="RepositoryClasses\ZarinpallAuthorityRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IEmpClubVideoGroupRepository.cs" />
     <Compile Include="RepositoryInterfaces\IConsultantRequestFormRepository.cs" />
     <Compile Include="RepositoryInterfaces\IConsultantRequestRepository.cs" />
     <Compile Include="RepositoryInterfaces\IEmpClubQuestionRepository.cs" />

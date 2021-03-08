@@ -397,11 +397,25 @@ namespace Site.Controllers
                 SideBarProducts = GetHomeProducts(),
                 SideBarProductGroups = _baseHelper.GetSidebarProductGroups(),
                 Forms = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "form" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
-                Videos = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "video" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
+                Videos = GetClubVideos(),
                 Instructions = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "instructions" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
                 Questions = UnitOfWork.EmpClubQuestionRepository.Get(c=>c.UserId==user.Id&& c.IsDeleted==false).OrderByDescending(c=>c.CreationDate).ToList()
             };
             return View(result);
+        }
+
+        public EmpClubVideos GetClubVideos()
+        {
+            EmpClubVideos  result = new EmpClubVideos ();
+            var videos = UnitOfWork.EmpClubProductRepository
+                .Get(c => c.EmpClubProductGroup.Name == "video" && c.IsActive)
+                .OrderByDescending(c => c.CreationDate).ToList();
+
+            result.GhanonKarVideos = videos.Where(c => c.EmpClubVideoGroup.Name == "kar").ToList();
+            result.TaminVideos = videos.Where(c => c.EmpClubVideoGroup.Name == "tamin").ToList();
+            result.VatVideos = videos.Where(c => c.EmpClubVideoGroup.Name == "vat").ToList();
+
+            return result;
         }
 
         [HttpPost]

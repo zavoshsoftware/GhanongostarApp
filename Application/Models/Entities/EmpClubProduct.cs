@@ -24,7 +24,11 @@ namespace Models
         public string Body { get; set; }
 
 
+        [Display(Name = "دسته بندی محتوا")]
         public Guid EmpClubProductGroupId { get; set; }
         public virtual EmpClubProductGroup EmpClubProductGroup { get; set; }
+        [Display(Name = "دسته بندی ویدیو")]
+        public Guid? EmpClubVideoGroupId { get; set; }
+        public virtual EmpClubVideoGroup EmpClubVideoGroup { get; set; }
     }
 }
