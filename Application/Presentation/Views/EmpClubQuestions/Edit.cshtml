@@ -1,63 +1,151 @@
-﻿@model Models.EmpClubQuestion
+﻿@model ViewModels.EmpClubQuestionViewModel
 
 @{
     ViewBag.Title = "ویرایش " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
     Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
 }
+<div class="row">
+    <div class="col-md-6">
+        <h2>@ViewBag.Title</h2>
 
-<h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm("Edit", "EmpClubQuestions", new { status = @ViewBag.status }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Edit", "EmpClubQuestions",new{status=@ViewBag.status},FormMethod.Post, new { enctype = "multipart/form-data" })) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">        
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.Subject)
-        @Html.HiddenFor(model => model.Question)
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.UserQuestion.Id)
+                @Html.HiddenFor(model => model.UserQuestion.UserId)
+                @Html.HiddenFor(model => model.UserQuestion.Subject)
+                @Html.HiddenFor(model => model.UserQuestion.Question)
 
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subject, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                                  @Html.DisplayFor(model => model.Subject)
-                @Html.ValidationMessageFor(model => model.Subject)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserQuestion.Subject, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.UserQuestion.Subject)
+                        @Html.ValidationMessageFor(model => model.UserQuestion.Subject)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserQuestion.Question, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.UserQuestion.Question)
+                        @Html.ValidationMessageFor(model => model.UserQuestion.Question)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserQuestion.Response, new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.UserQuestion.Response)
+                        @Html.ValidationMessageFor(model => model.UserQuestion.Response)
+                    </div>
+                    @*<div class="col-md-8 recorder-holder">
+                        <button type="button" class="audio-play" onclick="StartRecording();">
+                            شروع ثبت صدا<i class="fa fa-microphone fa-3x"></i>
+                        </button>
+                        <button type="button" class="audio-stop" onclick="SaveRecord();">
+                            ذخیره<i class="fa fa-save fa-3x"></i>
+                        </button>
+                    </div>*@
+                </div>
+
+
+
+                @Html.HiddenFor(model => model.UserQuestion.IsActive)
+                @Html.HiddenFor(model => model.UserQuestion.ResponseDate)
+                @Html.HiddenFor(model => model.UserQuestion.CreationDate)
+                @Html.HiddenFor(model => model.UserQuestion.Description)
+
+
+                <div class="form-group" id="buttons">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ثبت" class="btn btn-primary" />
+                        @Html.ActionLink("بازگشت به فهرست", "Index")
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Question, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                                  @Html.DisplayFor(model => model.Question)
-                @Html.ValidationMessageFor(model => model.Question)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Response, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                                  @Html.EditorFor(model => model.Response)
-                @Html.ValidationMessageFor(model => model.Response)
-            </div>
-        </div>
- 
-         
-
-	 @Html.HiddenFor(model => model.IsActive)
-	 @Html.HiddenFor(model => model.ResponseDate)
-	 @Html.HiddenFor(model => model.CreationDate)
-	 @Html.HiddenFor(model => model.Description)
-	  
-
-        <div class="form-group" id="buttons">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="ثبت" class="btn btn-primary" />
-				@Html.ActionLink("بازگشت به فهرست", "Index")
-            </div>
-        </div>
+        }
     </div>
-}
 
+    @* ****************(user question list)**************** *@
+    <div class="pane panel-primary col-md-6" style="margin-top:6.3rem;">
+        <div class="panel-heading text-center">
+            لیست سوالات قبلی کاربر
+        </div>
+        @foreach (var question in Model.UserQuestions)
+        {
+            <div class="row panel-body w-100">
+                <div class="col-md-10 mr-5">
+                    <div class="row py-1 date-s">
+                        <div class="col p-1">
+                            <label class="control-label">تاریخ سوال :</label><b>@question.CreationDate</b>
+                        </div>
+                    </div>
+                    <div class="row question-s">
+                        <div class="col p-1">
+                            <label class="control-label">سوال :</label><b>@question.Question</b>
+                        </div>
+                    </div>
+                    <div class="row answer-s">
+                        <div class="col p-1">
+                            <label class="control-label">پاسخ :</label><b>@question.Response</b>
+                        </div>
+                    </div>
+                    <div class="row date-s">
+                        <div class="col p-1">
+                            <label class="control-label">تاریخ پاسخ :</label><b>@question.ResponseDate</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr" />
+        }
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream);
+
+                const audioChunks = [];
+
+                function StartRecording() {
+                    mediaRecorder.start();
+                    mediaRecorder.addEventListener("dataavailable", event => {
+                        audioChunks.push(event.data);
+                    });
+                }
+
+                function SaveRecord() {
+                    mediaRecorder.stop();
+                    const audioBlob = new Blob(audioChunks);
+                    let fd = new FormData();
+                    fd.append(`audio`, audioBlob);
+                    return 0;
+                    $.ajax({
+                        url: "/EmpClubQuestions/SaveVoiceAnswer",
+                        method: "POST",
+                        processData: false,
+                        contentType:false,
+                        mimeType: "audio/wav",
+                        data: {fileName:'test.wav',data:fd},
+                        success: (data) => {
+                            Console.log(url)
+                            Console.log(data);
+                        }, error: (err) => {
+                            Console.log(err);
+                        }                                               
+                    });
+                }
+
+
+
+
+    </script>
+}
