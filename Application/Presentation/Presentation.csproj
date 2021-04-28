@@ -870,6 +870,7 @@
     <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\BaseControllerWithUnitOfWork.cs" />
+    <Compile Include="Models\EmpClubQuestionViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginPageViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -1175,6 +1176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="uloadfolder\" />
     <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\Courses\Images\" />
     <Folder Include="Uploads\Courses\Video\" />

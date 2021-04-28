@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace Presentation.Controllers
 {
@@ -87,14 +89,19 @@ namespace Presentation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmpClubQuestion empClubQuestion = db.EmpClubQuestions.Find(id);
-            if (empClubQuestion == null)
+            EmpClubQuestionViewModel model = new EmpClubQuestionViewModel();
+            model.UserQuestion = new EmpClubQuestion();
+            model.UserQuestion = db.EmpClubQuestions.Find(id);
+            model.UserQuestions = new List<EmpClubQuestion>();
+            model.UserQuestions = db.EmpClubQuestions.Where(x => x.UserId == model.UserQuestion.UserId).ToList();
+
+            if (model.UserQuestion == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Password", empClubQuestion.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Password", model.UserQuestion.UserId);
             ViewBag.status = status;
-            return View(empClubQuestion);
+            return View(model);
         }
 
         // POST: EmpClubQuestions/Edit/5
@@ -102,22 +109,31 @@ namespace Presentation.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EmpClubQuestion empClubQuestion, string status)
+        public ActionResult Edit(EmpClubQuestionViewModel empClubQuestion, string status)
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(empClubQuestion.Response))
-                    empClubQuestion.ResponseDate = DateTime.Now;
+                if (!string.IsNullOrEmpty(empClubQuestion.UserQuestion.Response))
+                    empClubQuestion.UserQuestion.ResponseDate = DateTime.Now;
 
-                empClubQuestion.IsDeleted = false;
+                empClubQuestion.UserQuestion.IsDeleted = false;
                 db.Entry(empClubQuestion).State = EntityState.Modified;
                 db.SaveChanges();
                 if (string.IsNullOrEmpty(status))
                     return RedirectToAction("Index");
                 return RedirectToAction("Index", new { status = "notanswered" });
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Password", empClubQuestion.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Password", empClubQuestion.UserQuestion.UserId);
             return View(empClubQuestion);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveVoiceAnswer(Guid id, HttpPostedFile questionVoice)
+        {
+            string FilePath = Path.Combine(Server.MapPath("~/uloadfolder"), questionVoice.FileName);
+            string FileUrl = Url.Content(Path.Combine("~/uloadfolder", questionVoice.FileName));
+            questionVoice.SaveAs(FilePath);
+            return View("Edit",new {id=id });
         }
 
         // GET: EmpClubQuestions/Delete/5
@@ -148,6 +164,7 @@ namespace Presentation.Controllers
             return RedirectToAction("Index");
         }
 
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
