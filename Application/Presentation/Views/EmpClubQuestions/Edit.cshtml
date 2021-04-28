@@ -43,14 +43,14 @@
                         @Html.EditorFor(model => model.UserQuestion.Response)
                         @Html.ValidationMessageFor(model => model.UserQuestion.Response)
                     </div>
-                    @*<div class="col-md-8 recorder-holder">
-                        <button type="button" class="audio-play" onclick="StartRecording();">
+                    <div class="col-md-8 recorder-holder">
+                        <button id="start-audio" onclick="startRecording();" type="button" class="audio-play" >
                             شروع ثبت صدا<i class="fa fa-microphone fa-3x"></i>
                         </button>
-                        <button type="button" class="audio-stop" onclick="SaveRecord();">
+                        <button id="stop-audio" onclick="stopRecording();" type="button" class="audio-stop" >
                             ذخیره<i class="fa fa-save fa-3x"></i>
                         </button>
-                    </div>*@
+                    </div>
                 </div>
 
 
@@ -109,43 +109,56 @@
 </div>
 @section scripts{
     <script>
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                const mediaRecorder = new MediaRecorder(stream);
+        let btnstart = document.querySelector("#start-audio");
+        let btnstop = document.querySelector("#stop-audio");
 
-                const audioChunks = [];
+        var audioStream = [];
+        var chunksOfData = [];
 
-                function StartRecording() {
-                    mediaRecorder.start();
-                    mediaRecorder.addEventListener("dataavailable", event => {
-                        audioChunks.push(event.data);
-                    });
+        
+        
+        function stopRecording() {
+            console.log("stop");
+        }
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.log('getUserMedia supported.');
+            navigator.mediaDevices.getUserMedia(
+                // constraints - only audio needed for this app
+                {
+                    audio: true
+                })
+
+                // Success callback
+                .then(function (stream) {
+                    audioStream = stream;
+                })
+
+                // Error callback
+                .catch(function (err) {
+                    console.log('The following getUserMedia error occurred: ' + err);
                 }
+                );
+        } else {
+            console.log('getUserMedia not supported on your browser!');
+        }
+        const mediaRecorder = new MediaRecorder(audioStream);
 
-                function SaveRecord() {
-                    mediaRecorder.stop();
-                    const audioBlob = new Blob(audioChunks);
-                    let fd = new FormData();
-                    fd.append(`audio`, audioBlob);
-                    return 0;
-                    $.ajax({
-                        url: "/EmpClubQuestions/SaveVoiceAnswer",
-                        method: "POST",
-                        processData: false,
-                        contentType:false,
-                        mimeType: "audio/wav",
-                        data: {fileName:'test.wav',data:fd},
-                        success: (data) => {
-                            Console.log(url)
-                            Console.log(data);
-                        }, error: (err) => {
-                            Console.log(err);
-                        }                                               
-                    });
-                }
+        function startRecording() {
+            console.log(mediaRecorder.state);
+            console.log("recording started");
+            mediaRecorder.start();
+            btnstart.style.background = "red";
+            mediaRecorder.ondataavailable = function (e) {
+                chunks.push(e.data);
+            }
+        }
 
-
-
-
+        function stopRecording() {
+            console.log(mediaRecorder.state);
+            console.log("recording stoped");
+            mediaRecorder.stop();
+            btnstart.style.background = "#0082ff";
+            btnstop.style.background = "red";
+        }
     </script>
 }
