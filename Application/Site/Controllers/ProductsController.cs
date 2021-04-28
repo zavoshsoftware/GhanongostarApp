@@ -176,7 +176,7 @@ namespace Site.Controllers
             ProductListViewModel products = new ProductListViewModel()
             {
                 MenuProductGroups = _baseHelper.GetMenuProductGroups(),
-                Products = UnitOfWork.ProductRepository.Get(current => current.ProductTypeId == typeId).ToList(),
+                Products = UnitOfWork.ProductRepository.Get(current => current.ProductTypeId == typeId&& current.IsActive).ToList(),
                 SideBarProducts = GetHomeProducts(),
                 SideBarProductGroups = _baseHelper.GetSidebarProductGroups(),
             };
