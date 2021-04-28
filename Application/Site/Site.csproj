@@ -642,6 +642,7 @@
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CityItemViewModel.cs" />
     <Compile Include="ViewModels\ConsultantFormViewModel.cs" />
+    <Compile Include="ViewModels\RegisterWorrkshopViewModel.cs" />
     <Compile Include="ViewModels\ConsultantViewModel.cs" />
     <Compile Include="ViewModels\EmployerPackageResultViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -754,6 +755,7 @@
     <Content Include="Views\Account\NewLogin.cshtml" />
     <Content Include="Views\Home\Consultant.cshtml" />
     <Content Include="Views\Home\ConsultantForm.cshtml" />
+    <Content Include="Views\Shop\RegisterWorkshopForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

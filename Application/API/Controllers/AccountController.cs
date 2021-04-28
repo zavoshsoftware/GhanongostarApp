@@ -524,6 +524,8 @@ namespace API.Controllers
             user.IsActive = true;
             user.LastModifiedDate = DateTime.Now;
             user.Password = activationCode;
+            user.Password = activationCode;
+            user.Password = activationCode;
 
             return user;
         }
@@ -812,6 +814,7 @@ namespace API.Controllers
             }
             else
             {
+                user.Password = NewPass;
                 user.Password = NewPass;
                 UnitOfWork.Save();
                 result.Result = Resources.Messages.SuccessPost;

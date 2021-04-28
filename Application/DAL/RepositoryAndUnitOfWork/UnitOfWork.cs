@@ -648,6 +648,20 @@ namespace DAL
             }
         }
 
+        private IFormInstagramLiveRepository _formInstagramLiveRepository;
+        public IFormInstagramLiveRepository FormInstagramLiveRepository
+        {
+            get
+            {
+                if (_formInstagramLiveRepository == null)
+                {
+                    _formInstagramLiveRepository =
+                        new FormInstagramLiveRepository(DatabaseContext);
+                }
+                return (_formInstagramLiveRepository);
+            }
+        }
+
         #endregion Inserting custom Respositories
     }
 }

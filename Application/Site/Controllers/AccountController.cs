@@ -414,10 +414,11 @@ namespace Site.Controllers
 
                     if (user != null)
                     {
-                        int pass = RandomCode();
-                        user.Password = pass.ToString();
-                        user.LastModifiedDate=DateTime.Now;
-                        UnitOfWork.Save();
+                        int pass = Convert.ToInt32(user.Password);
+                        //int pass = RandomCode();
+                        //user.Password = pass.ToString();
+                        //user.LastModifiedDate=DateTime.Now;
+                        //UnitOfWork.Save();
 
                       //  int code = Convert.ToInt32(pass);
 
@@ -720,6 +721,15 @@ namespace Site.Controllers
             return View(login);
         }
 
-
+        public void ConvertPassToAppPass()
+        {
+            var users = UnitOfWork.UserRepository.Get();
+            foreach (var user in users)
+            {
+                user.AppPassword = user.Password;
+                UnitOfWork.UserRepository.Update(user);
+            }
+            db.SaveChanges();
+        }
     }
 }

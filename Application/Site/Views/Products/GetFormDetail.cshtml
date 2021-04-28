@@ -5,7 +5,18 @@
 		ViewBag.Canonical = "https://ghanongostar.com/forms/g-" + @Model.Product.Code;
 	ViewBag.Description = "دانلود " + Model.Product.Title + ". جهت خرید آنلاین و دانلود فرم ها و قراردادها از وب سایت قانون گستر کلیک کنید. قانون گستر مرکز تخصصی روابط کار در ایران";
 }
-
+@section headSection{
+	<style>
+		h2{
+			font-size: 1.8rem;
+		}h3{
+			font-size: 1.3rem;
+		}video{max-width: 100%}
+		.caption-detail li{
+			margin-right: 20px;
+		}
+	</style>
+}
 <section class="breadcrumb-area">
 	<div class="container-fluid custom-container">
 		<div class="row">

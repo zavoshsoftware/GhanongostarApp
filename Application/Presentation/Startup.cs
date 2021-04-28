@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Presentation.Startup))]
+[assembly: OwinStartup("MyFirstProject2Config", typeof(Presentation.Startup))]
 namespace Presentation
 
 {

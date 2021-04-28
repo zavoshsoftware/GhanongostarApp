@@ -75,8 +75,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
@@ -839,6 +839,7 @@
     <Compile Include="Controllers\EmpClubProductsController.cs" />
     <Compile Include="Controllers\EmpClubQuestionsController.cs" />
     <Compile Include="Controllers\EmpClubVideoGroupsController.cs" />
+    <Compile Include="Controllers\FormInstagramLivesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
@@ -1160,6 +1161,11 @@
     <Content Include="Views\EmpClubVideoGroups\Details.cshtml" />
     <Content Include="Views\EmpClubVideoGroups\Edit.cshtml" />
     <Content Include="Views\EmpClubVideoGroups\Index.cshtml" />
+    <Content Include="Views\FormInstagramLives\Create.cshtml" />
+    <Content Include="Views\FormInstagramLives\Delete.cshtml" />
+    <Content Include="Views\FormInstagramLives\Details.cshtml" />
+    <Content Include="Views\FormInstagramLives\Edit.cshtml" />
+    <Content Include="Views\FormInstagramLives\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

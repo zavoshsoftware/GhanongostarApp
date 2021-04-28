@@ -1,0 +1,165 @@
+﻿@model ViewModels.RegisterWorrkshopViewModel
+@{
+		ViewBag.Title = "ورکشاپ تخصصی تشریح افزایش حقوق و مزایای کارگران در سال ۱۴۰۰| قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+@section headSection
+{
+	<style>
+		.img-header {
+			width: 100%;
+		}
+
+		.consultant-container {
+			padding-bottom: 20px;
+			background-color: #ececec;
+			padding-top: 20px;
+		}
+
+			.consultant-container ul {
+				direction: rtl;
+				text-align: right;
+			}
+
+
+			.consultant-container .form-info {
+				border: 1px solid #ddd;
+				padding: 20px;
+				background-color: #fff;
+				direction: rtl;
+			}
+
+
+
+		.btn-bottom-20 {
+			margin-bottom: 20px;
+		}
+
+		.mrl0 {
+			margin-right: 0;
+			margin-left: 0;
+		}
+
+		.prl0 {
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+		.bg-gray {
+			background-color: #ececec;
+		}
+	</style>
+}
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p>
+						<a href="/">قانون گستر  |</a>
+						ورکشاپ تخصصی تشریح افزایش حقوق و مزایای کارگران در سال ۱۴۰۰
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+@*<section>
+		<div class="employer-container">
+
+			<div class="row justify-content-center mrl0">
+				<div class="col-lg-8 prl0">
+
+					<p class="heading-color text-center">
+						<img src="~/images/Employers-Club2.jpg" class="img-header" />
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>*@
+
+<section class="consultant-container">
+	<div class="row justify-content-center mrl0">
+
+		<div class="col-lg-8">
+			<div class="form-info">
+			
+				<h2 class="text-center heading-title">
+					ورکشاپ تخصصی تشریح افزایش حقوق و مزایای کارگران در سال ۱۴۰۰
+				</h2>
+				<p class="heading-color mb--30 text-center">
+		ابتدای هر سال چالش محاسبات حقوق و مزایا بر اساس افزایشات قانونی، یکی از دغدغه های کارگران و کارفرمایان و نیز حسابدارن می باشد.
+				</p>
+				<p class="heading-color mb--30 text-center">
+					در هر سال جدید بر اساس افزایش حقوقی که توسط شورایعالی کار تصویب میشود سه نوع تعیین دستمزد برای کارگران و کارمندان مشمول قانون کار خواهیم داشت که اکثر کارفرمایان به اشتباه فقط یک نوع افزایش را در نظر میگیرند و همین اشتباه موجب اختلافات شدید بین کارگری و کارفرمایی می شود.
+				</p>
+				<p class="heading-color mb--30 text-center">
+					موضوع پایه سنوات و مزایای به تبع شغل که تاثیر مستقیمی در افزایش حقوق سالیانه کارگران دارد یکی دیگر از چالش های مجموعه ها می باشد.
+				</p>
+				<p class="heading-color mb--30 text-center">
+					در ورکشاپ آموزشی و تشریحی حقوق و دستمزد سال ۱۴۰۰ ( که به صورت آنلاین از بستر اینستاگرام پخش میشود ) تمامی موارد بررسی و به شما آموزش داده خواهد شد.
+
+				</p>
+				<p class="heading-color mb--30 text-center">
+					ثبت نام در این ورکشاپ جهت رفاه حال اعضا پیج اینستاگرام با ۸۰ درصد تخفیف انجام می پذیرد.
+				</p>
+				<p class="heading-color mb--30 text-center">
+					<span class="product-list-price old-price" style="color: red;">250,000 تومان</span>
+					<span class="product-list-price" style="color: green; font-size: 1.7rem;">55,000 تومان</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</section> 
+
+
+<section class="contact-area">
+	<div class="container-fluid custom-container">
+		<div class="section-heading pb-30">
+			<h3>فرم ثبت نام در ورکشاپ	</h3>
+		</div>
+		<div class="row justify-content-center dirright">
+			<div class="col-md-8 col-lg-8 col-xl-6">
+				<div class="contact-form">
+					@if (TempData["error"] != null)
+					{
+						<p class="alert alert-danger">
+							@TempData["error"]
+						</p>
+					}else if (TempData["success"] != null)
+					{
+						<p class="alert alert-success">
+							@TempData["success"]
+						</p>
+					}
+					@using (Html.BeginForm("RegisterWorkshopForm", "shop", new {}, FormMethod.Post, new {@class = "panel-body wrapper-lg", role = "form"}))
+					{
+						<div class="row">
+							<div class="col-xl-6">
+								<input type="text" placeholder="نام*" name="FirstName">
+							</div>
+							<div class="col-xl-6">
+								<input type="text" placeholder="نام خانوادگی*" name="LastName">
+							</div>
+						 
+						 
+							<div class="col-xl-6">
+								<input type="text" placeholder="شماره تماس*" name="ContactNumber">
+							</div>
+
+							<div class="col-xl-6">
+								<input type="text" placeholder="آی دی صفحه اینستاگرام*" name="InstagramId">
+							</div>
+					 
+							<div class="col-xl-12">
+								<input type="submit" value="ثبت درخواست">
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

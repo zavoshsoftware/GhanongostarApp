@@ -26,6 +26,10 @@ namespace Models
         [StringLength(150, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         public string Password { get; set; }
 
+        [Display(Name = "Password", ResourceType = typeof(Resources.Models.User))]
+        [StringLength(150, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
+        public string AppPassword { get; set; }
+
         [Display(Name = "CellNum", ResourceType = typeof(Resources.Models.User))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         [StringLength(20, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]

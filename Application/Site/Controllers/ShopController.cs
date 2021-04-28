@@ -42,8 +42,8 @@ namespace Site.Controllers
 
             decimal discountAmount = 0;
 
-            if (productInCarts.FirstOrDefault()!=null)
-             discountAmount = GetDiscount(productInCarts.FirstOrDefault().Product.Id);
+            if (productInCarts.FirstOrDefault() != null)
+                discountAmount = GetDiscount(productInCarts.FirstOrDefault().Product.Id);
 
             cart.DiscountAmount = discountAmount.ToString("n0") + " تومان";
 
@@ -57,7 +57,7 @@ namespace Site.Controllers
         [AllowAnonymous]
         public ActionResult DiscountRequestPost(string coupon)
         {
-            DiscountCode discount = UnitOfWork.DiscountCodeRepository.Get(current => current.Code == coupon&&current.IsActive).FirstOrDefault();
+            DiscountCode discount = UnitOfWork.DiscountCodeRepository.Get(current => current.Code == coupon && current.IsActive).FirstOrDefault();
 
             string result = CheckCouponValidation(discount);
 
@@ -105,7 +105,7 @@ namespace Site.Controllers
         {
             try
             {
-              //  cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                //  cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
                 string englishcellNumber = "";
                 foreach (char ch in cellNumber)
@@ -113,7 +113,7 @@ namespace Site.Controllers
                     englishcellNumber += char.GetNumericValue(ch);
                 }
                 cellNumber = englishcellNumber;
-               
+
 
 
                 bool isValidMobile = Regex.IsMatch(cellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
@@ -139,7 +139,7 @@ namespace Site.Controllers
                 if (!isEmail)
                     return Json("invalidEmail", JsonRequestBehavior.AllowGet);
 
-            
+
                 User user = UnitOfWork.UserRepository.Get(current => current.CellNum == cellNumber).FirstOrDefault();
 
                 string code;
@@ -178,11 +178,11 @@ namespace Site.Controllers
 
                 List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
 
-                if (productInCarts.FirstOrDefault().Product.ProductType.Name == "physicalproduct"&&(string.IsNullOrEmpty(address)||string.IsNullOrEmpty(city)))
+                if (productInCarts.FirstOrDefault().Product.ProductType.Name == "physicalproduct" && (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(city)))
                     return Json("physical", JsonRequestBehavior.AllowGet);
 
 
-               // cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                // cellNumber = cellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
 
                 string englishcellNumber = "";
@@ -193,7 +193,7 @@ namespace Site.Controllers
                 cellNumber = englishcellNumber;
 
 
-             //   activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
+                //   activationCode = activationCode.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
 
                 string englishactivationCode = "";
@@ -239,12 +239,12 @@ namespace Site.Controllers
                         //else
                         //    res = zp.ZarinPalRedirect(order, order.TotalAmount);
 
-                       //return Json(res, JsonRequestBehavior.AllowGet);
+                        //return Json(res, JsonRequestBehavior.AllowGet);
                     }
 
                     if (user.IsActive && user.Password == activationCode)
                     {
-                 
+
 
                         Order order = ConvertCoockieToOrder(productInCarts, user.Id, notes, email, city, address, postal);
 
@@ -252,7 +252,7 @@ namespace Site.Controllers
 
                         string res = "";
 
-                        if(order.TotalAmount==0)
+                        if (order.TotalAmount == 0)
                             return Json("invalid", JsonRequestBehavior.AllowGet);
 
                         res = zp.ZarinPalRedirect(order, order.TotalAmount);
@@ -482,7 +482,7 @@ namespace Site.Controllers
 
                     order.Amount = subtotal;
 
-                   
+
 
                     decimal discountAmount = 0;
 
@@ -584,7 +584,7 @@ namespace Site.Controllers
 
                     string code = basketItems[2];
                     DiscountCode discountCode = UnitOfWork.DiscountCodeRepository
-                        .Get(c => c.Code == code  && c.IsActive && c.IsDeleted == false).FirstOrDefault();
+                        .Get(c => c.Code == code && c.IsActive && c.IsDeleted == false).FirstOrDefault();
 
                     if (discountCode == null)
                         return 0;
@@ -809,6 +809,8 @@ namespace Site.Controllers
                             order.RefId = verificationResponse.RefID;
 
                             UnitOfWork.OrderRepository.Update(order);
+
+                          
                             UnitOfWork.Save();
 
                             callBack.IsSuccess = true;
@@ -828,7 +830,27 @@ namespace Site.Controllers
                                 {
                                     //   GeneratePfd(order.Id);
                                 }
+                                if (orderType.ToLower() == "productbyform")
+                                {
+                                    if (!string.IsNullOrEmpty(order.Description))
+                                    {
 
+                                        Guid formId = new Guid(order.Description);
+
+                                        FormInstagramLive formInstagramLive =
+                                            UnitOfWork.FormInstagramLiveRepository.GetById(formId);
+
+                                        if (formInstagramLive != null)
+                                        {
+                                            formInstagramLive.IsPaid = true;
+                                            formInstagramLive.OrderCode = order.Code.ToString();
+                                            formInstagramLive.SaleRefrenceId = order.RefId;
+
+                                            UnitOfWork.FormInstagramLiveRepository.Update(formInstagramLive);
+                                            UnitOfWork.Save();
+                                        }
+                                    }
+                                }
 
 
                                 OrderDetail orderDetail = UnitOfWork.OrderDetailRepository
@@ -857,10 +879,12 @@ namespace Site.Controllers
 
                                         }
                                         callBack.DownloadLink = fileLink;
-                                        ViewBag.Email = order.Email;
+                                        if (!string.IsNullOrEmpty(order.Email))
+                                        {
+                                            ViewBag.Email = order.Email;
 
-                                        CreateEmail(order.Email, fileLink, orderType);
-
+                                            CreateEmail(order.Email, fileLink, orderType);
+                                        }
 
                                         string city = "";
                                         if (order.City != null)
@@ -874,7 +898,7 @@ namespace Site.Controllers
 
                                         if (orderType.ToLower() == "physicalproduct")
                                         {
-                                          
+
 
                                             CreateEmailForAdminForPhysicalProduct(product.Title, order.User.CellNum,
                                                 order.Address, city, order.PostalCode, order.User.FullName);
@@ -967,7 +991,7 @@ namespace Site.Controllers
 
             //string email = "hajizadehlaw@yahoo.com";      
             //string email = "hajizadevahid797@gmail.com";      
-              string email = "babaei.aho@gmail.com";
+            string email = "babaei.aho@gmail.com";
             string body = @"<html>
                  <head></head>
                 <body dir='rtl'>
@@ -992,7 +1016,7 @@ namespace Site.Controllers
             Helpers.Message message = new Message();
 
             //string email = "hajizadehlaw@yahoo.com";      
-            string email = "hajizadevahid797@gmail.com";      
+            string email = "hajizadevahid797@gmail.com";
             // string email = "babaei.aho@gmail.com";
             string body = @"<html>
                  <head></head>
@@ -1235,6 +1259,151 @@ namespace Site.Controllers
                 });
             }
             return Json(cityItems, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Route("RegisterWorkshop")]
+        public ActionResult RegisterWorkshopForm()
+        {
+            RegisterWorrkshopViewModel result = new RegisterWorrkshopViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result);
+        }
+
+
+        [Route("RegisterWorkshop")]
+        [HttpPost]
+        public ActionResult RegisterWorkshopForm(RegisterWorrkshopViewModel consultantViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                FormInstagramLive formInstagramLive = new FormInstagramLive()
+                {
+                    Id = Guid.NewGuid(),
+                    InstagramId = consultantViewModel.InstagramId,
+                    CreationDate = DateTime.Now,
+                    IsDeleted = false,
+                    IsActive = true,
+                    FirstName = consultantViewModel.FirstName,
+                    LastName = consultantViewModel.LastName,
+                    ContactNumber = consultantViewModel.ContactNumber,
+                };
+
+                UnitOfWork.FormInstagramLiveRepository.Insert(formInstagramLive);
+           
+
+                Guid userId = InsertToUser(formInstagramLive.FirstName + " " + formInstagramLive.LastName,
+                     formInstagramLive.ContactNumber);
+            
+
+                Guid typeId = new Guid("05930422-48CB-43CC-B7C3-6728CB8ABBB2");
+                Product product = UnitOfWork.ProductRepository.Get(c => c.ProductTypeId == typeId && c.IsActive)
+                    .FirstOrDefault();
+
+
+                Order order = new Order();
+
+
+                order.Id = Guid.NewGuid();
+                order.IsActive = true;
+                order.IsDeleted = false;
+                order.IsPaid = false;
+                order.CreationDate = DateTime.Now;
+                order.LastModifiedDate = DateTime.Now;
+                order.Code = FindeLastOrderCode() + 1;
+                order.UserId = userId;
+                order.Description = "";
+                order.Email = "";
+                order.IsSiteOrder = true;
+                order.CityId = null;
+                order.Address = null;
+                order.PostalCode = null;
+                order.Description = formInstagramLive.Id.ToString();
+                decimal subtotal = product.Amount;
+
+                if (product.IsInPromotion)
+                    subtotal = product.DiscountAmount.Value;
+
+                order.Amount = subtotal;
+
+                decimal discountAmount = 0;
+
+                
+
+                order.DiscountAmount = discountAmount;
+
+                order.TotalAmount = Convert.ToDecimal(subtotal - order.DiscountAmount);
+                order.OrderTypeId = product.ProductTypeId;
+
+
+                UnitOfWork.OrderRepository.Insert(order);
+                UnitOfWork.Save();
+
+
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    ProductId =  product.Id,
+                    Quantity = 1,
+                    RawAmount =product.Amount * 1,
+                    IsDeleted = false,
+                    IsActive = true,
+                    CreationDate = DateTime.Now,
+                    OrderId = order.Id,
+                    Amount = product.Amount,
+                };
+              
+
+                UnitOfWork.OrderRepository.Update(order);
+
+                UnitOfWork.OrderDetailRepository.Insert(orderDetail);
+
+
+                UnitOfWork.Save();
+                string res = "";
+
+                if (order.TotalAmount == 0)
+                {
+                    TempData["error"] = "خطایی رخ داده است. لطفا مجددا تلاش کنید.";
+                    RegisterWorrkshopViewModel result = new RegisterWorrkshopViewModel()
+                    {
+                        MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+                    };
+                    return View(result);
+                }
+                res = zp.ZarinPalRedirect(order, order.TotalAmount);
+
+                return Redirect(res);
+            }
+
+            TempData["error"] = "لطفا فیلدهای ستاره دار را تکمیل کنید..";
+
+            RegisterWorrkshopViewModel result2 = new RegisterWorrkshopViewModel()
+            {
+                MenuProductGroups = _baseHelper.GetMenuProductGroups(),
+            };
+            return View(result2);
+        }
+
+        public Guid InsertToUser(string fullName, string cellNumber)
+        {
+            string englishcellNumber = "";
+            foreach (char ch in cellNumber)
+            {
+                englishcellNumber += char.GetNumericValue(ch);
+            }
+            cellNumber = englishcellNumber;
+
+            User user = UnitOfWork.UserRepository.Get(c => c.CellNum == cellNumber && c.IsDeleted == false).FirstOrDefault();
+
+            if (user != null)
+                return user.Id;
+
+            Guid userId = CreateUser(fullName, cellNumber, "", "0");
+
+            return userId;
+
         }
 
     }

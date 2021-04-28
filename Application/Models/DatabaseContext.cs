@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+
 namespace Models
 {
    public class DatabaseContext:DbContext
@@ -50,5 +51,6 @@ namespace Models
         public DbSet<ConsultantRequest> ConsultantRequests { get; set; }
         public DbSet<ConsultantRequestForm> ConxConsultantRequestForms { get; set; }
         public DbSet<EmpClubVideoGroup> EmpClubVideoGroups { get; set; }
+        public DbSet<FormInstagramLive> FormInstagramLives { get; set; }
     }
 }

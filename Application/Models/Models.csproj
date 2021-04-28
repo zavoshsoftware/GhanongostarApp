@@ -87,6 +87,7 @@
     <Compile Include="Entities\EmpClubQuestion.cs" />
     <Compile Include="Entities\EmpClubProduct.cs" />
     <Compile Include="Entities\EmpClubProductGroup.cs" />
+    <Compile Include="Entities\FormInstagramLive.cs" />
     <Compile Include="Entities\Redirect.cs" />
     <Compile Include="Entities\SiteBlogCategory.cs" />
     <Compile Include="Entities\SiteBlog.cs" />
@@ -318,6 +319,22 @@
     <Compile Include="Migrations\202103080711323_V50.Designer.cs">
       <DependentUpon>202103080711323_V50.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103100842369_V51.cs" />
+    <Compile Include="Migrations\202103100842369_V51.Designer.cs">
+      <DependentUpon>202103100842369_V51.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103100920205_V52.cs" />
+    <Compile Include="Migrations\202103100920205_V52.Designer.cs">
+      <DependentUpon>202103100920205_V52.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103171647161_V53.cs" />
+    <Compile Include="Migrations\202103171647161_V53.Designer.cs">
+      <DependentUpon>202103171647161_V53.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103171709599_V54.cs" />
+    <Compile Include="Migrations\202103171709599_V54.Designer.cs">
+      <DependentUpon>202103171709599_V54.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -481,6 +498,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103080711323_V50.resx">
       <DependentUpon>202103080711323_V50.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103100842369_V51.resx">
+      <DependentUpon>202103100842369_V51.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103100920205_V52.resx">
+      <DependentUpon>202103100920205_V52.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103171647161_V53.resx">
+      <DependentUpon>202103171647161_V53.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103171709599_V54.resx">
+      <DependentUpon>202103171709599_V54.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

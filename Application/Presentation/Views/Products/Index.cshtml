@@ -17,6 +17,7 @@ ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(mod
               columns.Bound(model => model.Title);
               columns.Bound(model => model.IsFree);
               columns.Bound(model => model.IsVip);
+              columns.Bound(model => model.Point);
               columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
                   columns.Bound(model => model.VideoThumbnail).Template(@<text><img src="@item.VideoThumbnail" height="100px" /></text>);
             columns.Bound(model => model.IsActive);
@@ -36,7 +37,7 @@ ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(mod
 					{				
 						toolbar.Custom().Action("Create","Products").Text("افزودن");                          
 					}
-		)         
+		)    .Sortable()     
 		.DataSource(dataSource => dataSource
 									.Server()
 							
