@@ -43,11 +43,27 @@
                         @Html.EditorFor(model => model.UserQuestion.Response)
                         @Html.ValidationMessageFor(model => model.UserQuestion.Response)
                     </div>
+
+                    <div class="col-md-12 audio-holder">
+                        @if (!string.IsNullOrEmpty(Model.UserQuestion.VoiceResponse))
+                        {
+                            <label class="control-label">پاسخ صوتی : </label>
+                            <audio controls>
+                                <source src="@Model.UserQuestion.VoiceResponse" type="audio/ogg">
+                            </audio>
+                            <button type="button" class="btn btn-danger remove-voice">حذف پاسخ صوتی</button>
+                        }
+                        else
+                        {
+                            <p>پاسخ صوتی : در حال حاضر پاسخ صوتی ارسال نشده.</p>
+                        }
+                    </div>
+
                     <div class="col-md-8 recorder-holder">
-                        <button id="start-audio" onclick="startRecording();" type="button" class="audio-play" >
+                        <button type="button" class="start">
                             شروع ثبت صدا<i class="fa fa-microphone fa-3x"></i>
                         </button>
-                        <button id="stop-audio" onclick="stopRecording();" type="button" class="audio-stop" >
+                        <button type="button" class="stop">
                             ذخیره<i class="fa fa-save fa-3x"></i>
                         </button>
                     </div>
@@ -97,7 +113,7 @@
                     </div>
                     <div class="row date-s">
                         <div class="col p-1">
-                            <label class="control-label">تاریخ پاسخ :</label><b>@question.ResponseDate</b>
+                            <a href="/EmpClubQuestions/Edit/@question.Id.ToString()" class="btn btn-success"> ویرایش</a>
                         </div>
                     </div>
                 </div>
@@ -109,56 +125,130 @@
 </div>
 @section scripts{
     <script>
-        let btnstart = document.querySelector("#start-audio");
-        let btnstop = document.querySelector("#stop-audio");
+        {
+            const record = document.querySelector('.start');
+            const stop = document.querySelector('.stop');
+            const soundClips = document.querySelector('.play');
 
-        var audioStream = [];
-        var chunksOfData = [];
 
-        
-        
-        function stopRecording() {
-            console.log("stop");
-        }
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            console.log('getUserMedia supported.');
-            navigator.mediaDevices.getUserMedia(
-                // constraints - only audio needed for this app
-                {
-                    audio: true
-                })
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                console.log('getUserMedia supported.');
+                navigator.mediaDevices.getUserMedia(
+                    // constraints - only audio needed for this app
+                    {
+                        audio: true
+                    })
 
-                // Success callback
-                .then(function (stream) {
-                    audioStream = stream;
-                })
+                    // Success callback
+                    .then(function (stream) {
 
-                // Error callback
-                .catch(function (err) {
-                    console.log('The following getUserMedia error occurred: ' + err);
-                }
-                );
-        } else {
-            console.log('getUserMedia not supported on your browser!');
-        }
-        const mediaRecorder = new MediaRecorder(audioStream);
+                        mediaRecorder = new MediaRecorder(stream);
 
-        function startRecording() {
-            console.log(mediaRecorder.state);
-            console.log("recording started");
-            mediaRecorder.start();
-            btnstart.style.background = "red";
-            mediaRecorder.ondataavailable = function (e) {
-                chunks.push(e.data);
+                        let chunks = [];
+
+                        mediaRecorder.ondataavailable = function (e) {
+                            chunks.push(e.data);
+                        }
+
+                        record.onclick = function () {
+                            mediaRecorder.start();
+                            console.log(mediaRecorder.state);
+                            console.log("recorder started");
+                            record.style.background = "red";
+                            record.style.color = "black";
+                        }
+
+                        stop.onclick = function () {
+                            mediaRecorder.stop();
+                            console.log(mediaRecorder.state);
+                            console.log("recorder stopped");
+                            record.style.background = "";
+                            record.style.color = "";
+                        }
+
+                        mediaRecorder.onstop = function (e) {
+                            console.log("recorder stopped");
+
+                            //const clipName = "voice.ogg";
+
+                            //const clipContainer = document.createElement('article');
+                            //const clipLabel = document.createElement('p');
+                            //const audio = document.createElement('audio');
+                            //const deleteButton = document.createElement('button');
+
+                            //clipContainer.classList.add('clip');
+                            //audio.setAttribute('controls', '');
+                            //deleteButton.innerHTML = "Delete";
+                            //clipLabel.innerHTML = clipName;
+
+                            //clipContainer.appendChild(audio);
+                            //clipContainer.appendChild(clipLabel);
+                            //clipContainer.appendChild(deleteButton);
+                            //soundClips.appendChild(clipContainer);
+
+                            const blob = new Blob(chunks, { type: 'audio/ogg' });
+                            chunks = [];
+                            const audioURL = window.URL.createObjectURL(blob);
+                            //audio.src = audioURL;
+
+                            var reader = new window.FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = function (reader) {
+                                var base64 = reader.target.result;
+                                var base64 = base64.split(',')[1];
+
+                                //var fd = new FormData();
+                            @*fd.append('id', '@Model.UserQuestion.Id');*@
+                                //fd.append('date', blob);
+
+                                $.ajax({
+                                    url: '/EmpClubQuestions/SaveVoice',
+                                    type: 'POST',
+                                    data: {
+                                    id:'@Model.UserQuestion.Id', audio: base64
+                                },
+
+                                    success: function (response) {
+                                        console.log(response); 
+                                        Location.reload(true);
+                                    },
+                                    error: function (response) { console.log(response); }
+                                });
+                            }
+
+                                deleteButton.onclick = function (e) {
+                                    let evtTgt = e.target;
+                                    evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+                                }
+                            }
+
+                        }
+                     )
+                    // Error callback
+                    .catch(function (err) {
+                        console.log('The following getUserMedia error occurred: ' + err);
+                    });
+            } else {
+                console.log('getUserMedia not supported on your browser!');
             }
-        }
 
-        function stopRecording() {
-            console.log(mediaRecorder.state);
-            console.log("recording stoped");
-            mediaRecorder.stop();
-            btnstart.style.background = "#0082ff";
-            btnstop.style.background = "red";
+        }
+    </script>
+    <script>
+        {
+            let removeVoice = document.querySelector(".remove-voice");
+            removeVoice.onclick = function () {
+                $.ajax({
+                    url: "/EmpClubQuestions/RemoveVoice",
+                    method: "POST",
+                    data: { id:'@Model.UserQuestion.Id', filePath: '@Model.UserQuestion.VoiceResponse' },
+                    success: function (response) {
+                        console.log(response);
+                        Location.reload(true);
+                    },
+                    error: function (response) { console.log(response);}
+                });
+            }
         }
     </script>
 }

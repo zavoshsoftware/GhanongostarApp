@@ -93,7 +93,8 @@ namespace Presentation.Controllers
             model.UserQuestion = new EmpClubQuestion();
             model.UserQuestion = db.EmpClubQuestions.Find(id);
             model.UserQuestions = new List<EmpClubQuestion>();
-            model.UserQuestions = db.EmpClubQuestions.Where(x => x.UserId == model.UserQuestion.UserId).ToList();
+            model.UserQuestions = db.EmpClubQuestions.Where(x => x.UserId == model.UserQuestion.UserId &&
+            x.Id != id).ToList();
 
             if (model.UserQuestion == null)
             {
@@ -121,21 +122,64 @@ namespace Presentation.Controllers
                 db.SaveChanges();
                 if (string.IsNullOrEmpty(status))
                     return RedirectToAction("Index");
+
                 return RedirectToAction("Index", new { status = "notanswered" });
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Password", empClubQuestion.UserQuestion.UserId);
             return View(empClubQuestion);
         }
+        //[ValidateAntiForgeryToken]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveVoiceAnswer(Guid id, HttpPostedFile questionVoice)
+        public ActionResult SaveVoice(string id, string audio)
         {
-            string FilePath = Path.Combine(Server.MapPath("~/uloadfolder"), questionVoice.FileName);
-            string FileUrl = Url.Content(Path.Combine("~/uloadfolder", questionVoice.FileName));
-            questionVoice.SaveAs(FilePath);
-            return View("Edit",new {id=id });
+            string FileName = $"question-{id}.ogg";
+            string FilePath = Path.Combine(Server.MapPath("/Uploads/question/"), FileName);
+            string FileUrl = Url.Content(Path.Combine("/Uploads/question/", FileName));
+
+            //if (postedFile.ContentLength>0)
+            //{                
+            //    postedFile.SaveAs(FilePath);
+            //}
+
+            using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] BlobData = Convert.FromBase64String(audio);
+                    bw.Write(BlobData);
+                    bw.Close();
+                }
+                fs.Close();
+            }
+
+            var question = db.EmpClubQuestions.Find(new Guid(id));
+            if (question.Id != null)
+            {
+                question.VoiceResponse = FileUrl;
+                db.SaveChanges();
+            }
+            return Content(FileName);
         }
 
+        [HttpPost]
+        public ActionResult RemoveVoice(string id, string filePath)
+        {
+            var question = db.EmpClubQuestions.Find(new Guid(id));
+            if (question.Id != null)
+            {
+                question.VoiceResponse = "";
+                db.SaveChanges();
+                string root = Server.MapPath("~");
+                string filetoremove = root + filePath;
+                if (System.IO.File.Exists(filetoremove))
+                {
+                    System.IO.File.Delete(filetoremove);
+                }
+
+
+            }
+            return Content("file removed");
+        }
         // GET: EmpClubQuestions/Delete/5
         public ActionResult Delete(Guid? id)
         {
@@ -164,7 +208,7 @@ namespace Presentation.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

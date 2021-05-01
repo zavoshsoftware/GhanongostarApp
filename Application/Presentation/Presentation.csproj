@@ -1167,6 +1167,8 @@
     <Content Include="Views\FormInstagramLives\Details.cshtml" />
     <Content Include="Views\FormInstagramLives\Edit.cshtml" />
     <Content Include="Views\FormInstagramLives\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\EmpClubQuestions\SaveVoice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1176,13 +1178,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="uloadfolder\" />
     <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\Courses\Images\" />
     <Folder Include="Uploads\Courses\Video\" />
     <Folder Include="Uploads\Editor\" />
     <Folder Include="Uploads\emp\" />
     <Folder Include="Uploads\Product\Files\" />
+    <Folder Include="Uploads\question\" />
     <Folder Include="Uploads\shared\" />
   </ItemGroup>
   <ItemGroup>

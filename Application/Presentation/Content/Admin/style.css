@@ -60,23 +60,27 @@ w-100{
     margin-bottom: 2rem;
     margin-right: 8.5rem;
 }
-.audio-play{
+.start{
     display:flex;
     align-items:center;
 }
-.audio-stop {
+.stop {
     display: flex;
     align-items: center;
 }
-.audio-play i {
+.start i {
     margin-right: 1rem;
     margin-left: 1rem;
     color: #0082ff;
 }
-.audio-stop i {
+.stop i {
     margin-right: 1rem;
     margin-left: 1rem;
     color: green;
+}
+.audio-holder{
+    display:flex;
+    align-items:center
 }
 @media screen and (max-width:760px){
     .mr-5 {
