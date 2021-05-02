@@ -209,10 +209,12 @@
                                 },
 
                                     success: function (response) {
-                                        console.log(response); 
-                                        Location.reload(true);
+                                        console.log(response);                                         
                                     },
-                                    error: function (response) { console.log(response); }
+                                    error: function (response) { console.log(response); },
+                                    complete: function () {
+                                        $('.audio-holder').load('/EmpClubQuestions/Edit/@Model.UserQuestion.Id .audio-holder');
+                                    }
                                 });
                             }
 
@@ -243,10 +245,12 @@
                     method: "POST",
                     data: { id:'@Model.UserQuestion.Id', filePath: '@Model.UserQuestion.VoiceResponse' },
                     success: function (response) {
-                        console.log(response);
-                        Location.reload(true);
+                        console.log(response);                        
                     },
-                    error: function (response) { console.log(response);}
+                    error: function (response) { console.log(response); },
+                    complete: function () {
+                        $('.audio-holder').load('/EmpClubQuestions/Edit/@Model.UserQuestion.Id .audio-holder');
+                    }
                 });
             }
         }

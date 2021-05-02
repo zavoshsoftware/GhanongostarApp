@@ -358,6 +358,19 @@
 
 									 </div>
 								 }
+                                if (!string.IsNullOrEmpty(question.VoiceResponse))
+								 {
+									 <div class="card-question-response">
+
+										 <p class="audio-holder">
+											 <span style="color: red">پاسخ صوتی:</span>
+                                             <audio controls="controls">
+                                                 <source src="https://ghanongostar.zavoshsoftware.com/@question.VoiceResponse" type="audio/ogg" />                                                 
+                                             </audio>
+										 </p>
+
+									 </div>
+								 }
 							}
 					 
 						</div>
