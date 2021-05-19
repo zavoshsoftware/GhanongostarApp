@@ -559,3 +559,7 @@ a.forget-pass {
 .account-table {
     padding-top: 0;
 }
+.audio-holder{
+    display:flex;
+    align-items:center;
+}

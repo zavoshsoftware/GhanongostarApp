@@ -13,7 +13,9 @@ namespace ViewModels
         public List<SidebarProductGroupViewModel> SideBarProductGroups { get; set; }
         public List<EmpClubProduct> Forms { get; set; }
         public  EmpClubVideos  Videos { get; set; }
-      
+        public Guid OrderId { get; set; }
+        public int ExpireNumber { get; set; }
+
         public List<EmpClubProduct> Instructions { get; set; }
         public List<EmpClubQuestion> Questions { get; set; }
     }

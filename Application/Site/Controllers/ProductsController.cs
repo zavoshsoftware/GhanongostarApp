@@ -385,10 +385,15 @@ namespace Site.Controllers
         {
             User user = GetOnlineUser();
 
-            if (!UnitOfWork.OrderDetailRepository.Get(c => c.Order.UserId == user.Id && c.Product.ProductTypeId == empPackageTypeId && c.Order.IsPaid).Any())
+
+            var orderDetail = UnitOfWork.OrderDetailRepository.Get(c => c.Order.UserId == user.Id && c.Product.ProductTypeId == empPackageTypeId && c.Order.IsPaid).FirstOrDefault();
+            var order = UnitOfWork.OrderRepository.GetById(orderDetail.OrderId);
+
+            if (orderDetail==null)
             {
                 return RedirectToAction("EmployerPackage");
             }
+
             Guid typeId = new Guid("E71DF968-54A3-497A-A8C2-1058A4293F8D");
 
             EmployerPackageResultViewModel result = new EmployerPackageResultViewModel()
@@ -399,9 +404,28 @@ namespace Site.Controllers
                 Forms = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "form" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
                 Videos = GetClubVideos(),
                 Instructions = UnitOfWork.EmpClubProductRepository.Get(c => c.EmpClubProductGroup.Name == "instructions" && c.IsActive).OrderByDescending(c => c.CreationDate).ToList(),
-                Questions = UnitOfWork.EmpClubQuestionRepository.Get(c=>c.UserId==user.Id&& c.IsDeleted==false).OrderByDescending(c=>c.CreationDate).ToList()
-            };
+                Questions = UnitOfWork.EmpClubQuestionRepository.Get(c => c.UserId == user.Id && c.IsDeleted == false).OrderByDescending(c => c.CreationDate).ToList(),
+                OrderId = orderDetail.OrderId,
+                ExpireNumber = order.ExpireNumber
+        };
             return View(result);
+        }
+        [HttpPost]
+        public ActionResult DecreaseExpireNumber(Guid id)
+        {
+            var order = UnitOfWork.OrderRepository.GetById(id);
+            if (order !=null)
+            {
+                if (order.ExpireNumber>0)
+                {
+                    order.ExpireNumber--;
+                    UnitOfWork.OrderRepository.Update(order);
+                    UnitOfWork.Save();
+                    return Content("عملیات کاهش موفق");
+                }
+                return Content("عملیات کاهش نا موفق");
+            }
+            return Content("چنین عملیاتی نا ممکن است");
         }
 
         public EmpClubVideos GetClubVideos()

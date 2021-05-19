@@ -22,5 +22,7 @@ namespace Models
         public string Response { get; set; }
         [Display(Name = "زمان پاسخ")]
         public DateTime ResponseDate { get; set; }
+        [Display(Name = "پاسخ صوتی")]
+        public string VoiceResponse { get; set; }
     }
 }
