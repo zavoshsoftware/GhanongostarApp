@@ -391,7 +391,7 @@
 			                                                            <input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
 
 			                                                            <textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
-			                                                            <button class="qsbutton" type="button" @*onclick="submitQuestion();"*@>ارسال سوال</button>
+			                                                            <button class="qsbutton" type="button" onclick="submitQuestion();">ارسال سوال</button>
 
 		                                                            </div>
 	                                                            </div>
@@ -519,7 +519,7 @@
 
 @section scripts{
     <script src="~/Scripts/jquery/jquery.min.js"></script>
-    <script>
+    @*<script>
         let btnDecrease = $('.qsbutton');
         btnDecrease.onclick= function decreaseExpireNumber() {
             console.log("clicked");
@@ -537,40 +537,40 @@
                 }
             });
         }
-    </script>
+    </script>*@
     <script>
-                                //function submitQuestion() {
+                                function submitQuestion() {
 
-                                //    var subject = $("#txtSubject").val();
-                                //    var question = $("#txtQuestion").val();
+                                    var subject = $("#txtSubject").val();
+                                    var question = $("#txtQuestion").val();
 
-                                //    if (subject !== "" && question !== "") {
-                                //        $.ajax(
-                                //            {
-                                //                url: "/employer-package-result/SubmitQuestion",
-                                //                data: { subject: subject, question: question },
-                                //                type: "Post"
-                                //            }).done(function (result) {
-                                //                if (result === "true") {
-                                //                    $("#errorDiv").css('display', 'none');
-                                //                    $("#SuccessDiv").css('display', 'block');
-                                //                    localStorage.setItem("id", "");
-                                //                }
-                                //                else if (result === "InvalidEmail") {
-                                //                    $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
-                                //                    $("#errorDiv").css('display', 'block');
-                                //                    $("#SuccessDiv").css('display', 'none');
+                                    if (subject !== "" && question !== "") {
+                                        $.ajax(
+                                            {
+                                                url: "/employer-package-result/SubmitQuestion",
+                                                data: { subject: subject, question: question },
+                                                type: "Post"
+                                            }).done(function (result) {
+                                                if (result === "true") {
+                                                    $("#errorDiv").css('display', 'none');
+                                                    $("#SuccessDiv").css('display', 'block');
+                                                    localStorage.setItem("id", "");
+                                                }
+                                                else if (result === "InvalidEmail") {
+                                                    $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
+                                                    $("#errorDiv").css('display', 'block');
+                                                    $("#SuccessDiv").css('display', 'none');
 
-                                //                }
-                                //            });
-                                //    }
-                                //    else {
-                                //        $("#errorDiv").html('موضوع و متن سوال خود را وارد نمایید.');
-                                //        $("#errorDiv").css('display', 'block');
-                                //        $("#SuccessDiv").css('display', 'none');
+                                                }
+                                            });
+                                    }
+                                    else {
+                                        $("#errorDiv").html('موضوع و متن سوال خود را وارد نمایید.');
+                                        $("#errorDiv").css('display', 'block');
+                                        $("#SuccessDiv").css('display', 'none');
 
-                                //    }
-                                //}
+                                    }
+                                }
     </script>
 
 }
