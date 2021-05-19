@@ -114,11 +114,18 @@ namespace Presentation.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(empClubQuestion.UserQuestion.Response))
-                    empClubQuestion.UserQuestion.ResponseDate = DateTime.Now;
+                EmpClubQuestion oEmpClubQuestion = db.EmpClubQuestions.Find(empClubQuestion.UserQuestion.Id);
 
-                empClubQuestion.UserQuestion.IsDeleted = false;
-                db.Entry(empClubQuestion).State = EntityState.Modified;
+                if (oEmpClubQuestion != null)
+                {
+                    if (!string.IsNullOrEmpty(empClubQuestion.UserQuestion.Response))
+                    {
+                        oEmpClubQuestion.ResponseDate = DateTime.Now;
+                        oEmpClubQuestion.Response = empClubQuestion.UserQuestion.Response;
+                        oEmpClubQuestion.IsDeleted = false;
+                    }
+                }
+
                 db.SaveChanges();
                 if (string.IsNullOrEmpty(status))
                     return RedirectToAction("Index");

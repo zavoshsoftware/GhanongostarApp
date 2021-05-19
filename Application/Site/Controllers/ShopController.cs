@@ -101,7 +101,7 @@ namespace Site.Controllers
         ZarinPalHelper zp = new ZarinPalHelper();
 
         [AllowAnonymous]
-        public ActionResult CheckUser(string notes, string email, string cellNumber, string employeeType, string fullName, string postalCode)
+        public ActionResult CheckUser(string notes, string email, string cellNumber, string employeeType, string fullName)
         {
             try
             {
@@ -114,11 +114,7 @@ namespace Site.Controllers
                 }
                 cellNumber = englishcellNumber;
 
-                bool ispostalCodeValid = Regex.IsMatch(postalCode,@"\b(?!(\d)\1{3})[13-9]{4}[1346-9][013-9]{5}\b",RegexOptions.IgnoreCase);
-                if (!ispostalCodeValid)
-                {
-                    return Json("invalidPostalCode", JsonRequestBehavior.AllowGet);
-                }
+               
 
                 bool isValidMobile = Regex.IsMatch(cellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
 

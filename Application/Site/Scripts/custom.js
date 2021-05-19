@@ -126,24 +126,25 @@ function registerUser() {
     var employeeType = $('#ddlEmployee').val();
     var email = $('#email').val();
     var postalCode = $('#postal').val();
-    var physical = $('.physical-product');
-    
+    var city = $('#city').val();
+    var address = $('#address').val();
+    var physical = $('.physical-product').val();
+   var isPhysical= $('#isPhysical').val();
 
-
-    if (email !== '' && name !== '' && cellNumber !== '' && employeeType!=='' && postalCode!=='') {
-        $.ajax(
-            {
-                url: "/shop/CheckUser",
-                data: {
-                    notes: orderNotes,
-                    email: email,
-                    fullName:name,
-                    cellNumber: cellNumber,
-                    employeeType: employeeType,
-                    postalCode:postalCode
-                },
-                type: "GET"
-            }).done(function (result) {
+    if (isPhysical == 'false') {
+        if (email !== '' && name !== '' && cellNumber !== '' && employeeType !== '') {
+            $.ajax(
+                {
+                    url: "/shop/CheckUser",
+                    data: {
+                        notes: orderNotes,
+                        email: email,
+                        fullName: name,
+                        cellNumber: cellNumber,
+                        employeeType: employeeType 
+                    },
+                    type: "GET"
+                }).done(function(result) {
                 if (result === "true") {
                     $('.activate').css('display', 'block');
                     $('.register').css('display', 'none');
@@ -155,24 +156,64 @@ function registerUser() {
                     $('#error-box').css('display', 'block');
                     $('#error-box').html('ایمیل وارد شده صحیح نمی باشد.');
                     AppearButton('btn-register', 'transfer-message');
-                }
-                else if (result === "invalidPostalCode") {
+                } else if (result === "invalidPostalCode") {
                     $('#error-box').css('display', 'block');
                     $('#error-box').html('کد پستی وارد شده صحیح نمی باشد.');
                     AppearButton('btn-register', 'transfer-message');
-                }
-
-                else {
+                } else {
                     $('#error-box').css('display', 'block');
                     $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
                     AppearButton('btn-register', 'transfer-message');
 
                 }
             });
+        } else {
+            $('#error-box').css('display', 'block');
+            $('#error-box').html('لطفا فیلدهای ستاره دار را تکمیل کنید');
+            AppearButton('btn-register', 'transfer-message');
+        }
     } else {
-        $('#error-box').css('display', 'block');
-        $('#error-box').html('لطفا فیلدهای ستاره دار را تکمیل کنید');
-        AppearButton('btn-register', 'transfer-message');
+        if (email !== '' && name !== '' && cellNumber !== '' && employeeType !== '' && postalCode !== '' && city !== '' && address!=='') {
+            $.ajax(
+                {
+                    url: "/shop/CheckUser",
+                    data: {
+                        notes: orderNotes,
+                        email: email,
+                        fullName: name,
+                        cellNumber: cellNumber,
+                        employeeType: employeeType,
+                        postalCode: postalCode
+                    },
+                    type: "GET"
+                }).done(function (result) {
+                    if (result === "true") {
+                        $('.activate').css('display', 'block');
+                        $('.register').css('display', 'none');
+                    } else if (result === "invalidMobile") {
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('شماره موبایل وارد شده صحیح نمی باشد');
+                        AppearButton('btn-register', 'transfer-message');
+                    } else if (result === "invalidEmail") {
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('ایمیل وارد شده صحیح نمی باشد.');
+                        AppearButton('btn-register', 'transfer-message');
+                    } else if (result === "invalidPostalCode") {
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('کد پستی وارد شده صحیح نمی باشد.');
+                        AppearButton('btn-register', 'transfer-message');
+                    } else {
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
+                        AppearButton('btn-register', 'transfer-message');
+
+                    }
+                });
+        } else {
+            $('#error-box').css('display', 'block');
+            $('#error-box').html('لطفا فیلدهای ستاره دار را تکمیل کنید');
+            AppearButton('btn-register', 'transfer-message');
+        }
     }
 }
 

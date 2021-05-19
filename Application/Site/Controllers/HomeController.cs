@@ -166,6 +166,53 @@ namespace Site.Controllers
             return urlPrefix;
         }
 
-      
+
+
+        public void TempCalculateQuestion()
+        {
+            Guid empClubId = new Guid("38DF416F-0A23-491C-8729-1316C20DC442");
+            Guid productId4 = new Guid("A86C74BD-414F-4D71-89B3-E6EC60EE56DD");
+            Guid productId8 = new Guid("D993B4B3-AF3F-4A96-A093-139B72849346");
+            Guid productId12 = new Guid("B52EF3E7-FE7D-4498-A98E-5CC641C68005");
+
+            List<OrderDetail> orderDetails = UnitOfWork.OrderDetailRepository.Get(c => c.Product.ProductTypeId == empClubId).ToList();
+
+            foreach (OrderDetail orderDetail in orderDetails)
+            {
+                var order = UnitOfWork.OrderRepository.Get(c => c.Id == orderDetail.OrderId).FirstOrDefault();
+
+                List<EmpClubQuestion> oquestionCount = UnitOfWork.EmpClubQuestionRepository.Get(c => c.UserId == order.UserId).ToList();
+
+                int questionCount = 0;
+
+                if (oquestionCount != null)
+                    questionCount = oquestionCount.Count();
+
+                if (orderDetail.ProductId == productId4)
+                {
+                    if (questionCount < 5)
+                        order.ExpireNumber = 5 - questionCount;
+                    else
+                        order.ExpireNumber = 0;
+                }
+                else if (orderDetail.ProductId == productId8)
+                {
+                    if (questionCount < 10)
+                        order.ExpireNumber = 10 - questionCount;
+                    else
+                        order.ExpireNumber = 0;
+                }
+                else if (orderDetail.ProductId == productId12)
+                {
+                    if (questionCount < 15)
+                        order.ExpireNumber = 15 - questionCount;
+                    else
+                        order.ExpireNumber = 0;
+                }
+                UnitOfWork.OrderRepository.Update(order);
+            }
+            UnitOfWork.Save();
+            
+        }
     }
 }

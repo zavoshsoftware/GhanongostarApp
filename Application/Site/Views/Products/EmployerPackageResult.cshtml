@@ -384,18 +384,24 @@
                                                         </div>
                                                         <div class="add-your-review">
                                                             <h6>ثبت سوال جدید</h6>
-                                                            @if (Model.ExpireNumber > 0)
-                                                            {
-                                                                <div class="raing-form">
-                                                                    <div action="#">
-                                                                        <input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
+                                                            @*@if (Model.ExpireNumber > 0)
+                                                            {*@
+	                                                            <div class="raing-form">
+		                                                            <div action="#">
+			                                                            <input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
 
-                                                                        <textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
-                                                                        <button class="qsbutton" type="button" @*onclick="submitQuestion();"*@>ارسال سوال</button>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            }
+			                                                            <textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
+			                                                            <button class="qsbutton" type="button" @*onclick="submitQuestion();"*@>ارسال سوال</button>
+
+		                                                            </div>
+	                                                            </div>
+                                                            @*}
+                                                            else
+                                                            {
+	                                                            <div class="alert alert-danger">
+		                                                            تعداد سوالات باشگاه روابط کار شما به اتمام رسیده است.
+	                                                            </div>
+                                                            }*@
                                                             <div>
                                                                 <div class="alert alert-success" id="SuccessDiv">سوال شما با موفقیت ثبت گردید</div>
                                                                 <div class="alert alert-danger" id="errorDiv"></div>

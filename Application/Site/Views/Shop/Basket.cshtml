@@ -176,6 +176,7 @@
 							</div>
 						</div>
 						<div class="row physical-product">
+							<input type="hidden" value="" id="isPhysical" />
 							<div class="col-md-6 col-xl-12">
 								<div class="form-group">
 									<label for="address">آدرس* </label>
@@ -247,10 +248,13 @@
 
 					if (result === "physical") {
 						$('.physical-product').css('display', 'block');
+						$('#isPhysical').val('true');
 					}
 
 					else {
 						$('.physical-product').css('display', 'none');
+						$('#isPhysical').val('false');
+
 					}
 				});
 		});
