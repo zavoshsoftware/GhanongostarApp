@@ -1,541 +1,570 @@
 ﻿@model ViewModels.EmployerPackageResultViewModel
 @{
-		ViewBag.Title = "باشگاه روابط کار | قانون گستر";
-		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+    ViewBag.Title = "باشگاه روابط کار | قانون گستر";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
 
 @section headSection
 {
-	<style>
-		.img-header {
-			width: 100%;
-		}
+    <style>
+        .img-header {
+            width: 100%;
+        }
 
-		.product-des-tab ul, #myTabContent {
-			direction: rtl;
-			text-align: right;
-		}
+        .product-des-tab ul, #myTabContent {
+            direction: rtl;
+            text-align: right;
+        }
 
-		.raing-form .form-control {
-			width: 100%;
-		}
+        .raing-form .form-control {
+            width: 100%;
+        }
 
-		.card-question {
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			padding: 5px;
-		}
+        .card-question {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
 
-		.card-question-title {
-			border-bottom: 1px solid #ddd;
-		}
+        .card-question-title {
+            border-bottom: 1px solid #ddd;
+        }
 
-		.card-question-response {
-			padding-right: 20px;
-			background-color: rgba(249, 210, 201, 0.3);
-		}
+        .card-question-response {
+            padding-right: 20px;
+            background-color: rgba(249, 210, 201, 0.3);
+        }
 
-		.description strong {
-			color: red;
-		}
+        .description strong {
+            color: red;
+        }
 
-		#SuccessDiv,#errorDiv {
-			display: none;
-		}
-		.qsbutton {
-			font-weight: 600;
-			color: #fff;
-			background: #ec0000 !important;
-			padding: 10px 15px;
-			width: 204px;
-			cursor: pointer;
-		}
-		.video-tab-heading {
-			background-color: #ececec;
-			padding: 5px;
-		}
+        #SuccessDiv, #errorDiv {
+            display: none;
+        }
 
-		.video-section {
-			border: 1px solid #ececec;
-			padding: 10px;
-			border-top: none;
-		}
-		.video-tab-heading .nav-tabs .nav-item a.active:after {
-			display: none;
-		}
-		.video-tab-heading .nav-tabs .nav-item a:hover:after {
-			display: none;
-		}
-	</style>
+        .qsbutton {
+            font-weight: 600;
+            color: #fff;
+            background: #ec0000 !important;
+            padding: 10px 15px;
+            width: 204px;
+            cursor: pointer;
+        }
+
+        .video-tab-heading {
+            background-color: #ececec;
+            padding: 5px;
+        }
+
+        .video-section {
+            border: 1px solid #ececec;
+            padding: 10px;
+            border-top: none;
+        }
+
+        .video-tab-heading .nav-tabs .nav-item a.active:after {
+            display: none;
+        }
+
+        .video-tab-heading .nav-tabs .nav-item a:hover:after {
+            display: none;
+        }
+    </style>
 }
 
 
 <section class="breadcrumb-area">
-	<div class="container-fluid custom-container">
-		<div class="row">
-			<div class="col-xl-12">
-				<div class="bc-inner">
-					<p>
-						<a href="/">قانون گستر  |</a>
-						باشگاه روابط کار
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bc-inner">
+                    <p>
+                        <a href="/">قانون گستر  |</a>
+                        باشگاه روابط کار
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="shop-area">
-	<div class="container-fluid custom-container">
-	<div class="row">
-		<div class="col-lg-1"></div>
-	
-	<div class="col-lg-10">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-lg-1"></div>
 
-	<div class="shop-content">
-	<div>
-	<div>
-	<div class="product-header">
-		<div class="row">
-			<div class="col-md-12">
-				<img src="~/images/Employers-Club32.jpg" class="img-header"/>
-			</div>
+            <div class="col-lg-10">
 
-		</div>
-	</div>
-	<div class="row">
-	<div class="col-xl-12">
-	<div class="product-des-tab">
-	<ul class="nav nav-tabs " role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">توضیحات</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ویدیوهای آموزشی</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">سوالات شما</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact2" aria-selected="false">فرم ها و قراردادها</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3" role="tab" aria-controls="contact3" aria-selected="false">آیین نامه ها و بخش نامه ها</a>
-		</li>
-	</ul>
-	<div class="tab-content" id="myTabContent">
-	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-		<div class="prod-bottom-tab-sin description">
-			<h5>توضیحات</h5>
-			<p>
-				به باشگاه روابط کار قانون گستر اولین و جامع ترین شبکه مجازی آموزش کشور در حوزه‌های روابط کار ، تامین اجتماعی ، مالیات و دارایی خوش آمدید .
-			</p>
-			<p>
-				در این بخش شما میتوانید :
-			</p>
-			<p>
-				<strong>ویدیو های آموزشی:</strong> دسترسی رایگان و کامل به ویدیو های اختصاصی باشگاه که در موضوعات قانون کار و تامین اجتماعی و مالیات و دارایی از سوی اساتید برجسته ارائه شده است داشته باشید .
-			</p>
-			<p>
-				<strong>فرم ها و قراردادها:</strong> دسترسی رایگان و کامل به کلیه قراردادهای کار پرسنل مشمول قانون کار و غیر مشمول و همچنین کلیه فرمهای اداری پرسنل و مالی
-			</p>
-			<p><strong>
-					آیین نامه ها و بخشنامه ها:
-				</strong> مشاهده تشریح ویدیوی و یا متنی بخشنامه ها و آیین نامه های صادره از دیوان عدالت اداری ، تامین اجتماعی ، وزارت کار ، سازمان مالیاتی کشور .
-			</p>
-			<p><strong>
-					پشتیبانی و پاسخ به سوالات شما:
-				</strong> هر گونه سوال و یا مشکلی که در حوزه های تعیین شده داشته باشید از این طریق می توانید ارسال نموده و ظرف مدت ۲۴ ساعت پاسخ خود را دریافت نمایید .
-			</p>
-		</div>
-	</div>
-	<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-		<div class="prod-bottom-tab-sin">
-			<h5>ویدیوهای آموزشی اختصاصی باشگاه روابط کار</h5>
-			
-			<div class="video-tab-heading">
-				<ul class="nav nav-tabs " role="tablist">
-				
-		 
-					<li class="nav-item">
-						<a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true">قانون کار</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile2" aria-selected="false">تامین اجتماعی</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile3" aria-selected="false">مالیات</a>
-					</li>
+                <div class="shop-content">
+                    <div>
+                        <div>
+                            <div class="product-header">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="~/images/Employers-Club32.jpg" class="img-header" />
+                                    </div>
 
-				</ul>
-			</div>
-			<div class="video-section">
-				<div class="tab-content" id="myTabContent2">
-					<div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
-						<div id="accordion">
-							@if (!Model.Videos.GhanonKarVideos.Any())
-					{
-									<p class="alert alert-info">
-										در حال حاظر ویدیویی در این بخش بارگزاری نشده است
-									</p>
-					}
-							@{
-						int k = 3000;
-						foreach (var video in Model.Videos.GhanonKarVideos)
-						{
-							var id = "heading" + k;
-							var idCollapse = "collapse" + k;
-											<div class="card">
-												<div class="card-header" id="@id">
-													<h5 class="mb-0">
-														<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
-															@video.Title
-														</button>
-													</h5>
-												</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="product-des-tab">
+                                        <ul class="nav nav-tabs " role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">توضیحات</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ویدیوهای آموزشی</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">سوالات شما</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact2" aria-selected="false">فرم ها و قراردادها</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3" role="tab" aria-controls="contact3" aria-selected="false">آیین نامه ها و بخش نامه ها</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                <div class="prod-bottom-tab-sin description">
+                                                    <h5>توضیحات</h5>
+                                                    <p>
+                                                        به باشگاه روابط کار قانون گستر اولین و جامع ترین شبکه مجازی آموزش کشور در حوزه‌های روابط کار ، تامین اجتماعی ، مالیات و دارایی خوش آمدید .
+                                                    </p>
+                                                    <p>
+                                                        در این بخش شما میتوانید :
+                                                    </p>
+                                                    <p>
+                                                        <strong>ویدیو های آموزشی:</strong> دسترسی رایگان و کامل به ویدیو های اختصاصی باشگاه که در موضوعات قانون کار و تامین اجتماعی و مالیات و دارایی از سوی اساتید برجسته ارائه شده است داشته باشید .
+                                                    </p>
+                                                    <p>
+                                                        <strong>فرم ها و قراردادها:</strong> دسترسی رایگان و کامل به کلیه قراردادهای کار پرسنل مشمول قانون کار و غیر مشمول و همچنین کلیه فرمهای اداری پرسنل و مالی
+                                                    </p>
+                                                    <p>
+                                                        <strong>
+                                                            آیین نامه ها و بخشنامه ها:
+                                                        </strong> مشاهده تشریح ویدیوی و یا متنی بخشنامه ها و آیین نامه های صادره از دیوان عدالت اداری ، تامین اجتماعی ، وزارت کار ، سازمان مالیاتی کشور .
+                                                    </p>
+                                                    <p>
+                                                        <strong>
+                                                            پشتیبانی و پاسخ به سوالات شما:
+                                                        </strong> هر گونه سوال و یا مشکلی که در حوزه های تعیین شده داشته باشید از این طریق می توانید ارسال نموده و ظرف مدت ۲۴ ساعت پاسخ خود را دریافت نمایید .
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <div class="prod-bottom-tab-sin">
+                                                    <h5>ویدیوهای آموزشی اختصاصی باشگاه روابط کار</h5>
 
-												<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
-													<div class="card-body">
-														<p>
-															@Html.Raw(video.Body)
-														</p>
-														<video width="540" controls>
-															<source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
-														</video>
-													</div>
-												</div>
-											</div>
-							k++;
-						}
-							}
-						</div>
-					</div>
-					<div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
-						<div id="accordion">
-							@if (!Model.Videos.TaminVideos.Any())
-					{
-									<p class="alert alert-info">
-										در حال حاظر ویدیویی در این بخش بارگزاری نشده است
-									</p>
-					}
-							@{
-						int m = 2000;
-						foreach (var video in Model.Videos.TaminVideos)
-						{
-							var id = "heading" + m;
-							var idCollapse = "collapse" + m;
-											<div class="card">
-												<div class="card-header" id="@id">
-													<h5 class="mb-0">
-														<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
-															@video.Title
-														</button>
-													</h5>
-												</div>
-
-												<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
-													<div class="card-body">
-														<p>
-															@Html.Raw(video.Body)
-														</p>
-														<video width="540" controls>
-															<source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
-														</video>
-													</div>
-												</div>
-											</div>
-							m++;
-						}
-							}
-						</div>
-					</div>
-					<div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
-						<div id="accordion">
-							@if (!Model.Videos.VatVideos.Any())
-					{
-									<p class="alert alert-info">
-										در حال حاظر ویدیویی در این بخش بارگزاری نشده است
-									</p>
-					}
-							@{
-						int n = 1000;
-						foreach (var video in Model.Videos.VatVideos)
-						{
-							var id = "heading" + n;
-							var idCollapse = "collapse" + n;
-											<div class="card">
-												<div class="card-header" id="@id">
-													<h5 class="mb-0">
-														<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
-															@video.Title
-														</button>
-													</h5>
-												</div>
-
-												<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
-													<div class="card-body">
-														<p>
-															@Html.Raw(video.Body)
-														</p>
-														<video width="540" controls>
-															<source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
-														</video>
-													</div>
-												</div>
-											</div>
-							n++;
-						}
-							}
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			@*<div id="accordion">
-				@if (!Model.Videos.Any())
-				{
-					<p class="alert alert-info">
-						در حال حاظر ویدیویی در این بخش بارگزاری نشده است
-					</p>
-				}
-				@{
-					int i = 1;
-					foreach (var video in Model.Videos)
-					{
-						var id = "heading" + i;
-						var idCollapse = "collapse" + i;
-						<div class="card">
-							<div class="card-header" id="@id">
-								<h5 class="mb-0">
-									<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
-										@video.Title
-									</button>
-								</h5>
-							</div>
-
-							<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
-								<div class="card-body">
-									<p>
-										@Html.Raw(video.Body)
-									</p>
-									<video width="540" controls>
-										<source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
-									</video>
-								</div>
-							</div>
-						</div>
-						i++;
-					}
-				}
-		 
-			</div>*@
-		</div>
-	</div>
-	<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-		<div class="prod-bottom-tab-sin">
-			<h5>سوالات شما</h5>
-			<div class="product-review">
-				<div class="reviwer">
-					<div class="review-details">
-						@*<span>تعداد سوال باقی مانده از پکیج شما: 5 سوال</span>*@
+                                                    <div class="video-tab-heading">
+                                                        <ul class="nav nav-tabs " role="tablist">
 
 
-						<div class="card-question">
-							@foreach (var question in Model.Questions)
-							{
-								<div class="card-question-title">
-									<p>@question.Question</p>
-								</div>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#home2" role="tab" aria-controls="home2" aria-selected="true">قانون کار</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile2" aria-selected="false">تامین اجتماعی</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile3" aria-selected="false">مالیات</a>
+                                                            </li>
 
-								if (!string.IsNullOrEmpty(question.Response))
-								 {
-									 <div class="card-question-response">
+                                                        </ul>
+                                                    </div>
+                                                    <div class="video-section">
+                                                        <div class="tab-content" id="myTabContent2">
+                                                            <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab2">
+                                                                <div id="accordion">
+                                                                    @if (!Model.Videos.GhanonKarVideos.Any())
+                                                                    {
+                                                                        <p class="alert alert-info">
+                                                                            در حال حاظر ویدیویی در این بخش بارگزاری نشده است
+                                                                        </p>
+                                                                    }
+                                                                    @{
+                                                                        int k = 3000;
+                                                                        foreach (var video in Model.Videos.GhanonKarVideos)
+                                                                        {
+                                                                            var id = "heading" + k;
+                                                                            var idCollapse = "collapse" + k;
+                                                                            <div class="card">
+                                                                                <div class="card-header" id="@id">
+                                                                                    <h5 class="mb-0">
+                                                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+                                                                                            @video.Title
+                                                                                        </button>
+                                                                                    </h5>
+                                                                                </div>
 
-										 <p>
-											 <span style="color: red">پاسخ:</span>
-											 @question.Response
-										 </p>
+                                                                                <div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+                                                                                    <div class="card-body">
+                                                                                        <p>
+                                                                                            @Html.Raw(video.Body)
+                                                                                        </p>
+                                                                                        <video width="540" controls>
+                                                                                            <source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+                                                                                        </video>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            k++;
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
+                                                                <div id="accordion">
+                                                                    @if (!Model.Videos.TaminVideos.Any())
+                                                                    {
+                                                                        <p class="alert alert-info">
+                                                                            در حال حاظر ویدیویی در این بخش بارگزاری نشده است
+                                                                        </p>
+                                                                    }
+                                                                    @{
+                                                                        int m = 2000;
+                                                                        foreach (var video in Model.Videos.TaminVideos)
+                                                                        {
+                                                                            var id = "heading" + m;
+                                                                            var idCollapse = "collapse" + m;
+                                                                            <div class="card">
+                                                                                <div class="card-header" id="@id">
+                                                                                    <h5 class="mb-0">
+                                                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+                                                                                            @video.Title
+                                                                                        </button>
+                                                                                    </h5>
+                                                                                </div>
 
-									 </div>
-								 }
-                                if (!string.IsNullOrEmpty(question.VoiceResponse))
-								 {
-									 <div class="card-question-response">
+                                                                                <div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+                                                                                    <div class="card-body">
+                                                                                        <p>
+                                                                                            @Html.Raw(video.Body)
+                                                                                        </p>
+                                                                                        <video width="540" controls>
+                                                                                            <source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+                                                                                        </video>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            m++;
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
+                                                                <div id="accordion">
+                                                                    @if (!Model.Videos.VatVideos.Any())
+                                                                    {
+                                                                        <p class="alert alert-info">
+                                                                            در حال حاظر ویدیویی در این بخش بارگزاری نشده است
+                                                                        </p>
+                                                                    }
+                                                                    @{
+                                                                        int n = 1000;
+                                                                        foreach (var video in Model.Videos.VatVideos)
+                                                                        {
+                                                                            var id = "heading" + n;
+                                                                            var idCollapse = "collapse" + n;
+                                                                            <div class="card">
+                                                                                <div class="card-header" id="@id">
+                                                                                    <h5 class="mb-0">
+                                                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+                                                                                            @video.Title
+                                                                                        </button>
+                                                                                    </h5>
+                                                                                </div>
 
-										 <p class="audio-holder">
-											 <span style="color: red">پاسخ صوتی:</span>
-                                             <audio controls="controls">
-                                                 <source src="https://ghanongostar.zavoshsoftware.com/@question.VoiceResponse" type="audio/ogg" />                                                 
-                                             </audio>
-										 </p>
+                                                                                <div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+                                                                                    <div class="card-body">
+                                                                                        <p>
+                                                                                            @Html.Raw(video.Body)
+                                                                                        </p>
+                                                                                        <video width="540" controls>
+                                                                                            <source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+                                                                                        </video>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            n++;
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-									 </div>
-								 }
-							}
-					 
-						</div>
-					</div>
-				</div>
-				<div class="add-your-review">
-					<h6>ثبت سوال جدید</h6>
+                                                    @*<div id="accordion">
+                                                            @if (!Model.Videos.Any())
+                                                            {
+                                                                <p class="alert alert-info">
+                                                                    در حال حاظر ویدیویی در این بخش بارگزاری نشده است
+                                                                </p>
+                                                            }
+                                                            @{
+                                                                int i = 1;
+                                                                foreach (var video in Model.Videos)
+                                                                {
+                                                                    var id = "heading" + i;
+                                                                    var idCollapse = "collapse" + i;
+                                                                    <div class="card">
+                                                                        <div class="card-header" id="@id">
+                                                                            <h5 class="mb-0">
+                                                                                <button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+                                                                                    @video.Title
+                                                                                </button>
+                                                                            </h5>
+                                                                        </div>
 
-					<div class="raing-form">
-						<div action="#">
-							<input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
+                                                                        <div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+                                                                            <div class="card-body">
+                                                                                <p>
+                                                                                    @Html.Raw(video.Body)
+                                                                                </p>
+                                                                                <video width="540" controls>
+                                                                                    <source src="https://ghanongostar.zavoshsoftware.com/@video.FileUrl" type="video/mp4">Your browser does not support HTML5 video.
+                                                                                </video>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    i++;
+                                                                }
+                                                            }
 
-							<textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
-							<button class="qsbutton" type="button" onclick="submitQuestion();" >ارسال سوال</button>
-						
-						</div>
-					</div>
-					<div>
-						<div class="alert alert-success" id="SuccessDiv">سوال شما با موفقیت ثبت گردید</div>
-						<div class="alert alert-danger" id="errorDiv"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
-		<div class="prod-bottom-tab-sin">
-			<h5>فرم ها و قراردادهای کار</h5>
-
-			<div class="row">
-
-				@foreach (var form in Model.Forms)
-				{
-					<div class="col-sm-6 col-xl-4">
-						<div class="sin-product style-two">
-							<a href="#">
-								<img src="https://ghanongostar.zavoshsoftware.com/@form.ImageUrl" alt="@form.Title">
-							</a>
-							<div class="mid-wrapper">
-								<h2 class="pro-title"><a href="#">@form.Title</a>
-								</h2>
-
-								<a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@form.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
-							</div>
-						</div>
-					</div>
-				}
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                                <div class="prod-bottom-tab-sin">
+                                                    <h5>سوالات شما</h5>
+                                                    <div class="product-review">
+                                                        <div class="reviwer">
+                                                            <div class="review-details">
+                                                                @*<span>تعداد سوال باقی مانده از پکیج شما: 5 سوال</span>*@
 
 
+                                                                <div class="card-question">
+                                                                    @foreach (var question in Model.Questions)
+                                                                    {
+                                                                        <div class="card-question-title">
+                                                                            <p>@question.Question</p>
+                                                                        </div>
 
-			</div>
-		</div>
-	</div>
+                                                                        if (!string.IsNullOrEmpty(question.Response))
+                                                                        {
+                                                                            <div class="card-question-response">
+
+                                                                                <p>
+                                                                                    <span style="color: red">پاسخ:</span>
+                                                                                    @question.Response
+                                                                                </p>
+
+                                                                            </div>
+                                                                        }
+                                                                        if (!string.IsNullOrEmpty(question.VoiceResponse))
+                                                                        {
+                                                                            <div class="card-question-response">
+
+                                                                                <p class="audio-holder">
+                                                                                    <span style="color: red">پاسخ صوتی:</span>
+                                                                                    <audio controls="controls">
+                                                                                        <source src="https://ghanongostar.zavoshsoftware.com/@question.VoiceResponse" type="audio/ogg" />
+                                                                                    </audio>
+                                                                                </p>
+
+                                                                            </div>
+                                                                        }
+                                                                    }
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="add-your-review">
+                                                            <h6>ثبت سوال جدید</h6>
+                                                            @if (Model.ExpireNumber > 0)
+                                                            {
+                                                                <div class="raing-form">
+                                                                    <div action="#">
+                                                                        <input class="form-control" id="txtSubject" type="text" placeholder="موضوع سوال">
+
+                                                                        <textarea class="form-control" id="txtQuestion" name="rating-form" placeholder="متن سوال شما"></textarea>
+                                                                        <button class="qsbutton" type="button" @*onclick="submitQuestion();"*@>ارسال سوال</button>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <div>
+                                                                <div class="alert alert-success" id="SuccessDiv">سوال شما با موفقیت ثبت گردید</div>
+                                                                <div class="alert alert-danger" id="errorDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-	<div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
-		<div class="prod-bottom-tab-sin">
-			<h5>آیین نامه ها و بخش نامه ها</h5>
+                                            <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
+                                                <div class="prod-bottom-tab-sin">
+                                                    <h5>فرم ها و قراردادهای کار</h5>
 
-			<div class="row">
+                                                    <div class="row">
 
-				@if (!Model.Instructions.Any())
-				{
-					<p class="alert alert-info">
-						در حال حاظر آیین نامه ای بارگزاری نشده است.
-					</p>
-				}
-				
-				
-				@{
-						int j = 9000;
-						foreach (var instruction in Model.Instructions)
-						{
-							var id = "heading" + j;
-							var idCollapse = "collapse" + j;
-								<div class="col-md-12">
-									<div class="card">
-										<div class="card-header" id="@id">
-											<h5 class="mb-0">
-												<button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
-													@instruction.Title
-												</button>
-											</h5>
-										</div>
+                                                        @foreach (var form in Model.Forms)
+                                                        {
+                                                            <div class="col-sm-6 col-xl-4">
+                                                                <div class="sin-product style-two">
+                                                                    <a href="#">
+                                                                        <img src="https://ghanongostar.zavoshsoftware.com/@form.ImageUrl" alt="@form.Title">
+                                                                    </a>
+                                                                    <div class="mid-wrapper">
+                                                                        <h2 class="pro-title">
+                                                                            <a href="#">@form.Title</a>
+                                                                        </h2>
 
-										<div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
-											<div class="card-body">
-												<p>@Html.Raw(instruction.Body)</p>
-											</div>
-										</div>
-									</div>
-									</div>
-									j++;
-									}
-									}
+                                                                        <a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@form.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
 
-									@*@foreach (var ins in Model.Instructions)
-										{
-											<div class="col-sm-6 col-xl-4">
-												<div class="sin-product style-two">
-													<a href="#">
-														<img src="https://ghanongostar.zavoshsoftware.com/@ins.ImageUrl" alt="">
-													</a>
-													<div class="mid-wrapper">
-														<h2 class="pro-title"><a href="#">@ins.Title</a>
-														</h2>
 
-														<a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@ins.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
-													</div>
-												</div>
-											</div>
-										}*@
 
-								</div>
-		</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
+                                                <div class="prod-bottom-tab-sin">
+                                                    <h5>آیین نامه ها و بخش نامه ها</h5>
+
+                                                    <div class="row">
+
+                                                        @if (!Model.Instructions.Any())
+                                                        {
+                                                            <p class="alert alert-info">
+                                                                در حال حاظر آیین نامه ای بارگزاری نشده است.
+                                                            </p>
+                                                        }
+
+
+                                                        @{
+                                                            int j = 9000;
+                                                            foreach (var instruction in Model.Instructions)
+                                                            {
+                                                                var id = "heading" + j;
+                                                                var idCollapse = "collapse" + j;
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-header" id="@id">
+                                                                            <h5 class="mb-0">
+                                                                                <button class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="false" aria-controls="@idCollapse">
+                                                                                    @instruction.Title
+                                                                                </button>
+                                                                            </h5>
+                                                                        </div>
+
+                                                                        <div id="@idCollapse" class="collapse " aria-labelledby="@id" data-parent="#accordion">
+                                                                            <div class="card-body">
+                                                                                <p>@Html.Raw(instruction.Body)</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                j++;
+                                                            }
+                                                        }
+
+                                                        @*@foreach (var ins in Model.Instructions)
+                                                            {
+                                                                <div class="col-sm-6 col-xl-4">
+                                                                    <div class="sin-product style-two">
+                                                                        <a href="#">
+                                                                            <img src="https://ghanongostar.zavoshsoftware.com/@ins.ImageUrl" alt="">
+                                                                        </a>
+                                                                        <div class="mid-wrapper">
+                                                                            <h2 class="pro-title"><a href="#">@ins.Title</a>
+                                                                            </h2>
+
+                                                                            <a class="btn-ghanon" href="https://ghanongostar.zavoshsoftware.com/@ins.FileUrl" target="_blank"><i class="fa fa-download"></i> دانلود</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }*@
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 @section scripts{
-<script src="~/Scripts/jquery/jquery.min.js"></script>
-	<script>
-		function submitQuestion() {
-			
-			var subject = $("#txtSubject").val();
-			var question = $("#txtQuestion").val();
+    <script src="~/Scripts/jquery/jquery.min.js"></script>
+    <script>
+        let btnDecrease = $('.qsbutton');
+        btnDecrease.onclick= function decreaseExpireNumber() {
+            console.log("clicked");
+            $.ajax({
+                url: '/Products/DecreaseExpireNumber',
+                method: 'POST',
+                data: {id='@Model.OrderId'},
+                success: function (response) {
+                    console.log("succesed");
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log("failed");
+                    console.log(response);
+                }
+            });
+        }
+    </script>
+    <script>
+                                //function submitQuestion() {
 
-			if (subject !== "" && question !== "") {
-				$.ajax(
-					{
-						url: "/employer-package-result/SubmitQuestion",
-						data: { subject: subject, question: question },
-						type: "Post"
-					}).done(function (result) {
-					if (result === "true") {
-						$("#errorDiv").css('display', 'none');
-						$("#SuccessDiv").css('display', 'block');
-						localStorage.setItem("id", "");
-					}
-					else if (result === "InvalidEmail") {
-						$("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
-						$("#errorDiv").css('display', 'block');
-						$("#SuccessDiv").css('display', 'none');
+                                //    var subject = $("#txtSubject").val();
+                                //    var question = $("#txtQuestion").val();
 
-					}
-				});
-			}
-			else {
-				$("#errorDiv").html('موضوع و متن سوال خود را وارد نمایید.');
-				$("#errorDiv").css('display', 'block');
-				$("#SuccessDiv").css('display', 'none');
+                                //    if (subject !== "" && question !== "") {
+                                //        $.ajax(
+                                //            {
+                                //                url: "/employer-package-result/SubmitQuestion",
+                                //                data: { subject: subject, question: question },
+                                //                type: "Post"
+                                //            }).done(function (result) {
+                                //                if (result === "true") {
+                                //                    $("#errorDiv").css('display', 'none');
+                                //                    $("#SuccessDiv").css('display', 'block');
+                                //                    localStorage.setItem("id", "");
+                                //                }
+                                //                else if (result === "InvalidEmail") {
+                                //                    $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
+                                //                    $("#errorDiv").css('display', 'block');
+                                //                    $("#SuccessDiv").css('display', 'none');
 
-			}
-		}
-	</script>
+                                //                }
+                                //            });
+                                //    }
+                                //    else {
+                                //        $("#errorDiv").html('موضوع و متن سوال خود را وارد نمایید.');
+                                //        $("#errorDiv").css('display', 'block');
+                                //        $("#SuccessDiv").css('display', 'none');
+
+                                //    }
+                                //}
+    </script>
+
 }

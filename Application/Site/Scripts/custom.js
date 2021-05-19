@@ -125,8 +125,12 @@ function registerUser() {
     var cellNumber = $('#txtCellNum').val();
     var employeeType = $('#ddlEmployee').val();
     var email = $('#email').val();
+    var postalCode = $('#postal').val();
+    var physical = $('.physical-product');
+    
 
-    if (email !== '' && name !== '' && cellNumber !== '' && employeeType!=='') {
+
+    if (email !== '' && name !== '' && cellNumber !== '' && employeeType!=='' && postalCode!=='') {
         $.ajax(
             {
                 url: "/shop/CheckUser",
@@ -135,7 +139,8 @@ function registerUser() {
                     email: email,
                     fullName:name,
                     cellNumber: cellNumber,
-                    employeeType: employeeType
+                    employeeType: employeeType,
+                    postalCode:postalCode
                 },
                 type: "GET"
             }).done(function (result) {
@@ -149,6 +154,11 @@ function registerUser() {
                 } else if (result === "invalidEmail") {
                     $('#error-box').css('display', 'block');
                     $('#error-box').html('ایمیل وارد شده صحیح نمی باشد.');
+                    AppearButton('btn-register', 'transfer-message');
+                }
+                else if (result === "invalidPostalCode") {
+                    $('#error-box').css('display', 'block');
+                    $('#error-box').html('کد پستی وارد شده صحیح نمی باشد.');
                     AppearButton('btn-register', 'transfer-message');
                 }
 

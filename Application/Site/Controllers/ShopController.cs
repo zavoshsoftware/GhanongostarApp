@@ -101,7 +101,7 @@ namespace Site.Controllers
         ZarinPalHelper zp = new ZarinPalHelper();
 
         [AllowAnonymous]
-        public ActionResult CheckUser(string notes, string email, string cellNumber, string employeeType, string fullName)
+        public ActionResult CheckUser(string notes, string email, string cellNumber, string employeeType, string fullName, string postalCode)
         {
             try
             {
@@ -114,7 +114,11 @@ namespace Site.Controllers
                 }
                 cellNumber = englishcellNumber;
 
-
+                bool ispostalCodeValid = Regex.IsMatch(postalCode,@"\b(?!(\d)\1{3})[13-9]{4}[1346-9][013-9]{5}\b",RegexOptions.IgnoreCase);
+                if (!ispostalCodeValid)
+                {
+                    return Json("invalidPostalCode", JsonRequestBehavior.AllowGet);
+                }
 
                 bool isValidMobile = Regex.IsMatch(cellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
 
@@ -477,6 +481,11 @@ namespace Site.Controllers
                     order.CityId = cityId;
                     order.Address = address;
                     order.PostalCode = postal;
+                    if (product.Product.ProductTypeId == new Guid("38df416f-0a23-491c-8729-1316c20dc442"))
+                    {
+                        order.ExpireNumber = (int)(product.Product.ExpireNumber);
+                    }
+                    
 
                     decimal subtotal = GetSubtotal(products);
 
@@ -810,7 +819,7 @@ namespace Site.Controllers
 
                             UnitOfWork.OrderRepository.Update(order);
 
-                          
+
                             UnitOfWork.Save();
 
                             callBack.IsSuccess = true;
@@ -1292,11 +1301,11 @@ namespace Site.Controllers
                 };
 
                 UnitOfWork.FormInstagramLiveRepository.Insert(formInstagramLive);
-           
+
 
                 Guid userId = InsertToUser(formInstagramLive.FirstName + " " + formInstagramLive.LastName,
                      formInstagramLive.ContactNumber);
-            
+
 
                 Guid typeId = new Guid("05930422-48CB-43CC-B7C3-6728CB8ABBB2");
                 Product product = UnitOfWork.ProductRepository.Get(c => c.ProductTypeId == typeId && c.IsActive)
@@ -1330,7 +1339,7 @@ namespace Site.Controllers
 
                 decimal discountAmount = 0;
 
-                
+
 
                 order.DiscountAmount = discountAmount;
 
@@ -1344,16 +1353,16 @@ namespace Site.Controllers
 
                 OrderDetail orderDetail = new OrderDetail()
                 {
-                    ProductId =  product.Id,
+                    ProductId = product.Id,
                     Quantity = 1,
-                    RawAmount =product.Amount * 1,
+                    RawAmount = product.Amount * 1,
                     IsDeleted = false,
                     IsActive = true,
                     CreationDate = DateTime.Now,
                     OrderId = order.Id,
                     Amount = product.Amount,
                 };
-              
+
 
                 UnitOfWork.OrderRepository.Update(order);
 

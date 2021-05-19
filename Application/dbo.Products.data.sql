@@ -1,0 +1,1 @@
+﻿select * from Products where ProductTypeId='38df416f-0a23-491c-8729-1316c20dc442'

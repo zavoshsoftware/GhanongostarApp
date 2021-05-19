@@ -1,0 +1,1 @@
+﻿select * from OrderDetails where ProductId ='A86C74BD-414F-4D71-89B3-E6EC60EE56DD'
