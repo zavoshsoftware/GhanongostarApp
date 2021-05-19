@@ -72,40 +72,41 @@
     </div>
 
     @* ****************(user question list)**************** *@
-    <div class="pane panel-primary col-md-6" style="margin-top:6.3rem;">
-        <div class="panel-heading text-center">
-            لیست سوالات قبلی کاربر
-        </div>
-        @foreach (var question in Model.UserQuestions)
-        {
-            <div class="row panel-body w-100">
-                <div class="col-md-10 mr-5">
-                    <div class="row py-1 date-s">
-                        <div class="col p-1">
-                            <label class="control-label">تاریخ سوال :</label><b>@question.CreationDate</b>
-                        </div>
-                    </div>
-                    <div class="row question-s">
-                        <div class="col p-1">
-                            <label class="control-label">سوال :</label><b>@question.Question</b>
-                        </div>
-                    </div>
-                    <div class="row answer-s">
-                        <div class="col p-1">
-                            <label class="control-label">پاسخ :</label><b>@question.Response</b>
-                        </div>
-                    </div>
-                    <div class="row date-s">
-                        <div class="col p-1">
-                            <label class="control-label">تاریخ پاسخ :</label><b>@question.ResponseDate</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr" />
-        }
+<div class="col-md-6">
+	<div class="panel panel-primary" style="margin-top:6.3rem;">
+		<div class="panel-heading text-center">
+			لیست سوالات قبلی کاربر
+		</div>
+		@foreach (var question in Model.UserQuestions)
+		{
 
-    </div>
+			<div class="panel-body w-100">
+			<div class="row">
+				<div class="col-md-10 mr-5">
+					<div class="row py-1 date-s">
+						<div class="col p-1">
+							<label class="control-label">تاریخ سوال :</label><b>@question.CreationDate</b>
+						</div>
+					</div>
+					<div class="row question-s">
+						<div class="col p-1">
+							<label class="control-label">سوال :</label><b>@question.Question</b>
+						</div>
+					</div>
+					<div class="row answer-s">
+						<div class="col p-1">
+							<label class="control-label">پاسخ :</label><b>@question.Response</b>
+						</div>
+					</div>
+			 
+				</div>
+			</div>
+			</div>
+			<hr class="hr" />
+		}
+
+	</div>
+</div>
 </div>
 @section scripts{
     <script>

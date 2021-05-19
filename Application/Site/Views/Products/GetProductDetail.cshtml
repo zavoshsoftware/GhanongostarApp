@@ -72,6 +72,15 @@
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="product-header">
+								@*@if (Model.Product.Code == 108)
+								{
+									<div class="row">
+										<div class="col-md-12">
+											<h2 style="text-align: center; direction: rtl; border: 1px solid rgb(255, 0, 0); padding: 10px;"><span style="color: #ff0000;"><strong> 1 میلیون تومان تخفیف ویژه عید فطر</strong></span>
+											</h2>
+										</div>
+									</div>
+								}*@
 								<div class="row">
 									<div class="col-md-8 product-detail-title">
 										<h1>
@@ -104,7 +113,7 @@
 										<img src="https://ghanongostar.zavoshsoftware.com/@Model.Product.ImageUrl" alt="@Model.Product.Title"/>
 									</div>
 								</div>
-								</div>
+							</div>
 							<div class="row">
 								<div class="col-md-12 product-detail caption-detail">
 									<p>

@@ -93,7 +93,9 @@ namespace Presentation.Controllers
             model.UserQuestion = new EmpClubQuestion();
             model.UserQuestion = db.EmpClubQuestions.Find(id);
             model.UserQuestions = new List<EmpClubQuestion>();
-            model.UserQuestions = db.EmpClubQuestions.Where(x => x.UserId == model.UserQuestion.UserId).ToList();
+            model.UserQuestions = db.EmpClubQuestions.Where(x => x.UserId == model.UserQuestion.UserId && x.Id != id).OrderByDescending(c=>c.CreationDate)
+                .ToList();
+
 
             if (model.UserQuestion == null)
             {
