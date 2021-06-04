@@ -160,7 +160,13 @@ namespace Payment.Controller
                                         CreateEmail(order.Email, fileLink, orderType);
 
                                         CreateEmailForAdmin(product.Title, Amount);
+
+                                        User user = UnitOfWork.UserRepository.GetById(order.UserId);
+                                        CreateEmailForAdminForPhysicalProduct(product.Title, user.CellNum, order.Address,
+                                            "", "", user.FullName);
                                     }
+                                  
+
                                 }
 
                             }
@@ -439,6 +445,29 @@ namespace Payment.Controller
             }
 
             return body;
+        }
+        public void CreateEmailForAdminForPhysicalProduct(string productTitle, string cellNumber, string address, string city, string postalCode, string fullName)
+        {
+            Helper.Message message = new Message();
+
+            string email = "akramfazli2011@gmail.com";
+            // string email = "babaei.aho@gmail.com";
+            string body = @"<html>
+                 <head></head>
+                <body dir='rtl'>
+                <h1> خرید محصول از اپلیکیشن قانون گستر</h1>
+                <p> از اپلیکیشن قانون گستر خریدی انجام شده است</p>
+                <p>عنوان کالا: </p>" + productTitle + "<p>شماره موبایل کاربر: </p>" + cellNumber +
+                          "<p>نام کاربر: </p>" + fullName + "<p>شهر: </p>" + city +
+                          "<p>آدرس: </p>" + address + @"
+                <h3>مجموعه قانون گستر</h3>
+                <p>آدرس: تهران، خیابان شریعتی، سه راه طالقانی، جنب مبل پایتخت، پلاک 306، طبقه 2، واحد 4</p>
+                <p>تلفن: 02177515152</p>
+                <p>وب سایت: https://ghanongostar.com/ </p>
+                </body>
+                </html> ";
+
+            message.Send(email, "خرید از اپلیکیشن قانون گستر", body, "email");
         }
 
 
