@@ -621,6 +621,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\SeminarsController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\SiteBlogsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -630,6 +631,7 @@
     <Compile Include="Helpers\BaseViewModelHelper.cs" />
     <Compile Include="Helpers\DiscountHelper.cs" />
     <Compile Include="Helpers\Message.cs" />
+    <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Helpers\ZarinPalHelper.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\BaseControllerWithUnitOfWork.cs" />
@@ -642,6 +644,8 @@
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CityItemViewModel.cs" />
     <Compile Include="ViewModels\ConsultantFormViewModel.cs" />
+    <Compile Include="ViewModels\SeminarDetailViewModel.cs" />
+    <Compile Include="ViewModels\SeminarListViewModel.cs" />
     <Compile Include="ViewModels\RegisterWorrkshopViewModel.cs" />
     <Compile Include="ViewModels\ConsultantViewModel.cs" />
     <Compile Include="ViewModels\EmployerPackageResultViewModel.cs" />
@@ -756,6 +760,8 @@
     <Content Include="Views\Home\Consultant.cshtml" />
     <Content Include="Views\Home\ConsultantForm.cshtml" />
     <Content Include="Views\Shop\RegisterWorkshopForm.cshtml" />
+    <Content Include="Views\Seminars\GetSeminars.cshtml" />
+    <Content Include="Views\Seminars\GetSeminarDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

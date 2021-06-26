@@ -52,5 +52,9 @@ namespace Models
         public DbSet<ConsultantRequestForm> ConxConsultantRequestForms { get; set; }
         public DbSet<EmpClubVideoGroup> EmpClubVideoGroups { get; set; }
         public DbSet<FormInstagramLive> FormInstagramLives { get; set; }
+        public DbSet<Seminar> Seminars { get; set; }
+        public DbSet<SeminarTeacher> SeminarTeachers { get; set; }
+
+        public System.Data.Entity.DbSet<Models.SeminarImage> SeminarImages { get; set; }
     }
 }

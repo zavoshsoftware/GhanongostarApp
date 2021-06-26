@@ -662,6 +662,49 @@ namespace DAL
             }
         }
 
+        private ISeminarRepository _seminarRepository;
+        public ISeminarRepository SeminarRepository
+        {
+            get
+            {
+                if (_seminarRepository == null)
+                {
+                    _seminarRepository =
+                        new SeminarRepository(DatabaseContext);
+                }
+                return (_seminarRepository);
+            }
+        }
+
+
+        private ISeminarTeacherRepository _seminarTeacherRepository;
+        public ISeminarTeacherRepository SeminarTeacherRepository
+        {
+            get
+            {
+                if (_seminarTeacherRepository == null)
+                {
+                    _seminarTeacherRepository =
+                        new SeminarTeacherRepository(DatabaseContext);
+                }
+                return (_seminarTeacherRepository);
+            }
+        }
+
+        private ISeminarImageRepository _seminarImageRepository;
+        public ISeminarImageRepository SeminarImageRepository
+        {
+            get
+            {
+                if (_seminarImageRepository == null)
+                {
+                    _seminarImageRepository =
+                        new SeminarImageRepository(DatabaseContext);
+                }
+                return (_seminarImageRepository);
+            }
+        }
+
         #endregion Inserting custom Respositories
     }
 }

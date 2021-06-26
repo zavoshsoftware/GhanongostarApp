@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using GSD.Globalization;
 using Models;
 
 namespace Site
@@ -38,7 +40,11 @@ namespace Site
 
             else if(url== "/درباره-ما/"||url== "contact")
                 Response.Redirect("/");
-   
+
+
+            var persianCulture = new PersianCulture();
+            Thread.CurrentThread.CurrentCulture = persianCulture;
+            Thread.CurrentThread.CurrentUICulture = persianCulture;
 
         }
     }

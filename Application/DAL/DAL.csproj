@@ -60,6 +60,9 @@
     <Compile Include="RepositoryAndUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="RepositoryAndUnitOfWork\Repository.cs" />
     <Compile Include="RepositoryAndUnitOfWork\UnitOfWork.cs" />
+    <Compile Include="RepositoryClasses\SeminarImageRepository.cs" />
+    <Compile Include="RepositoryClasses\SeminarTeacherRepository.cs" />
+    <Compile Include="RepositoryClasses\SeminarRepository.cs" />
     <Compile Include="RepositoryClasses\FormInstagramLiveRepository.cs" />
     <Compile Include="RepositoryClasses\EmpClubVideoGroupRepository.cs" />
     <Compile Include="RepositoryClasses\ConsultantRequestFormRepository.cs" />
@@ -98,6 +101,9 @@
     <Compile Include="RepositoryClasses\VipPackageFeatureRepository.cs" />
     <Compile Include="RepositoryClasses\VipPackageRepository.cs" />
     <Compile Include="RepositoryClasses\ZarinpallAuthorityRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISeminarImageRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISeminarTeacherRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISeminarRepository.cs" />
     <Compile Include="RepositoryInterfaces\IFormInstagramLiveRepository.cs" />
     <Compile Include="RepositoryInterfaces\IEmpClubVideoGroupRepository.cs" />
     <Compile Include="RepositoryInterfaces\IConsultantRequestFormRepository.cs" />

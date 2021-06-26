@@ -46,6 +46,10 @@ namespace DAL
         IConsultantRequestFormRepository ConsultantRequestFormRepository { get; }
         IEmpClubVideoGroupRepository EmpClubVideoGroupRepository { get; }
         IFormInstagramLiveRepository FormInstagramLiveRepository { get; }
+        ISeminarRepository SeminarRepository { get; }
+        ISeminarTeacherRepository SeminarTeacherRepository { get; }
+        ISeminarImageRepository SeminarImageRepository { get; }
+
 
         void Save();
     }

@@ -1,0 +1,188 @@
+﻿@model ViewModels.SeminarDetailViewModel
+@{
+		ViewBag.Title =@Model.Seminar.Title+ " | قانون گستر";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://ghanongostar.com/seminar/detail/" + @Model.Seminar.Id;
+		ViewBag.Description = Model.Seminar.Title + ". جهت ثبت نام آنلاین و دریافت پکیج های آموزشی از وب سایت قانون گستر کلیک کنید. قانون گستر مرکز تخصصی روابط کار در ایران";
+
+}
+@section headSection
+{
+	<style>
+		.shop-content li  {
+			margin-bottom:12px;
+		}
+		.shop-content li b {
+			color: #ec0000;
+		}
+
+		.teacher-card {
+			text-align: center;
+		}
+
+		.teacher-card h3{
+			text-align: center;
+			margin-top: 7px;
+			font-size: 1.25rem
+		}
+	</style>
+}
+<section class="breadcrumb-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="bc-inner">
+					<p><a href="/">قانون گستر  |</a>
+						<a href="/seminar/old">سمینارها  |</a>	
+					@Model.Seminar.Title</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="shop-area">
+	<div class="container-fluid custom-container">
+		<div class="row">
+			<div class="order-2 order-lg-2 col-lg-3 col-xl-3">
+				<div class=" shop-sidebar left-side">
+			 
+					<div class=" blog-widget">
+						<h4 class="widget-title">ویدیو های آموزشی</h4>
+						@foreach (var productGroup in Model.SideBarProductGroups)
+						{
+							<div class="widget-post">
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="/video/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+										<span>(@productGroup.ProductCount)</span>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>				
+					
+					<div class=" blog-widget">
+						<h4 class="widget-title">پرفروش ترین محصولات</h4>
+						@foreach (var product in Model.SideBarProducts)
+						{
+							<div class="widget-post">
+								<div class="widget-post-img">
+									<a href="@product.Url"><img src="@product.ImageUrl" alt="@product.Title"></a>
+								</div>
+								<div class="widget-post-content">
+									<h6 class="wid-post-title">
+										<a href="@product.Url">@product.Title</a>
+									</h6>
+								</div>
+							</div>
+						}
+					</div>	 
+				</div>
+			</div>
+			<div class="order-1 order-lg-1 col-lg-9 col-xl-9">
+			 
+				<div class="shop-content">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="product-header">
+								@*@if (Model.Product.Code == 108)
+								{
+									<div class="row">
+										<div class="col-md-12">
+											<h2 style="text-align: center; direction: rtl; border: 1px solid rgb(255, 0, 0); padding: 10px;"><span style="color: #ff0000;"><strong> 1 میلیون تومان تخفیف ویژه عید فطر</strong></span>
+											</h2>
+										</div>
+									</div>
+								}*@
+								<div class="row">
+									<div class="col-md-8 product-detail-title">
+										<h1>
+											@Model.Seminar.Title
+										</h1>
+										<ul>
+											<li>
+												<b>
+													<i class="fa fa-location-arrow"></i>
+													مکان برگزاری:
+												</b> @Model.Seminar.Place
+											</li>
+											<li>
+												<b>
+													<i class="fa fa-clock"></i>
+
+													زمان برگزاری:
+												</b> @Model.Seminar.ExecuteDate
+											</li>
+										</ul>
+									</div>
+									<div class="col-md-4 ">
+										<img src="https://ghanongostar.zavoshsoftware.com/@Model.Seminar.ImageUrl" alt="@Model.Seminar.Title"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 product-detail caption-detail">
+									<p>
+										@Html.Raw(Model.Seminar.Body)
+									</p>
+								
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 product-detail caption-detail">
+									<h2>
+										اساتید همایش
+									</h2>
+								
+									<div class="row">
+										@foreach (var teacher in Model.Seminar.SeminarTeachers)
+										{
+											<div class="col-md-3">
+												<div class="teacher-card">
+													<img src="https://ghanongostar.zavoshsoftware.com/@teacher.ImageUrl"/>
+													<h3>@teacher.Title</h3>
+												</div>
+											</div>
+										}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+						
+								<div class="col-lg-12 col-xl-12">
+									<h2>
+تصاویر همایش									</h2>
+									<div class="quickview-slider">
+										<div class="slider-for">
+											@foreach (var image in Model.Seminar.SeminarImages)
+											{
+												<div class="">
+													<img src="https://ghanongostar.zavoshsoftware.com/@image.ImageUrl" alt="Thumb">
+												</div>
+											}
+
+
+										</div>
+										<div class="slider-nav">
+											@foreach (var image in Model.Seminar.SeminarImages)
+											{
+												<div class="">
+													<img src="https://ghanongostar.zavoshsoftware.com/@image.ImageUrl" alt="Thumb">
+												</div>
+											}
+
+										</div>
+									</div>
+									<!-- /.quickview-slider -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

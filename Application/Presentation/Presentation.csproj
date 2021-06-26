@@ -851,6 +851,9 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\QuestionConversationsController.cs" />
     <Compile Include="Controllers\RedirectsController.cs" />
+    <Compile Include="Controllers\SeminarImagesController.cs" />
+    <Compile Include="Controllers\SeminarsController.cs" />
+    <Compile Include="Controllers\SeminarTeachersController.cs" />
     <Compile Include="Controllers\SiteBlogCategoriesController.cs" />
     <Compile Include="Controllers\SiteBlogImagesController.cs" />
     <Compile Include="Controllers\SiteBlogsController.cs" />
@@ -1169,6 +1172,18 @@
     <Content Include="Views\FormInstagramLives\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\EmpClubQuestions\SaveVoice.cshtml" />
+    <Content Include="Views\SeminarTeachers\Create.cshtml" />
+    <Content Include="Views\SeminarTeachers\Delete.cshtml" />
+    <Content Include="Views\SeminarTeachers\Edit.cshtml" />
+    <Content Include="Views\SeminarTeachers\Index.cshtml" />
+    <Content Include="Views\Seminars\Create.cshtml" />
+    <Content Include="Views\Seminars\Delete.cshtml" />
+    <Content Include="Views\Seminars\Edit.cshtml" />
+    <Content Include="Views\Seminars\Index.cshtml" />
+    <Content Include="Views\SeminarImages\Create.cshtml" />
+    <Content Include="Views\SeminarImages\Delete.cshtml" />
+    <Content Include="Views\SeminarImages\Edit.cshtml" />
+    <Content Include="Views\SeminarImages\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1185,6 +1200,7 @@
     <Folder Include="Uploads\emp\" />
     <Folder Include="Uploads\Product\Files\" />
     <Folder Include="Uploads\question\" />
+    <Folder Include="Uploads\seminar\" />
     <Folder Include="Uploads\shared\" />
   </ItemGroup>
   <ItemGroup>

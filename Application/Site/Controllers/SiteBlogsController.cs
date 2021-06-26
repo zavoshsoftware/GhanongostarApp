@@ -26,7 +26,7 @@ namespace Site.Controllers
             BlogListViewModel blogs =new BlogListViewModel()
             {
                 MenuProductGroups = _baseHelper.GetMenuProductGroups(),
-                SiteBlogs = UnitOfWork.SiteBlogRepository.Get(current=>current.SiteBlogCategory.UrlParam== urlParam).ToList(),
+                SiteBlogs = UnitOfWork.SiteBlogRepository.Get(current=>current.SiteBlogCategory.UrlParam== urlParam&&current.IsActive).ToList(),
                 SideBarProductGroups = _baseHelper.GetMenuProductGroups(),
                 SiteBlogCategory = siteBlogCategory
             };
@@ -42,7 +42,7 @@ namespace Site.Controllers
             BlogListViewModel blogs =new BlogListViewModel()
             {
                 MenuProductGroups = _baseHelper.GetMenuProductGroups(),
-                SiteBlogs = UnitOfWork.SiteBlogRepository.Get().Include(c => c.SiteBlogCategory).ToList(),
+                SiteBlogs = UnitOfWork.SiteBlogRepository.Get(c=>c.IsActive).Include(c => c.SiteBlogCategory).ToList(),
                 SideBarProductGroups = _baseHelper.GetMenuProductGroups(),
                 //SiteBlogCategory = siteBlogCategory
             };
